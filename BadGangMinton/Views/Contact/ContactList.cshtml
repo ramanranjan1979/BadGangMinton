@@ -1,0 +1,180 @@
+﻿@model IEnumerable<BGO.Contact.Person>
+@using BadGangMinton.Helpers
+@{
+    ViewBag.Title = "Contact List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-box-large">
+    <div class="panel-body">
+        <div class="table-responsive" style="background-color:#f7ca18;color:darkred;">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.Label("#")
+                    </th>
+
+                    <th>
+                        @Html.Label("Name")
+                    </th>
+                    <th>
+                        @Html.Label("Date of birth")
+                    </th>
+                    <th>
+                        @Html.Label("Gender")
+                    </th>
+
+                    <th>
+                        Email Address(s)
+                    </th>
+                    <th>
+                        Contact Number(s)
+                    </th>
+                    <th>
+                        Creation Date
+                    </th>
+                    <th>
+                        <div class="pull-right">
+                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span>", "Add Contact", "Add", "Contact", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
+                        </div>
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.OrderByDescending(o => o.CreatedOn))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+
+                        <td style="cursor:pointer;" onclick="ShowPersonDetailModal('@item.Id');">
+                            @Html.DisplayFor(modelItem => item.Name)
+                            @if (item.GroupId.HasValue)
+                            {
+                                <span style="cursor:pointer;background-color:lawngreen;" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="Group Member">
+                                    <span class="glyphicon glyphicon-asterisk" style="margin-top:8px;"></span>
+                                </span>
+                            }
+                        </td>
+
+                        <td>
+                            @Html.Raw(item.DOB.ToShortDateString())
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sex)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonEmail.Count)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonPhone.Count)
+                        </td>
+
+                        <td>
+                            @Html.Raw(item.CreatedOn.ToShortDateString())
+                        </td>
+                        <td>
+                            @*<div class="pull-right">
+                                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-pencil'></span>", "Edit", "Edit", "People", routeValues: new { id = item.Id }, htmlAttributes: new { data_modal = "", @class = "btn btn-default" })
+                                    &nbsp;
+                                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-search'></span>", "Details", "Details", "People", routeValues: new { id = item.Id }, htmlAttributes: new { data_modal = "", @class = "btn btn-default" })
+                                    &nbsp;
+                                </div>*@
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="Person_Detail_Popup" role="dialog">
+    <div class="modal-dialog" style="border:solid 20px; border-color:#f7ca18; border-radius:11px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="text-align:center;">Person Details</h4>
+            </div>
+            <div class="modal-body" id="modalBody">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $.date = function (dateObject) {
+        var d = new Date(dateObject);
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var date = day + "/" + month + "/" + year;
+
+        return date;
+    };
+
+
+    function ShowPersonDetailModal(personId) {
+        $("#modalBody").html("");
+        var data = { "personId": personId };
+        $.ajax({
+            url: "/Contact/GetContactDetails",
+            type: "POST",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                var list = $("#modalBody").append('<div style="border:solid 1px;padding:20px;"></div>').find('div');
+
+                if (data.Group != null) {
+                    list.append('<p style="font-weight:bold;background-color:red;color:gold;text-align:center;">Attached To ' + data.Group.Name + '</p>');
+                }
+
+
+                list.append('<p>Name: ' + data.Name + '</p>');
+                list.append('<p>DOB: ' + $.date(data.DOB) + '</p>');
+                list.append('<p>Gender: ' + data.Sex + '</p>');
+
+                list.append('<p style="font-weight:bold;">Email</p>');
+
+                jQuery.each(data.PersonEmail, function (i, val) {
+                    list.append('<p>' + val.Type.Name + ':' + val.Value + '</p>');
+
+                });
+
+                list.append('<p style="font-weight:bold;">Contact Number</p>');
+
+                jQuery.each(data.PersonPhone, function (i, val) {
+                    list.append('<p>' + val.Type.Name + ':' + val.Value + '</p>');
+
+                });
+
+                list.append('<p style="font-weight:bold;">Address</p>');
+
+                jQuery.each(data.PersonAddress, function (i, val) {
+                    list.append('<p style="font-weight:bold;">' + val.AddressType.Name + '</p>');
+                    list.append('<p>' + val.FullAddress + '</p>');
+
+                });
+
+               
+            },
+            error: function () {
+                //alert("Error");
+            }
+        });
+
+        $('#Person_Detail_Popup').modal('show');
+    }
+
+</script>

@@ -1,0 +1,62 @@
+﻿@{
+    BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
+    BadGangMinton.DAL.TransactionDal txDal = new BadGangMinton.DAL.TransactionDal();
+    var data = txDal.GetTransaction(sm.UserSession.Person.Id).OrderByDescending(o => o.TransactionDate).Take(10);
+}
+
+<div class="container">
+    <div class="panel panel-default" style="box-shadow: 0 4px 8px 0 rgb(139, 63, 15), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+        <div class="panel-heading">
+            <h1 style="color:darkred;font-weight: bold;text-align: center;text-shadow: 2px 2px darkred;">Billing Info</h1>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-condensed">
+                    @foreach (var item in data.OrderByDescending(o => o.TransactionDate))
+                    {
+                        <tr>
+
+                            <td>
+                                <span class="glyphicon glyphicon-calendar" style="font-size: 20px;"></span>
+                            </td>
+
+                            <td>
+                                @Html.Raw(item.TransactionDate.Value.ToShortDateString())
+                            </td>
+
+                            <td>
+                                @Html.Raw(item.TransactionDate.Value.DayOfWeek)
+                            </td>
+
+                            <td>
+                                <span class="glyphicon glyphicon-gbp"></span>
+                            </td>
+
+                            <td>
+                                <span data-toggle="tooltip" data-placement="bottom" title="@item.TransactionType.Desc">@Html.Raw(item.Amount.ToString("##.###"))</span>
+                            </td>
+
+                            <td style="color:darkred;font-weight:bold;">
+                                @(sm.UserSession.Person.Fname == item.Person.Fname ? string.Empty : item.Person.Fname)
+                            </td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td colspan="6" style="text-align:right;">
+                            @Html.ActionLink("More..", "MyBalance", "Account")
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

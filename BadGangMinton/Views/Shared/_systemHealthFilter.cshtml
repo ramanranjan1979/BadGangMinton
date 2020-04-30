@@ -1,0 +1,39 @@
+﻿@model BadGangMinton.View.Model.LogFilterViewModel
+
+<div class="col-sm-4">
+    @Html.DropDownListFor(e => Model.PersonId, Model.People, "- Select person -", new { @class = "form-control", @style = "border-color: darkred;background-color:white;margin-left:auto;margin-right:auto; " })
+</div>
+
+<div class="col-sm-4">
+    @Html.DropDownListFor(e => Model.LogTypeId, Model.LogTypes, "- Select Log Type -", new { @class = "form-control", @style = "border-color: darkred;background-color:white;margin-left:auto;margin-right:auto; " })
+</div>
+
+<div class="col-sm-4">
+    <span class="glyphicon glyphicon-search" style="cursor:pointer;color:darkred;" onclick="SearchLog();"></span>
+</div>
+
+<script>
+
+    function SearchLog() {
+
+
+        var ddlPerson = $('#PersonId');
+        var ddlLogType = $('#LogTypeId');
+
+
+
+        var pid = ddlPerson.val();
+        var logtypeId = ddlLogType.val();
+
+        if (pid == '' || logtypeId == '') {
+
+            ddlPerson.css("border-color", "red");
+            ddlLogType.css("border-color", "red");
+        }
+        else {
+            var url = '/System/Health?logTypeId=' + logtypeId + '&personId=' + pid;
+            window.location.href = url;
+        }
+    }
+
+</script>

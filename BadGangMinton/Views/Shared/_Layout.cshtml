@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+   
+
+    @*<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>*@
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3Cb_dulWfCjicdxXhNdxhO8sCdhzrX0I&callback=initMap"
+            type="text/javascript"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")    
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+
+    <script type="text/javascript" src="~/Scripts/jquery.inview.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/wow.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/mousescroll.js"></script>
+    <script type="text/javascript" src="~/Scripts/smoothscroll.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.countTo.js"></script>
+    <script type="text/javascript" src="~/Scripts/lightbox.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <link href="~/Content/animate.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/lightbox.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/responsive.css" rel="stylesheet" />
+
+    <link href="~/Content/presets/preset6.css" rel="stylesheet" />
+
+    
+
+    <link rel="apple-touch-icon" sizes="57x57" href="~/Images/FavIcon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/Images/FavIcon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Images/FavIcon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Images/FavIcon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Images/FavIcon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Images/FavIcon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Images/FavIcon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Images/FavIcon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Images/FavIcon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/Images/FavIcon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Images/FavIcon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/Images/FavIcon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Images/FavIcon/favicon-16x16.png">
+    <link rel="manifest" href="~/Images/FavIcon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/Images/FavIcon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+<body>
+    
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-585009855b19b1e6"></script> 
+
+    <!--.preloader-->
+    <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <!--/.preloader-->
+    <header id="home">
+        <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active" style="background-image: url(images/slider/11.jpg);top: 0;left: 0;bottom: 0;right: 0; background-position:center;background-size: cover;">
+                    <div class="caption">
+                        <h1 class="animated fadeInLeftBig">Welcome to <span>Badminton</span> <span>Crew</span></h1>
+                        <p class="animated fadeInRightBig">Talk with your feet. Play with your heart.</p>
+                        <a data-scroll class="btn btn-start animated fadeInUpBig" href="#joinus">Join now</a>
+                    </div>
+                </div>
+                <div class="item" style="background-image: url(images/slider/15.jpg); top: 0;left: 0;bottom: 0;right: 0;background-position: center;background-size: cover;">
+                    <div class="caption">
+                        <h1 class="animated fadeInLeftBig">Say Hello to <span>Badminton</span> <span>Crew</span></h1>
+                        <p class="animated fadeInRightBig">Talk with your feet. Play with your heart.</p>
+                        <a data-scroll class="btn btn-start animated fadeInUpBig" href="#joinus">Join now</a>
+                    </div>
+                </div>
+                <div class="item" style="background-image: url(images/slider/16.jpg); top: 0;left: 0;bottom: 0;right: 0;background-position: center;background-size: cover;">
+                    <div class="caption">
+                        <h1 class="animated fadeInLeftBig">We play <span>Badminton</span></h1>
+                        <p class="animated fadeInRightBig">Talk with your feet. Play with your heart.</p>
+                        <a data-scroll class="btn btn-start animated fadeInUpBig" href="#joinus">Join now</a>
+                    </div>
+                </div>
+            </div>
+            <a class="left-control" href="#home-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+            <a class="right-control" href="#home-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
+            <a id="tohash" href="#joinus"><i class="fa fa-angle-down"></i></a>
+        </div><!--/#home-slider-->
+
+        <div class="main-nav">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                        <h1><img class="img-responsive logo" src="~/images/bc_logo.png" alt="logo" ></h1>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="scroll active"><a href="#home">Home</a></li>                        
+                        <li class="scroll"><a href="#about-us">About Us</a></li>                        
+                        <li class="scroll"><a href="#Players">Players</a></li>                        
+                        <li class="scroll"><a href="#contact">Contact</a></li>
+                        <li class="scroll"><a href="#joinus">Join</a></li>
+                        <li class="scroll"><a href="@Url.Action("Login", "Home")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!--/#main-nav-->
+    </header><!--/#home-->
+
+    <div class="container body-content">
+        @RenderBody()       
+    </div>
+
+    <footer id="footer">
+        <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <div class="container text-center">
+                <div class="footer-logo">
+                    <a href="/"><img class="img-responsive logo" src="~/images/bc_logo.png" alt="logo"></a>
+                </div>
+                <div class="social-icons">
+                    <ul>
+                        <li><a class="envelope" href="#"><i class="fa fa-envelope"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a class="tumblr" href="#"><i class="fa fa-tumblr-square"></i></a></li>
+                    </ul>
+                </div>
+                <div>
+                    
+                    <span style="cursor:pointer;" class="support" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="Support">
+                        <a onclick="OpenSupport();">
+                            <img src="/Images/support-icon.png" class="support">
+                        </a>
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                   
+                    <div class="col-sm-12">
+                        <p><a href="@Url.Action("Privacy","Home")">Privacy</a></p>
+                    </div>
+                    
+                    <div class="col-sm-12">
+                        <p>@Html.ActionLink("Beta disclaimer", "Disclaimer", "Home")</p>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <p>&copy; @DateTime.Now.Year Modizson</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")*@
+
+    @*@Scripts.Render("~/bundles/main")
+    @Scripts.Render("~/bundles/smoothscroll")
+    @Scripts.Render("~/bundles/wow")
+ 
+    @Scripts.Render("~/bundles/lightbox")
+    @Scripts.Render("~/bundles/countTo")
+    @Scripts.Render("~/bundles/inview")*@
+  @Html.Action("GetSupport", "Home")
+
+ 
+
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-96857929-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

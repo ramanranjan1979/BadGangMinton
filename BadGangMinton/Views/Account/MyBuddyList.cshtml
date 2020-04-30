@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BGO.Contact.Person>
+@using BadGangMinton.Helpers
+@{
+    ViewBag.Title = "My Buddy";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+<div class="content-box-large">
+    <div class="panel-body">
+        <div class="table-responsive" style="background-color:#f7ca18;color:darkred;">
+            <table class="table">
+                <tr>
+
+
+                    <th>
+                        @Html.Label("Name")
+                    </th>
+                    <th>
+                        @Html.Label("Date of birth")
+                    </th>
+                    <th>
+                        @Html.Label("Gender")
+                    </th>
+
+
+                    <th>
+                        <div class="pull-right">
+                            <span class='glyphicon glyphicon-edit'></span>
+                        </div>
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.OrderByDescending(o => o.CreatedOn))
+                {
+                    <tr>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+
+                        <td>
+                            @Html.Raw(item.DOB.ToShortDateString())
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sex)
+                        </td>
+
+                        <td>
+                            <div class="pull-right">
+                                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-edit'></span>", "Edit Buddy", "MyBuddyProfile", "Account", routeValues: new { personId = @item.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+                            </div>
+                        </td>
+
+
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+

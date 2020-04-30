@@ -1,0 +1,104 @@
+﻿@model BadGangMinton.View.Model.VerifictionViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutNoMenu.cshtml";
+}
+
+@using (Html.BeginForm("CompleteRegistration", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form", ID = "FRM_BGB_VERIFY", @autocomplete = "off" }))
+{
+    @Html.HiddenFor(x => x.PersonId)
+    @Html.HiddenFor(x => x.VerificationCode)
+    @Html.HiddenFor(x => x.PrimaryEmail)
+    @Html.HiddenFor(x => x.PhoneNumber)
+    @Html.HiddenFor(x => x.SalutuionId)
+    @Html.HiddenFor(x => x.Gender)
+    @Html.HiddenFor(x => x.DateOfBirth)
+    @Html.AntiForgeryToken()
+    <section id="login">
+        <div id="login-here" class="parallax">
+            <div class="container">
+                <div class="row">
+                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <h2>Welcome Aboard @Model.FirstName!</h2>
+                        <h2>Please confirm your joining application details</h2>
+                    </div>
+                </div>
+                <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row  wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+
+
+
+                                <div class="form-group col-sm-12">
+                                    @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "First Name", maxlength = "50", @class = "form-control", @style = "text-align: center;margin-left: auto;margin-right: auto;background-color:#f7ca18;" })
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    @Html.TextBoxFor(m => m.MiddleName, new { @placeholder = "Middle Name", maxlength = "50", @class = "form-control", @style = "text-align: center;margin-left: auto;margin-right: auto;background-color:#f7ca18;" })
+                                </div>
+
+
+                                <div class="form-group col-sm-12">
+                                    @Html.TextBoxFor(m => m.LastName, new { @placeholder = "Last Name", maxlength = "50", @class = "form-control", @style = "text-align: center;margin-left: auto;margin-right: auto;background-color:#f7ca18;" })
+                                </div>
+
+                                @*<div class="form-group col-sm-12">
+                                    @Html.TextBoxFor(m => m.PrimaryEmail, new { @placeholder = "Email", type = "email", maxlength = "50", @class = "form-control", @style = "text-align: center;margin-left: auto;margin-right: auto;background-color:#f7ca18;" })
+                                </div>*@
+
+                                <div class="form-group col-sm-12">
+                                    @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Choose Username", maxlength = "20", @class = "form-control", @style = "text-align: center;margin-left: auto;margin-right: auto;background-color:#f7ca18;", @required = "required", @data_val = "true", @data_val_required = "Choose your user name" })
+                                </div>
+
+
+
+                                <div class="form-group col-sm-12">
+                                    @Html.PasswordFor(m => m.Password, new { @placeholder = "Choose Password", maxlength = "20", @type = "password", @class = "form-control", @required = "required", @style = "text-align: center;margin-left: auto;margin-right: auto;background-color:#f7ca18;" })
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm Password", maxlength = "20", @type = "password", @class = "form-control", @style = "text-align: center;margin-left: auto;margin-right: auto;background-color:#f7ca18;" })
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <input type="submit" class="btn-submit animated infinite pulse" style="width: 50%;margin-left: auto;margin-right: auto;" value="Confirm Now" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+                                <p style="font-size: 15px; color:red; font-weight: bold; font-style: normal;" id="message">
+                                    @ViewBag.Message
+                                </p>
+                            </div>
+
+                            <div class="col-sm-12 text-center text-danger">
+                                @Html.ValidationSummary()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @Html.Action("GetSupport", "Home")
+}
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+
+<style>
+    div.validation-summary-errors ul li {
+        text-align: center;
+        color:gold;
+    }
+</style>
+
+
+

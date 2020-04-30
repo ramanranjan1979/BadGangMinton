@@ -1,0 +1,241 @@
+﻿@using BadGangMinton.Helpers
+@{
+    ViewBag.Title = "Mailout History";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
+    BadGangMinton.DAL.MxDal txDal = new BadGangMinton.DAL.MxDal();
+
+
+    var data = txDal.GetAllMailouts(null);
+}
+
+
+<div class="conten-box-large">
+    <div class="panel-body">
+        <div class="table-responsive" style="background-color:#f7ca18;color:darkred;">
+            <table class="table">
+
+                <tr>
+
+                    <th>
+                        @Html.Label("Name")
+                    </th>
+                    <th>
+                        <span class="glyphicon glyphicon-calendar" style="font-size: 20px;"></span>
+                    </th>
+                    <th>
+                        @Html.Label("Subject")
+                    </th>
+
+                    <th>
+                        @Html.Label("IsSent")
+                    </th>
+
+
+                    <th colspan="2">
+                        <div class="pull-right">
+                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span>", "Compose", "ComposeEmail", "Mailout", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
+                        </div>
+                    </th>
+                </tr>
+
+                @foreach (var item in data.OrderByDescending(o => o.CreatedOn))
+                {
+                    <tr>
+                        <td style="cursor:pointer;" onclick="ShowPersonDetailModal('@item.Person.Id');">
+                            @Html.DisplayFor(modelItem => item.Person.Name)
+                            @if (item.Person.GroupId.HasValue)
+                            {
+                                <span style="cursor:pointer;background-color:lawngreen;" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="Group Member">
+                                    <span class="glyphicon glyphicon-asterisk" style="margin-top:8px;"></span>
+                                </span>
+                            }
+                        </td>
+
+                        <td>
+                            @Html.Raw(item.CreatedOn.ToShortDateString()) ,
+                            @item.CreatedOn.DayOfWeek
+                        </td>
+
+                        <td>
+                            @item.Subject
+                        </td>
+
+                        <td>
+                            @item.Status
+                        </td>
+
+                        <td>
+                            <span style="cursor:pointer;" class="glyphicon glyphicon-envelope" onclick="ShowTxMessageDetailModal('@item.HTML.Replace(System.Environment.NewLine, "\\" + System.Environment.NewLine).Replace("'", "\"")');"></span>
+                        </td>
+
+                        <td>
+                            <span style="cursor:pointer;" class="glyphicon glyphicon-inbox" onclick="Resend_Mailout_Popup('@item.Id');"></span>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="TxEmailModal" role="dialog">
+    <div class="modal-dialog" style="border:solid 20px; border-color:#f7ca18; border-radius:11px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody" style="font-size:12px;">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="Person_Detail_Popup" role="dialog">
+    <div class="modal-dialog" style="border:solid 20px; border-color:#f7ca18; border-radius:11px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="text-align:center;">Person Details</h4>
+            </div>
+            <div class="modal-body" id="modalPersonalBody">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Resend_Mailout_Popup" role="dialog">
+    <div class="modal-dialog" style="border:solid 20px; border-color:#f7ca18; border-radius:11px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="text-align:center;">To Resend, Type RESEND</h4>
+
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                <input type="text" id="Resend_Textbox" style="width: 200px; height: 20px;" />
+                <input type="button" value="Submit" onclick="Resend();" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function ShowTxMessageDetailModal(content) {
+        $("#modalBody").html("");
+        $("#modalBody").html(content.replace('text-decoration: underline;', 'text-decoration: none;'));
+        $('#TxEmailModal').modal('show');
+    }
+
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+
+
+    function ShowPersonDetailModal(personId) {
+        $("#modalPersonalBody").html("");
+        var data = { "personId": personId };
+        $.ajax({
+            url: "/Contact/GetContactDetails",
+            type: "POST",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                var list = $("#modalPersonalBody").append('<div style="border:solid 1px;padding:20px;"></div>').find('div');
+
+                if (data.Group != null) {
+                    list.append('<p style="font-weight:bold;background-color:red;color:gold;text-align:center;">Attached To ' + data.Group.Name + '</p>');
+                }
+
+
+                list.append('<p>Name: ' + data.Name + '</p>');
+                list.append('<p>DOB: ' + $.date(data.DOB) + '</p>');
+                list.append('<p>Gender: ' + data.Sex + '</p>');
+
+                list.append('<p style="font-weight:bold;">Email</p>');
+
+                jQuery.each(data.PersonEmail, function (i, val) {
+                    list.append('<p>' + val.Type.Name + ':' + val.Value + '</p>');
+
+                });
+
+                list.append('<p style="font-weight:bold;">Contact Number</p>');
+
+                jQuery.each(data.PersonPhone, function (i, val) {
+                    list.append('<p>' + val.Type.Name + ':' + val.Value + '</p>');
+
+                });
+
+                list.append('<p style="font-weight:bold;">Address</p>');
+
+                jQuery.each(data.PersonAddress, function (i, val) {
+                    list.append('<p style="font-weight:bold;">' + val.AddressType.Name + '</p>');
+                    list.append('<p>' + val.FullAddress + '</p>');
+
+                });
+
+
+            },
+            error: function () {
+                //alert("Error");
+            }
+        });
+
+        $('#Person_Detail_Popup').modal('show');
+    }
+
+    var id_to_Resend=0;
+
+    function Resend_Mailout_Popup(id) {
+        id_to_Resend = id;
+        $('#Resend_Mailout_Popup').modal('show');
+        setTimeout("$('#Resend_Textbox').focus();", 1000);
+
+    }
+
+    function Resend() {
+        if ($("#Resend_Textbox").val() == "RESEND") {            
+            var data = { "mailoutQueueId": id_to_Resend };
+            $.ajax({
+                url: "/Mailout/Resend",
+                type: "POST",
+                data: JSON.stringify(data),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    $('#Resend_Mailout_Popup').modal('hide');
+                },
+                error: function () {
+                    alert("Error");
+                }
+            });
+        }
+    }
+
+
+    $.date = function (dateObject) {
+        var d = new Date(dateObject);
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var date = day + "/" + month + "/" + year;
+
+        return date;
+    };
+</script>

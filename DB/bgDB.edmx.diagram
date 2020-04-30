@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d7ae61c4b7b849aa8a53110f459cc792" Name="Diagram1" ZoomLevel="83" >
+        <EntityTypeShape EntityType="BgDB.Country" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.LogType" Width="1.5" PointX="2.125" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.EmailType" Width="1.5" PointX="3.75" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.AddressType" Width="1.5" PointX="5.375" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.PhoneType" Width="1.5" PointX="7.125" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.Person" Width="1.5" PointX="9.125" PointY="6.125" FillColor="Fuchsia" />
+        <EntityTypeShape EntityType="BgDB.Member" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="BgDB.Salutation" Width="1.5" PointX="8.875" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.Occupation" Width="1.5" PointX="10.75" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.JobTitle" Width="1.5" PointX="12.5" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.TransactionType" Width="1.5" PointX="14.125" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.UploadType" Width="1.5" PointX="15.75" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.PersonUpload" Width="1.5" PointX="15" PointY="3.375" />
+        <EntityTypeShape EntityType="BgDB.SocialProfileType" Width="2.125" PointX="17.375" PointY="0.5" />
+        <EntityTypeShape EntityType="BgDB.PersonSocialProfile" Width="2.25" PointX="17.375" PointY="2.75" />
+        <EntityTypeShape EntityType="BgDB.PersonPhone" Width="1.5" PointX="7" PointY="2.5" />
+        <EntityTypeShape EntityType="BgDB.PersonEmail" Width="1.5" PointX="3" PointY="2.625" />
+        <EntityTypeShape EntityType="BgDB.PersonAddress" Width="1.5" PointX="5" PointY="2.625" />
+        <AssociationConnector Association="BgDB.EmailTypePersonEmail" />
+        <AssociationConnector Association="BgDB.PhoneTypePersonPhone" />
+        <AssociationConnector Association="BgDB.AddressTypePersonAddress" />
+        <AssociationConnector Association="BgDB.UploadTypePersonUpload" />
+        <EntityTypeShape EntityType="BgDB.PersonOccupation" Width="2.125" PointX="11.5" PointY="2.625" />
+        <AssociationConnector Association="BgDB.OccupationPersonOccupation" />
+        <AssociationConnector Association="BgDB.CountryPersonAddress" />
+        <AssociationConnector Association="BgDB.SalutationPerson" />
+        <AssociationConnector Association="BgDB.SocialProfileTypePersonSocialProfile" />
+        <AssociationConnector Association="BgDB.JobTitlePersonOccupation" />
+        <AssociationConnector Association="BgDB.PersonPersonAddress" />
+        <AssociationConnector Association="BgDB.PersonPersonEmail" />
+        <AssociationConnector Association="BgDB.PersonPersonOccupation" />
+        <AssociationConnector Association="BgDB.PersonPersonPhone" />
+        <AssociationConnector Association="BgDB.PersonPersonSocialProfile" />
+        <AssociationConnector Association="BgDB.PersonPersonUpload" />
+        <EntityTypeShape EntityType="BgDB.Log" Width="1.5" PointX="3.125" PointY="7.5" />
+        <AssociationConnector Association="BgDB.LogTypeLog" />
+        <AssociationConnector Association="BgDB.PersonLog" />
+        <EntityTypeShape EntityType="BgDB.Transaction" Width="1.5" PointX="12.75" PointY="7.375" />
+        <AssociationConnector Association="BgDB.TransactionTypeTransaction" />
+        <AssociationConnector Association="BgDB.PersonTransaction" />
+        <AssociationConnector Association="BgDB.PersonPlayer" />
+        <EntityTypeShape EntityType="BgDB.Login" Width="1.5" PointX="3.125" PointY="10.125" FillColor="Red" />
+        <AssociationConnector Association="BgDB.PersonLogin" />
+        <EntityTypeShape EntityType="BgDB.PersonTypeRole" Width="1.5" PointX="0.75" PointY="12.75" FillColor="Red" />
+        <EntityTypeShape EntityType="BgDB.Role" Width="1.5" PointX="0.875" PointY="9.875" FillColor="Red" />
+        <AssociationConnector Association="BgDB.RolePersonRole" />
+        <EntityTypeShape EntityType="BgDB.PersonType" Width="1.5" PointX="7.375" PointY="5.25" FillColor="0, 122, 204" />
+        <AssociationConnector Association="BgDB.PersonTypeMember" />
+        <AssociationConnector Association="BgDB.PersonTypePersonRole" />
+        <EntityTypeShape EntityType="BgDB.MailoutQueue" Width="1.5" PointX="9.375" PointY="12.125" FillColor="Olive" />
+        <AssociationConnector Association="BgDB.PersonMailoutQueue" />
+        <EntityTypeShape EntityType="BgDB.MailoutType" Width="1.5" PointX="12.75" PointY="14.125" FillColor="Olive" />
+        <AssociationConnector Association="BgDB.MailoutTypeMailoutQueue" />
+        <EntityTypeShape EntityType="BgDB.MailoutParameter" Width="2.375" PointX="15" PointY="8" FillColor="Olive" />
+        <EntityTypeShape EntityType="BgDB.MailoutTypeParameter" Width="2.375" PointX="15.75" PointY="13" FillColor="Olive" />
+        <AssociationConnector Association="BgDB.MailoutTypeMailoutTypeParameter" />
+        <AssociationConnector Association="BgDB.MailoutParameterMailoutTypeParameter" />
+        <EntityTypeShape EntityType="BgDB.MailoutQueueParameterValue" Width="2.875" PointX="12.25" PointY="10.5" FillColor="Olive" />
+        <AssociationConnector Association="BgDB.MailoutQueueMailoutQueueParameterValue" />
+        <AssociationConnector Association="BgDB.MailoutTypeParameterMailoutQueueParameterValue" />
+        <EntityTypeShape EntityType="BgDB.MailoutTracker" Width="1.5" PointX="9.5" PointY="16.125" FillColor="Olive" />
+        <AssociationConnector Association="BgDB.MailoutQueueMailoutTracker" />
+        <EntityTypeShape EntityType="BgDB.Attendance" Width="1.5" PointX="11.375" PointY="19.625" />
+        <AssociationConnector Association="BgDB.FK_PersonAttendance" />
+        <EntityTypeShape EntityType="BgDB.SecurityType" Width="1.5" PointX="19.75" PointY="0.5" FillColor="0, 122, 204" />
+        <EntityTypeShape EntityType="BgDB.SecurityCode" Width="1.5" PointX="20.125" PointY="2.875" FillColor="0, 122, 204" />
+        <AssociationConnector Association="BgDB.SecurityTypeSecurityCode" />
+        <AssociationConnector Association="BgDB.PersonSecurityCode" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

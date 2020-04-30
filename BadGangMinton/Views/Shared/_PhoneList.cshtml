@@ -1,0 +1,131 @@
+﻿@model BadGangMinton.View.Model.PersonViewModel
+
+<div class="table-responsive" style="color:darkred;">
+    <table class="table table-striped table-hover table-condensed">
+        <tr>
+           
+
+            <th>
+                @Html.Label("Type")
+            </th>
+            <th>
+                @Html.Label("Value")
+            </th>
+
+          
+
+            <th>
+                <span class="glyphicon glyphicon-plus" id="spanAddPhone"> </span>
+            </th>           
+            
+
+        </tr>
+
+        @foreach (var item in Model.PersonContactNumber.OrderByDescending(o => o.CreatedOn))
+        {
+            <tr>
+                
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>               
+
+                <td>
+                    <span class="glyphicon glyphicon-edit" > </span> 
+                </td>               
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div class="modal fade" id="Add_Phone_Pop_UP" role="dialog">
+    <div class="modal-dialog" style="border:solid 20px; border-color:#f7ca18; border-radius:11px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="text-align:center;color:darkred;">Add your contact number here..</h4>
+            </div>
+            <div class="modal-body text-center" id="modalBody">
+
+                <div class="form-group">
+                    <select style="width:100%" id="ddlPhoneType">
+                        <option value="1">Mobile</option>
+                        <option value="2">Home</option>
+                        <option value="3">Work</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="tel" id="txtPhone" required placeholder="07563265423" maxlength="15" style="width:300px;color:darkred;" />
+                </div>                
+
+                <div class="form-group">
+                    <input type="button" value="Save" class="btn-info" onclick="AddNewPhone();" />
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $("#spanAddPhone").click(function () {
+        $('#Add_Phone_Pop_UP').modal('show');
+        setTimeout("$('#txtPhone').focus();", 1000);
+    });
+
+
+    function AddNewPhone() {
+
+        var data =
+            {
+                "phoneTypeId": $('#ddlPhoneType').val(),
+                "phone": $('#txtPhone').val(),
+                "personId": '@Model.Id'
+            };
+
+        var isValid = true;
+
+        if ($('#txtPhone').val().trim() == "") {
+            isValid = false;
+            $('#txtPhone').css({ 'border-color': 'red' });
+        }
+
+        if (isValid) {
+            $.ajax({
+                url: "/Account/AddNewPhone",
+                type: "POST",
+                data: JSON.stringify(data),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (status) {
+
+                    $('#Add_Phone_Pop_UP').modal('hide');
+
+                    if (status == 0) {
+                        window.location.href = '../Account/MyBuddyProfile?personId=' + '@Model.Id';
+                    }
+                    else {
+                        window.location.href = '../Account/MyProfile';
+                    }
+
+                },
+                error: function () {
+                    alert('Error');
+                }
+            });
+            return false;
+        }
+    }
+
+
+
+
+</script>

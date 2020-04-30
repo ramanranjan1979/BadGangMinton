@@ -1,0 +1,7 @@
+﻿insert into BG.Person values('Raman','Prakash','Ranjan','12/09/1980',2,1,1,getdate(),'92.20.85.175',null)
+insert into BG.PersonEmail values('ramanranjan1979@gmail.com',1,1,GETDATE())
+insert into BG.PersonRole values(1,GETDATE(),1,1)
+insert into BG.Login values('ramanranjan1979','F04949AF70B9EC13069FD8E32490445C8F17C2ED',GETDATE(),null,null,1,0,0,1)
+insert into BG.Member values (1,GETDATE(),1,1)
+insert into BG.PersonRole values(1,GETDATE(),2,2)
+insert into BG.PersonRole values(1,GETDATE(),2,1)

@@ -1,0 +1,47 @@
+﻿@{
+    BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
+    BadGangMinton.DAL.TransactionDal txDal = new BadGangMinton.DAL.TransactionDal();
+    BadGangMinton.DAL.LookupDal lDal = new BadGangMinton.DAL.LookupDal();
+
+    var d = lDal.GetPersonLog(sm.UserSession.Person.Id);
+}
+
+<div class="container">
+    <div class="panel panel-default" style="box-shadow: 0 4px 8px 0 rgb(139, 63, 15), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+        <div class="panel-heading">
+            <h1 style="color:darkred;font-weight: bold;text-align: center;text-shadow: 2px 2px darkred;">Welcome @sm.UserSession.Person.Fname,</h1>
+        </div>
+
+        <div class="panel-body">
+            <ul style="list-style:none;text-align:center;line-height:35px;">
+                
+
+                <li>
+                    Your Joining Date: <strong>@sm.UserSession.Person.CreatedOn.ToShortDateString()</strong>
+                </li>
+
+
+                @{
+                    if (txDal.GetAccountBalance(sm.UserSession.Person.Id) > 0)
+                    {
+                        <li>
+                            Your Account Balance: <span class="glyphicon glyphicon-gbp text-danger">@txDal.GetAccountBalance(sm.UserSession.Person.Id)</span><span class="glyphicon glyphicon-thumbs-up" style="font-size: 20px;color: green;top: 5px;left: 7px;"></span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            Your Account Balance: <span class="glyphicon glyphicon-gbp text-danger">@txDal.GetAccountBalance(sm.UserSession.Person.Id)</span><span class="glyphicon glyphicon-thumbs-down" style="font-size: 20px;color: red;top: 5px;left: 7px;"></span>
+                        </li>
+                    }
+                }
+
+
+                <li>
+                    Your Last Login : @d.Where(x => x.Description == "LOGGED IN SYSTEM").OrderByDescending(o => o.CreatedOn).FirstOrDefault().CreatedOn.ToShortDateString()
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

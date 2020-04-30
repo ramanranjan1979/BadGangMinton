@@ -1,0 +1,95 @@
+﻿@model BadGangMinton.View.Model.SupportViewModel
+
+
+
+
+<div class="modal fade" id="model_support" tabindex="-1" role="dialog" aria-labelledby="model_support">
+    <div class="modal-dialog modal-lg" role="document" style="border:solid 5px; border-color:#f7ca18; border-radius:5px;">
+        <div class="modal-content">
+            <div class="modal-body modal-bg text-center" style="background-color:#f7ca18;">                
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div id="support_body">
+                    <div class="col-lg-12">
+                        <h3>HOW CAN WE HELP?</h3>
+                        <p style="color:darkred;">Please fill out the simple form below for any queries or issues you may experience, a member from our support team will assist you as soon as possible. </p>
+                    </div>
+                    <div class="col-lg-10" style="margin-left: auto;  margin-right: auto; float: none; z-index:8;">
+                        @using (Ajax.BeginForm("RaiseSupportQuery", "Home", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "ThankYouSupport(data);" }, new { @Id = "SupportPopupForm", @class = "form" }))
+                        {
+
+
+                            if (Model.isMemnber == false)
+                            {
+                                @Html.TextBoxFor(name => Model.Name, new { @Class = "col-lg-12 form-control", maxlength = 20, @placeholder = "Name", required = "required", @style = "min-width:100%;background-color:white;margin-bottom: 20px;" })
+                                @Html.TextBoxFor(name => Model.EmailAddress, new { @Class = "col-lg-12 form-control", maxlength = 50, @type = "email", @placeholder = "Enter Your Registered Email Address", required = "required", @data_val = "true", @data_val_required = "Enter Your Registered Email Address", @style = "min-width:100%;background-color:white;margin-bottom: 20px;" })
+                                @Html.TextBoxFor(name => Model.Subject, new { @Class = "col-lg-12 form-control", maxlength = 20, @placeholder = "Subject", required = "required", @style = "min-width:100%;background-color:white;margin-bottom: 20px;" })
+                            }
+                            else
+                            {
+                                @Html.HiddenFor(r => r.EmailAddress)
+                                @Html.TextBoxFor(name => Model.Name, new { @Class = "col-lg-12 form-control", @placeholder = "Name", @readonly = "readonly", @style = "color:white;margin-bottom: 20px;" })
+                            }
+                            @Html.TextAreaFor(message => Model.Message, new { @class = "col-lg-12 form-control", @placeholder = "Message up to 250 Characters", @style = "min-width:100%;background-color:white;margin-bottom: 20px;text-align:left;" })
+
+                            <span class="submit" style="cursor:pointer;background-color:white;" onclick="$('#SupportPopupForm').submit(); return false;">SUBMIT</span>
+
+                        }
+                    </div>
+                </div>
+                <div>
+                    <div id="SupportThankYou" class="col-lg-12" style="z-index:8;display:none;">
+                        <h3>Thanks!</h3>
+                        <p>
+                            You are very important to us, all information received will always remain confidential. We will contact you as soon as we review your message.
+                        </p>
+                    </div>
+
+                    <div id="SupportThankYou1" class="col-lg-12" style="z-index:8;display:none;">
+                        <h3>Sorry!</h3>
+                        <p>
+                            Email address cannot be found into system.Please enter the registered email address or not registered then <a style="background-color:white;" href="#contact">contact us</a>
+                        </p>
+                    </div>
+
+                    <div id="SupportThankYou2" class="col-lg-12" style="z-index:8;display:none;">
+                        <h3>Thanks!</h3>
+                        <p>
+                            We have already received your query and you are very important to us, all information received will always remain confidential. We will contact you as soon as we review your message.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function OpenSupport() {
+        $('#model_support').modal('show');
+    }
+
+
+    $("#Message").on('keyup keypress blur change', function (e) { NoSpecialCharacters(this) });
+
+    function NoSpecialCharacters(f) {
+        !(/^ [A-z&#209;&#241;0-9\n\r,\.\-#~\[\]\{\}\?\(\)\+\=£$€%!\:\']*$/i).test(f.value) ? f.value = f.value.replace(/[^ A-z&#209;&#241;0-9\n\r,\.\-#~\[\]\{\}\?\(\)\+\=£$€%!\:\']/ig, '') : null;
+    }
+
+    function ThankYouSupport(data) {
+
+        if (data.Ok == "OK") {
+            $('#SupportThankYou').show();
+        }
+        else if (data.Ok == "NF") {
+            $('#SupportThankYou1').show();
+        }
+        else {
+            $('#SupportThankYou2').show();
+        }
+
+        $('#Message').val('');
+        $('#support_body').hide();
+    }
+
+</script>

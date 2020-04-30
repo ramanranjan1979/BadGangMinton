@@ -1,0 +1,102 @@
+﻿@model BadGangMinton.View.Model.TransactionViewModel
+
+
+@{
+    ViewBag.Title = "New Transaction";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+@using (Html.BeginForm("SaveTransaction", "Transaction", FormMethod.Post, new { ID = "FRM_BGB_ADD_TRANSACTION", @class = "form-horizontal", @autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    <section id="AddContact">
+        <div id="AddContact-here" class="parallax">
+            <div class="container">
+                <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="row">
+                        <div class="col-sm-12" style="background-color:#f7ca18;padding:40px;">
+                            <form id="main-contact-form" name="contact-form" method="post" action="#">
+                                <div class="row  wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms" style="margin-top:37px;">
+
+                                    <div class="col-sm-12" style="color: darkred;">
+
+
+
+                                        <div class="form-group">
+
+                                            <label for="TransactionTypeId" class="col-sm-2 control-label">Type</label>
+                                            <div class="col-sm-4">
+                                                @Html.DropDownListFor(e => Model.TransactionTypeId, Model.TransactionTypes, new { @class = "form-control", @style = "border-color: darkred;" })
+                                            </div>
+
+
+                                            <label for="PersonId" class="col-sm-2 control-label">Member</label>
+                                            <div class="col-sm-4">
+                                                @Html.ListBoxFor(e => Model.PersonId, Model.People, new { @class = "form-control", @required = "Required", @style = "border-color: darkred;" })
+                                                @Html.ValidationMessageFor(model => model.PersonId, "", new { @class = "text-danger", @Style = "color:red;" })
+                                            </div>
+
+
+
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label for="TransactionDate" class="col-sm-2 control-label">Date</label>
+                                            <div class="col-sm-4">
+                                                @Html.TextBoxFor(model => model.TransactionDate,  new { @class = "form-control", @readonly = "Readonly", @style = "background-color:#f7ca18;border-color: darkred;" })
+                                                @Html.ValidationMessageFor(model => model.TransactionDate, "", new { @class = "text-danger", @Style = "color:red;" })
+                                            </div>
+
+                                            <label for="Amount" class="col-sm-2 control-label">Amount (£)</label>
+                                            <div class="col-sm-4">
+                                                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", @style = "border-color: darkred;" } })
+                                                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger", @Style = "color:red;" })
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn-submit" style="width: 50%;margin-left: auto;margin-right: auto;border: solid 2px;color: darkred;">Add Transaction</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<script type="text/javascript">
+
+    $(function () {
+        $("#TransactionDate").datepicker(
+            {
+                changeMonth: true,
+                dateFormat: "yy/mm/dd",
+                changeYear: true,
+                inline: true,
+                altField: "#datep",
+                yearRange: "-55:+0",
+            }
+            );
+    });
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

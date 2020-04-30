@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BGO.TX.Transaction>
+
+<div class="table-responsive" style="color:darkred;">
+    <table class="table table-striped table-hover table-condensed">
+        <tr>
+            <th style="text-align: center;">
+                @Html.Label("#")
+            </th>
+
+            <th style="text-align: center;">
+                @Html.Label("Name")
+            </th>
+            <th style="text-align: center;">
+                @Html.Label("Amount (£)")
+            </th>                      
+            <th style="text-align: center;">
+                @Html.Label("Datetime")
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model.OrderByDescending(o => o.TransactionDate))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransactionTypeId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Person.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                
+                <td>                    
+                    @Html.Raw(item.TransactionDate.Value.ToShortDateString())
+                </td>               
+            </tr>
+        }
+
+    </table>
+</div>
+

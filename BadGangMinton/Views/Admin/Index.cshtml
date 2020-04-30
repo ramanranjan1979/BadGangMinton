@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    BadGangMinton.DAL.ContactDal cDal = new BadGangMinton.DAL.ContactDal();
+    BadGangMinton.DAL.MemberDal mDal = new BadGangMinton.DAL.MemberDal();
+    BadGangMinton.DAL.TransactionDal tDal = new BadGangMinton.DAL.TransactionDal();
+    BadGangMinton.DAL.LookupDal lookupDal = new BadGangMinton.DAL.LookupDal();
+}
+
+<div class="page-content">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:40px;text-align:center;">
+                            <div class="content-box-header">
+                                <div class="panel-title" style="color:darkred;">RECENT CONTACTS</div>
+
+                                <div class="panel-options">
+                                    <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+                                    <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+                                </div>
+                            </div>
+                            <div class="content-box-large box-with-header">
+                                @Html.Partial("_newMember", cDal.GetPeople().OrderByDescending(o=>o.CreatedOn).Take(10))
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:40px;text-align:center;">
+                            <div class="content-box-header">
+                                <div class="panel-title" style="color:darkred;">RECENT PLAYERS</div>
+
+                                <div class="panel-options">
+                                    <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+                                    <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+                                </div>
+                            </div>
+                            <div class="content-box-large box-with-header">
+                                @Html.Partial("_newPlayer", mDal.GetMember(2).OrderByDescending(o => o.JoiningDate).Take(10))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:40px;text-align:center;">
+                            <div class="content-box-header">
+                                <div class="panel-title" style="color:darkred;">RECENT PAYMENTS</div>
+
+                                <div class="panel-options">
+                                    <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+                                    <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+                                </div>
+                            </div>
+                            <div class="content-box-large box-with-header">
+                                @Html.Partial("_newPayment", tDal.GetTransaction().Where(t => t.TransactionTypeId == 1).OrderByDescending(o=>o.TransactionDate).Take(10))
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:40px;text-align:center;">
+                            <div class="content-box-header">
+                                <div class="panel-title" style="color:darkred;">SYSTEM HEALTH</div>
+
+                                <div class="panel-options">
+                                    <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+                                    <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+                                </div>
+                            </div>
+                            <div class="content-box-large box-with-header">
+                                @Html.Partial("_sysHealth", lookupDal.GetSystemLog().OrderByDescending(o=>o.CreatedOn).Take(10))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

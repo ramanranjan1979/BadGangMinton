@@ -1,0 +1,149 @@
+﻿@model  BadGangMinton.View.Model.MemberViewModel
+@using BadGangMinton.Helpers
+
+@{
+    ViewBag.Title = "Add Player";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="content-box-large">
+    <div class="panel-body">
+        <div class="table-responsive" style="background-color:#f7ca18;color:darkred;">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.Label("#")
+                    </th>
+
+                    <th>
+                        @Html.Label("Name")
+                    </th>
+
+                    <th>
+                        Joining Date
+                    </th>
+
+
+
+                    <th>
+                        <div class="pull-right">
+                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span>", "Add Contact", "Add", "Contact", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
+                        </div>
+                    </th>
+
+                </tr>
+
+                @foreach (var item in Model.PotentialMember.OrderByDescending(o => o.DOB))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                            @if (item.GroupId.HasValue)
+                            {
+                                <span style="cursor:pointer;background-color:lawngreen;" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="Group Member">
+                                    <span class="glyphicon glyphicon-asterisk" style="margin-top:8px;"></span>
+                                </span>
+                            }
+                        </td>
+
+                        <td>
+                            <input type="qq" id="DOJ-@item.Id" />
+                        </td>
+
+                        <td colspan="1">
+                            <input type="button" value="Complete" class="btn-success" onclick="Confirm_Popup(@item.Id);" />
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmpopup" role="dialog">
+    <div class="modal-dialog" style="border:solid 20px; border-color:#f7ca18; border-radius:11px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="text-align:center;">To Confirm, Type CONFIRM</h4>
+
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                <input type="text" id="Confirm_Textbox" style="width: 200px; height: 20px;" />
+                <input type="button" value="Submit" onclick="AddPlayer();" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var id_to_confirm = 0;
+
+    $(document).ready(function () {
+        $('input[type=qq]').datepicker(
+            {
+                changeMonth: true,
+                dateFormat: "yy/mm/dd",
+                changeYear: true,
+                inline: true,
+                altField: "#datep",
+                yearRange: "-55:+0",
+            }
+            );
+    });
+
+
+    function Confirm_Popup(id) {
+
+        id_to_confirm = id;
+
+        if ($('#DOJ-' + id_to_confirm).val() == '') {
+            $('#DOJ-' + id_to_confirm).css('border-color', 'red');
+        }
+        else {
+            $('#DOJ-' + id_to_confirm).css('border-color', '');
+            $('#confirmpopup').modal('show');
+            setTimeout("$('#Confirm_Textbox').focus();", 1000);
+        }
+    }
+
+    function AddPlayer() {
+        if ($("#Confirm_Textbox").val() == "CONFIRM") {
+
+            var data = { "PersonId": id_to_confirm, "DOJ": $('#DOJ-' + id_to_confirm).val() };
+            $.ajax({
+                url: "/Player/AddNewPlayer",
+                type: "POST",
+                data: JSON.stringify(data),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (status) {
+                    $('#confirmpopup').modal('hide');
+                    window.location.href = '../Player/AddPlayer';
+                },
+                error: function () {
+                    alert('Error');
+                }
+            });
+            return false;
+
+
+        }
+    }
+
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

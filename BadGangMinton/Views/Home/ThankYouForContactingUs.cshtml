@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Welcome to Badminton Crew";
+    Layout = "~/Views/Shared/_LayoutNoMenu.cshtml";
+}
+
+
+<section id="joinus">
+    <div id="contact-us" class="parallax">
+        <div class="container">
+            <div class="row">
+                <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <h2>Hey @ViewBag.Name</h2>                    
+                </div>
+            </div>
+            <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row  wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="col-sm-12 text-center">
+                                <h3>Thanks for contacting us!</h3>
+
+                                <p>We have received your details and would like to thank you for sending to us. We will be in touch with you asap via email <span style="color:#f7ca18">@ViewBag.Email</span></p>
+
+                                <p style="color:red;">Tip: Please check your spam/junk folder just in case ;-)<br />Please mark us as a safe sender so you can receive all updates from us.</p>                                                                
+
+                                <p>Talk to you soon</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

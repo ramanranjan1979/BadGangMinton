@@ -1,0 +1,81 @@
+﻿@model IEnumerable<BGO.Member.Attendance>
+
+@{
+    BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
+
+    ViewBag.Title = "My Attendance";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+
+<div class="content-box-large" style="box-shadow: inset -20px 17px 100px 0 rgb(247, 202, 24), 0 6px 20px 0 rgb(11, 148, 66);">
+
+    <div class="panel-heading">
+        <h1 style="color:darkred;font-weight: bold;text-align: center;text-shadow: 2px 2px darkred;">My Attendance(@Model.Count())</h1>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="form-group">
+
+
+
+            <div class="table-responsive" style="background-color:#f7ca18;color:darkred;">
+                <table class="table">
+                    <tr>
+                        @*<th>
+                                @Html.Label("#")
+                            </th>*@
+
+                        <th>
+                            <span class="glyphicon glyphicon-user"></span>
+                        </th>
+
+                        <th>
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </th>
+
+                        <th>
+                            @Html.Label("Logged On")
+                        </th>
+
+                    </tr>
+
+                    @foreach (var item in Model.OrderByDescending(o => o.AttendanceDate))
+                    {
+                        <tr>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>*@
+
+                            <td>
+                                @(sm.UserSession.Person.Fname == item.Person.Fname ? string.Empty : item.Person.Fname)
+                            </td>
+
+                            <td>
+                                @Html.Raw(item.AttendanceDate.ToShortDateString()), @Html.Raw(item.AttendanceDate.DayOfWeek)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreatedOn)
+                            </td>
+
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+</script>

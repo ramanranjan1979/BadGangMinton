@@ -1,0 +1,102 @@
+﻿@model IEnumerable<BGO.TX.Transaction>
+
+@{
+    BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
+
+    ViewBag.Title = "My Balance";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+
+<div class="content-box-large" style="box-shadow: inset -20px 17px 100px 0 rgb(247, 202, 24), 0 6px 20px 0 rgb(11, 148, 66);">
+
+    <div class="panel-heading">
+        @{
+            if (@Model.Sum(z => z.Amount) > 0)
+            {
+                <h1 style="color:green;font-weight: bold;text-align:center;text-shadow: 2px 2px darkred;">My Balance(@Model.Sum(z => z.Amount).ToString("##.##"))</h1>
+            }
+            else
+            {
+                <h1 style="color:red;font-weight: bold;text-align:center;text-shadow: 2px 2px darkred;">My Balance(@Model.Sum(z => z.Amount).ToString("##.##"))</h1>
+            }
+        }
+        
+    </div>
+
+    <div class="panel-body">
+
+        <div class="form-group">
+
+
+
+            <div class="table-responsive" style="background-color:#f7ca18;color:darkred;">
+                <table class="table">
+                    <tr>
+                        @*<th>
+                            @Html.Label("#")
+                        </th>*@
+
+                        <th>
+                            <span class="glyphicon glyphicon-user"></span>
+                        </th>
+
+                        <th>
+                            @Html.Label("Type")
+                        </th>
+
+                        <th>
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </th>
+
+                        <th>
+                            <span class="glyphicon glyphicon-gbp"></span>
+                        </th>
+
+                    </tr>
+
+                    @foreach (var item in Model.OrderByDescending(o => o.TransactionDate))
+                    {
+                        <tr>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>*@
+
+                            <td>
+                                @(sm.UserSession.Person.Fname == item.Person.Fname ? string.Empty : item.Person.Fname)
+                            </td>
+
+                            <td>
+                                <span style="cursor:pointer;" data-toggle="tooltip" data-placement="bottom" title="@item.TransactionType.Desc">@Html.Raw(item.TransactionType.Name)</span>
+                            </td>
+
+                            <td>
+                                @Html.Raw(item.TransactionDate.Value.ToShortDateString()), @Html.Raw(item.TransactionDate.Value.DayOfWeek)
+                            </td>
+
+                            <td>
+                                <span style="cursor:pointer;"  data-toggle="tooltip" data-placement="bottom" title="@item.Remarks">@Html.DisplayFor(modelItem => item.Amount)</span>
+                            </td>
+
+                        </tr>
+                    }
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+</script>
+
+

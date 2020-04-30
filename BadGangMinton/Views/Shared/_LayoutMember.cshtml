@@ -1,0 +1,199 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+
+
+
+    @*<script type="text/javascript" src="~/Scripts/jquery.inview.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/wow.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/mousescroll.js"></script>
+        <script type="text/javascript" src="~/Scripts/smoothscroll.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.countTo.js"></script>
+        <script type="text/javascript" src="~/Scripts/lightbox.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/main.js"></script>*@
+
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <link href="~/Content/animate.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/lightbox.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/responsive.css" rel="stylesheet" />
+
+    <link href="~/Content/presets/preset6.css" rel="stylesheet" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="~/Images/FavIcon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/Images/FavIcon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Images/FavIcon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Images/FavIcon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Images/FavIcon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Images/FavIcon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Images/FavIcon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Images/FavIcon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Images/FavIcon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/Images/FavIcon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Images/FavIcon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/Images/FavIcon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Images/FavIcon/favicon-16x16.png">
+    <link rel="manifest" href="~/Images/FavIcon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/Images/FavIcon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+<body>
+
+
+
+
+    <header id="home">
+
+
+        <div class="main-nav">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index","Account")">
+                        <h1><img class="img-responsive logo" src="~/Images/bc_logo.png" alt="logo"></h1>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a href="@Url.Action("Index","Account")">
+                                Home
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                My Profile
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("MyProfile","Account")">My Profile</a></li>
+                                @{
+                                    BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
+                                    BadGangMinton.DAL.ContactDal cDal = new BadGangMinton.DAL.ContactDal();
+                                    if (cDal.GetBuddyListByPersonId(sm.UserSession.Person.Id).Count() > 0)
+                                    {
+                                        <li><a href="@Url.Action("MyBuddyList","Account")">My Buddy</a></li>
+                                    }
+                                }
+
+                                <li><a href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
+
+                            </ul>
+                        </li>
+
+
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                My Data
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("MyAttendance","Account")">Attendance</a></li>
+                                <li><a href="@Url.Action("MyBalance","Account")">Account Balance</a></li>
+                                @*<li><a href="@Url.Action("MyPlanner","Account")">Planner</a></li>*@
+                            </ul>
+                        </li>
+
+
+                        <li><a href="@Url.Action("Logout","Home")"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+                    </ul>
+                </div>
+
+
+            </div>
+        </div><!--/#main-nav-->
+    </header><!--/#home-->
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <footer id="footer">
+        <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <div class="container text-center">
+                <div class="footer-logo">
+                    <a href="@Url.Action("Index","Account")"><img class="img-responsive logo" src="~/Images/bc_logo.png" alt="logo"></a>
+                </div>
+                <div class="social-icons">
+                    <ul>
+                        <li><a class="envelope" href="#"><i class="fa fa-envelope"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a class="tumblr" href="#"><i class="fa fa-tumblr-square"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <p><a href="@Url.Action("Privacy","Home")">Privacy</a></p>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <p>@Html.ActionLink("Beta disclaimer", "Disclaimer", "Home")</p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p>&copy; @DateTime.Now.Year Modizson</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-96857929-1', 'auto');
+    ga('send', 'pageview');
+
+</script>

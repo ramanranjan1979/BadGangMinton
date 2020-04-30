@@ -1,0 +1,87 @@
+﻿@model IEnumerable<BGO.Common.MailoutType>
+
+@{
+    ViewBag.Title = "Email Templates";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-box-large">  
+    <div class="panel-body">
+        <div class="table-responsive" style="background-color:#f7ca18;color:darkred;">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+
+
+
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            <a style="color:darkred;cursor:pointer;" onclick="ShowTemplate('@item.Id');">@item.Name</a>
+
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+
+
+
+
+                    </tr>
+                }
+            </table>
+
+        </div>
+
+        <div class="modal fade" id="mxType_Details_Popup" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-header">
+                                <h4>Description</h4>
+                            </div>
+                            <div class="modal-body" id="mxTypeBody">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function ShowTemplate(id) {
+
+        var url = window.location.protocol + "//" + window.location.host + "/Mailout/GetMxTemplateByMailoutTypeId";
+        $.ajax({
+            url: url,
+            type: "post",
+            data: { 'mailoutTypeId': id },
+            success: function (data) {
+                $('#mxTypeBody').html(data.html);
+            },
+            error: function () { }
+        });
+
+        $('#mxType_Details_Popup').modal();
+        return false;
+
+    }
+
+
+
+</script>

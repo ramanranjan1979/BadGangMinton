@@ -1,0 +1,43 @@
+﻿@model BadGangMinton.View.Model.AttachPersonViewModel
+
+
+<div class="modal fade" id="model_PersonList" tabindex="-1" role="dialog" aria-labelledby="model_support">
+    <div class="modal-dialog modal-lg" role="document" style="border:solid 5px; border-color:#f7ca18; border-radius:5px;">
+        <div class="modal-content">
+            <div class="modal-body modal-bg text-center" style="background-color:#f7ca18;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                <div class="col-lg-12">
+                    <h3 style="color:darkred;">Please select whom you want to attach</h3>
+                </div>
+
+                <div>
+                    @Html.DropDownListFor(e => Model.MainPersonIdId, Model.People, "- Select one -", new { @class = "form-control", @style = "border-color: darkred;background-color:white;margin-left:auto;margin-right:auto; " })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function OpenPersonList() {
+        $('#model_PersonList').modal('show');
+    }
+
+    function Detach()
+    {
+        $('#GroupId').val('0');
+        $('#txtAttPersonName').val('');
+        $('#divATT').hide();
+    }
+
+    $('#model_PersonList').on('hidden.bs.modal', function () {
+
+        if ($('#MainPersonIdId').val() != '') {
+            $('#divATT').show();
+            $('#GroupId').val($('#MainPersonIdId').val());
+            $('#txtAttPersonName').val($("#MainPersonIdId option:selected").text());
+        }
+    })
+</script>

@@ -1,0 +1,199 @@
+﻿@model BadGangMinton.View.Model.PersonViewModel
+
+<div class="table-responsive" style="color:darkred;">
+    <table class="table table-striped table-hover table-condensed">
+        <tr>
+
+
+            <th>
+                @Html.Label("Type")
+            </th>
+
+            <th>
+                @Html.Label("Line1")
+            </th>
+
+            <th>
+                @Html.Label("Line2")
+            </th>
+
+            <th>
+                @Html.Label("City")
+            </th>
+
+            <th>
+                @Html.Label("State")
+            </th>
+
+
+            <th>
+                @Html.Label("Postcode")
+            </th>
+
+            <th>
+                <span class="glyphicon glyphicon-plus" id="spanAddNewAddress"> </span>
+            </th>
+
+
+        </tr>
+
+        @foreach (var item in Model.PersonAddress.OrderByDescending(o => o.CreatedOn))
+        {
+            <tr>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Line1)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Line2)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostCode)
+                </td>
+
+                <td>
+                    <span class="glyphicon glyphicon-edit"> </span>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div class="modal fade" id="Add_Address_Pop_UP" role="dialog">
+    <div class="modal-dialog" style="border:solid 20px; border-color:#f7ca18; border-radius:11px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="text-align:center;color:darkred;">Add your address here..</h4>
+            </div>
+            <div class="modal-body text-center" id="modalBody">
+
+                <div class="form-group">
+                    <select style="width:100%" id="ddlAddressType">
+                        <option value="1">Home</option>
+                        <option value="2">Work</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="txtLine1" required placeholder="flat 3 st john court" maxlength="50" style="width:300px;color:darkred;" />
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="txtLine2" required placeholder="101 wentworth road" maxlength="50" style="width:300px;color:darkred;" />
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="txtCity" required placeholder="birmingham" maxlength="20" style="width:300px;color:darkred;" />
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="txtState" required placeholder="west midlands" maxlength="15" style="width:300px;color:darkred;" />
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="txtPostcode" required placeholder="b17 9st" maxlength="8" style="width:300px;color:darkred;" />
+                </div>
+
+                <div class="form-group">
+                    <input type="button" value="Save" class="btn-info" onclick="AddNewAddress();" />
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $("#spanAddNewAddress").click(function () {
+        $('#Add_Address_Pop_UP').modal('show');
+        setTimeout("$('#txtLine1').focus();", 1000);
+    });
+
+
+    function AddNewAddress() {
+
+        var data =
+            {
+                "addressTypeId": $('#ddlAddressType').val(),
+                "line1": $('#txtLine1').val(),
+                "line2": $('#txtLine2').val(),
+                "city": $('#txtCity').val(),
+                "state": $('#txtState').val(),
+                "postcode": $('#txtPostcode').val(),
+                "personId": '@Model.Id'
+            };
+
+        var isValid = true;
+
+        if ($('#txtLine1').val().trim() == "") {
+            isValid = false;
+            $('#txtLine1').css({ 'border-color': 'red' });
+        }
+
+        if ($('#txtCity').val() == "") {
+            isValid = false;
+            $('#txtCity').css({ 'border-color': 'red' });
+        }
+
+        if ($('#txtState').val() == "") {
+            isValid = false;
+            $('#txtState').css({ 'border-color': 'red' });
+        }
+
+        if ($('#txtPostcode').val() == "") {
+            isValid = false;
+            $('#txtPostcode').css({ 'border-color': 'red' });
+        }
+
+
+        if (isValid) {
+
+            $.ajax({
+                url: "/Account/AddNewAddress",
+                type: "POST",
+                data: JSON.stringify(data),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (status) {
+
+                    $('#Add_Address_Pop_UP').modal('hide');
+
+                    if (status == 0) {
+                        window.location.href = '../Account/MyBuddyProfile?personId=' + '@Model.Id';
+                    }
+                    else {
+                        window.location.href = '../Account/MyProfile';
+                    }
+                },
+                error: function () {
+                    alert('Error');
+                }
+            });
+            return false;
+        }
+    }
+
+
+
+
+</script>

@@ -1,0 +1,126 @@
+﻿@model BadGangMinton.View.Model.PersonViewModel
+
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm("UpdateMyProfile", "Account", FormMethod.Post, new { ID = "FRM_BGB_MY_PROFILE", @class = "form-horizontal", @autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x=>x.Id)
+    @Html.HiddenFor(x => x.PrimaryEmail)
+    @Html.HiddenFor(x => x.PrimaryContactNumber)    
+    <section id="AddContact">
+        <div id="AddContact-here" class="parallax">
+            <div class="container">
+                <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="row">
+                        <div class="col-sm-12" style="box-shadow: inset -20px 17px 100px 0 rgb(247, 202, 24), 0 6px 20px 0 rgb(11, 148, 66);padding:40px;">
+                            <form id="main-contact-form" name="contact-form" method="post" action="#">
+                                <div class="row  wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms" style="margin-top:20px;">
+
+                                    <div class="col-sm-12" style="color: darkred;">
+
+                                        <div class="form-group">
+
+                                            <label for="Me_SalutationId" class="col-sm-2 control-label">Title</label>
+                                            <div class="col-sm-4">
+                                                @Html.DropDownListFor(e => Model.SalutationTypeId, Model.Salutations, new { @class = "form-control", @style = "border-color: darkred;" })
+                                            </div>
+                                            <label for="Me_Fname" class="col-sm-2 control-label">First Name</label>
+                                            <div class="col-sm-4">
+                                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @required = "required", placeholder = "John", @class = "form-control", @style = "color:darkred;border-color: darkred;", maxlength = 20 } })
+                                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger", @Style = "color:red;" })
+                                            </div>
+
+
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label for="Me_Mname" class="col-sm-2 control-label">Middle Name</label>
+                                            <div class="col-sm-4">
+                                                @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { placeholder = "Doe", @class = "form-control", @style = "color:darkred;border-color: darkred;", maxlength = 20 } })
+                                                @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger", @Style = "color:red;" })
+                                            </div>
+
+
+                                            <label for="Me_Lname" class="col-sm-2 control-label">Last Name</label>
+                                            <div class="col-sm-4">
+                                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new {@required="required", placeholder = "Smith", @class = "form-control", @style = "color:darkred;border-color: darkred;", maxlength = 20 } })
+                                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger", @Style = "color:red;" })
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label for="Me_GenderId" class="col-sm-2 control-label">Sex</label>
+                                            <div class="col-sm-4">
+                                                @Html.DropDownListFor(e => Model.GenderTypeId, Model.Gender, new { @class = "form-control", @style = "border-color: darkred;" })
+                                            </div>
+
+
+                                            <label for="Me_DOB" class="col-sm-2 control-label">Date Of Birth</label>
+                                            <div class="col-sm-4">
+                                                @Html.TextBoxFor(model => model.DOB, Model.DOB.Value.ToString("yyyy/MM/dd"), new { @class = "form-control", @readonly = "Readonly", @style = "border-color: darkred;color:darkred" })
+                                                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger", @Style = "color:red;" })
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn-submit" style="width: 50%;margin-left: auto;margin-right: auto;color: darkred;">Save</button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        @Html.Partial("_EmailList", Model)
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Partial("_PhoneList", Model)
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Partial("_AddressList", Model)
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<script type="text/javascript">
+
+    $(function () {
+        $("#DOB").datepicker(
+            {
+                changeMonth: true,
+                dateFormat: "yy/mm/dd",
+                changeYear: true,
+                inline: true,
+                altField: "#datep",
+                yearRange: "-55:+0",
+            }
+            );
+    });
+
+
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

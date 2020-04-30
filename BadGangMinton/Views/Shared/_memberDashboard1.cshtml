@@ -1,0 +1,78 @@
+﻿@model BadGangMinton.View.Model.PhotoViewModel
+
+
+@{
+    BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
+    BadGangMinton.DAL.ContactDal cDal = new BadGangMinton.DAL.ContactDal();
+
+    string filePath = "../Images/DefaultAvatar.png";
+
+    var d = cDal.GetPersonUploadyPersonId(sm.UserSession.Person.Id).Where(x => x.Type.Id == 1).OrderByDescending(o => o.CreatedOn).FirstOrDefault();
+
+    if (d != null)
+    {
+        filePath = Path.Combine(System.Configuration.ConfigurationManager.AppSettings["upload"],d.Path);
+    }
+
+}
+
+
+
+
+<div class="container">
+    <div class="panel panel-default" style="box-shadow: 0 4px 8px 0 rgb(139, 63, 15), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+        <div class="panel-heading">
+            <h1 style="color:darkred;font-weight: bold;text-align: center;text-shadow: 2px 2px darkred;">Your Profile Pic</h1>
+        </div>
+
+        <div class="panel-body text-center">
+
+            <img src="@filePath" class="img-responsive" style="max-width:100px;display:-webkit-inline-box;" />
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-camera">Change</span></button>
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginForm("UpdateProfilePic", "Account", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.PersonId)
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="border:solid 20px; border-color:#f7ca18; border-radius:11px;">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <span class="glyphicon glyphicon-upload"></span>
+                </div>
+
+                <div class="modal-body">
+                    <ul style="list-style:none;text-align:center;">
+                        <li>
+                            <img src="@filePath" class="img-responsive" style="max-width:100px;display:-webkit-inline-box;" />
+                        </li>
+
+                        <li>
+                            <input type="file" name="fileToUpload" style="font-size:16px;margin-top: 47px;max-width: 200px;margin-left: auto;margin-right:auto;" id="file" />
+                        </li>
+                    </ul>
+                                        
+
+                    <div class="form-group">
+                        <button type="submit" class="btn-submit" style="width: 50%;margin-left: auto;margin-right: auto;border: solid 2px;color: darkred;">Upload</button>
+                    </div>
+
+
+                    <div class="alert-warning text-center">
+                        Please select .jpg or .gif or .png file to upload under 3 MB in Size.
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

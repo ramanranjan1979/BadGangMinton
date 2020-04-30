@@ -1,0 +1,323 @@
+﻿@model BadGangMinton.View.Model.AttendanceViewModel
+
+@{
+    ViewBag.Title = "Attendance";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    BadGangMinton.DAL.TransactionDal txDal = new BadGangMinton.DAL.TransactionDal();
+    BadGangMinton.DAL.ContactDal cDal = new BadGangMinton.DAL.ContactDal();
+}
+
+@if (Model.AttDate != null)
+{
+    <div class="content-box-large">
+        <div class="panel-body">
+
+            <div class="panel-heading">
+                <div class="text-center" style="background-color:#f7ca18;color:darkred;font-weight:bold;">
+                    <span id="next" class="glyphicon glyphicon-step-backward"></span>Attendance sheet for: <input type="text" id="AttDate" readonly="readonly" value="@Model.AttDate.Value.ToShortDateString()" class="form-control" style="color:darkred;border-color: darkred;display:inline-block;max-width:100px;font-weight:bold;" /> , @Model.AttDate.Value.DayOfWeek
+                    <span id="next" class="glyphicon glyphicon-step-forward"></span>
+                </div>
+            </div>
+
+            <div class="table-responsive" style="background-color:#f7ca18;color:darkred;">
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.Label("#")
+                        </th>
+
+                        <th>
+                            @Html.Label("Name")
+                        </th>
+
+                        <th>
+                            @Html.Label("A/C Balance")
+                        </th>
+
+                        <th>
+                            @Html.Label("Status")
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.Members)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Value)
+                            </td>
+
+                            <td onclick="ShowPersonDetailModal('@item.Value');">
+                                <span style="cursor:pointer;">@Html.DisplayFor(modelItem => item.Text)</span>
+                                @if (cDal.GetPersonByPersonId(int.Parse(item.Value)).GroupId.HasValue)
+                                {
+                                    <span style="cursor:pointer;background-color:lawngreen;" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="Group Member">
+                                        <span class="glyphicon glyphicon-asterisk" style="margin-top:8px;"></span>
+                                    </span>
+                                }
+                            </td>
+
+
+                            <td>
+                                @if (cDal.GetPersonByPersonId(int.Parse(item.Value)).GroupId.HasValue == false)
+                                {
+                                    <span class="@(txDal.GetAccountBalance(int.Parse(item.Value)) > 0 == true ? "text-success" : "text-danger")" style="cursor:pointer;" onclick="ShowTxDetailModal('@item.Value');">@txDal.GetAccountBalance(int.Parse(item.Value))</span>
+                                }
+                                else
+                                {
+                                    <span style="cursor:pointer;background-color:lawngreen;" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="Group Member">
+                                        <span class="glyphicon glyphicon-asterisk" style="margin-top:8px;"></span>
+                                    </span>
+                                }
+                            </td>
+
+                            <td>
+                                @{
+                                    if (txDal.GetAttendanceByDate(Model.AttDate.Value).Where(m => m.Person.Id == int.Parse(item.Value)).Count() == 0)
+                                    {
+                                        <input type="button" class="btn-success" id="success-@item.Value" value="0.5X" onclick="SaveAttendance('@item.Value','@Model.AttDate.Value','halfunit');" />
+
+                                        <input type="button" class="btn-success" id="success-@item.Value" value="1X" onclick="SaveAttendance('@item.Value','@Model.AttDate.Value','oneunit');" />
+
+                                        <input type="button" class="btn-success" id="success-@item.Value" value="1.5X" onclick="SaveAttendance('@item.Value','@Model.AttDate.Value','oneandhalfunit');" />
+
+                                        <input type="button" class="btn-success" id="success-@item.Value" value="2X" onclick="SaveAttendance('@item.Value','@Model.AttDate.Value','twounit');" />
+                                    }
+                                    else
+                                    {
+                                        <input type="button" class="btn-danger" id="danger-@item.Value" value="VOID" onclick="DeleteAttendance('@item.Value','@Model.AttDate.Value');" />
+                                    }
+                                }
+                            </td>
+                        </tr>
+                                    }
+                </table>
+            </div>
+        </div>
+    </div>
+                                    }
+
+
+<div class="modal fade" id="Person_Detail_Popup" role="dialog">
+    <div class="modal-dialog" style="border:solid 20px; border-color:#f7ca18; border-radius:11px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="text-align:center;">Personal Data</h4>
+            </div>
+            <div class="modal-body" id="modalBody_personal_Info">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="TxReportpopup" role="dialog">
+    <div class="modal-dialog" style="border:solid 20px; border-color:#f7ca18; border-radius:11px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="text-align:center;">Billing Statements</h4>
+            </div>
+            <div class="modal-body" id="modalBody" style="font-size:12px;">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $('#next').click(function () {
+        //var nextDate = $('#AttDate').datepicker('getDate');
+        //if (nextDate) {
+        //    nextDate.setDate(nextDate.getDate() + 1);
+        //}
+        //$('#AttDate').datepicker('setDate', nextDate);
+    });
+
+    $(function () {
+        $("#AttDate").datepicker(
+            {
+                changeMonth: true,
+                dateFormat: "yy/mm/dd",
+                changeYear: true,
+                inline: true,
+                altField: "#datep",
+                yearRange: "-55:+0",
+            }
+            );
+    });
+
+    $("#AttDate").datepicker({
+        onSelect: function (dateText, inst) {
+            var date = $(this).val();
+            var url = '@Url.Action("AttendanceNew", "Player", new { attdate = "__param__" })';
+            url = url.replace('__param__', date);
+            window.location = url;
+        }
+    });
+
+
+    function ShowPersonDetailModal(personId) {
+        $("#modalBody_personal_Info").html("");
+        var data = { "personId": personId };
+        $.ajax({
+            url: "/Contact/GetContactDetails",
+            type: "POST",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                var list = $("#modalBody_personal_Info").append('<div style="border:solid 1px;padding:20px;"></div>').find('div');
+
+                if (data.Group != null) {
+                    list.append('<p style="font-weight:bold;background-color:red;color:gold;text-align:center;">Attached To ' + data.Group.Name + '</p>');
+                }
+
+
+                list.append('<p>Name: ' + data.Name + '</p>');
+                list.append('<p>DOB: ' + $.date(data.DOB) + '</p>');
+                list.append('<p>Gender: ' + data.Sex + '</p>');
+
+                list.append('<p style="font-weight:bold;">Email</p>');
+
+                jQuery.each(data.PersonEmail, function (i, val) {
+                    list.append('<p>' + val.Type.Name + ':' + val.Value + '</p>');
+
+                });
+
+                list.append('<p style="font-weight:bold;">Contact Number</p>');
+
+                jQuery.each(data.PersonPhone, function (i, val) {
+                    list.append('<p>' + val.Type.Name + ':' + val.Value + '</p>');
+
+                });
+
+                list.append('<p style="font-weight:bold;">Address</p>');
+
+                jQuery.each(data.PersonAddress, function (i, val) {
+                    list.append('<p style="font-weight:bold;">' + val.AddressType.Name + '</p>');
+                    list.append('<p>' + val.FullAddress + '</p>');
+
+                });
+            },
+            error: function () {
+                //alert("Error");
+            }
+        });
+
+        $('#Person_Detail_Popup').modal('show');
+    }
+
+    function SaveAttendance(personId, attendanceDate, unit) {
+
+        var data = { "Playervalue": personId, "attendanceDate": attendanceDate, "unit": unit };
+
+        $.ajax({
+            url: "/Player/SaveAttendanceNew",
+            type: "POST",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+
+                //var btn1 = $('#success-' + personId);
+                //var btn2 = $('#danger-' + personId);
+                //btn1.css("display", "none");
+                //btn2.css("display", "block");
+
+                var url = '@Url.Action("AttendanceNew", "Player", new { attdate = "__param__" })';
+                url = url.replace('__param__', '@Model.AttDate.Value.ToString("MM/dd/yyyy")');
+                window.location = url;
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+
+    }
+
+    function DeleteAttendance(personId, attendanceDate) {
+
+        var data = { "Playervalue": personId, "attendanceDate": attendanceDate };
+
+        $.ajax({
+            url: "/Player/DeleteAttendance",
+            type: "POST",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+
+                //var btn1 = $('#success-' + personId);
+                //var btn2 = $('#danger-' + personId);
+                //btn1.css("display", "block");
+                //btn2.css("display", "none");
+
+                var url = '@Url.Action("AttendanceNew", "Player", new { attdate = "__param__" })';
+                url = url.replace('__param__', '@Model.AttDate.Value.ToString("MM/dd/yyyy")');
+                window.location = url;
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+
+    }
+
+    function ShowTxDetailModal(personId) {
+        $("#modalBody").html("");
+        var data = { "personId": personId };
+        $.ajax({
+            url: "/Player/GetPlayerAccountBalanceDetails",
+            type: "POST",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                var list = $("#modalBody").append('<ol></ol>').find('ol');
+                jQuery.each(data, function (i, val) {
+                    if (val.TransactionType.Id == 1) {
+                        list.append('<li style="border:solid 1px;text-align:center;background-color:green;color:gold;">' + '<span class="glyphicon glyphicon-gbp"/>' + val.Amount + ' Date: ' + new Date(val.TransactionDate).toLocaleDateString() + ' Tx Type:  ' + val.TransactionType.Name + ' Tx Desc:  ' + val.TransactionType.Desc + '</li>');
+                    }
+                    else {
+                        list.append('<li style="border:solid 1px;text-align:center;background-color:red;color:gold;">' + '<span class="glyphicon glyphicon-gbp"/>' + val.Amount + ' Date: ' + new Date(val.TransactionDate).toLocaleDateString() + ' Tx Type:  ' + val.TransactionType.Name + ' Tx Desc:  ' + val.TransactionType.Desc + '</li>');
+                    }
+                });
+            },
+            error: function () {
+                //alert("Error");
+            }
+        });
+
+        $('#TxReportpopup').modal('show');
+    }
+
+    $.date = function (dateObject) {
+        var d = new Date(dateObject);
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var date = day + "/" + month + "/" + year;
+
+        return date;
+    };
+
+
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

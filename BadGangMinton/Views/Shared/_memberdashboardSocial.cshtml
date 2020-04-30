@@ -1,0 +1,34 @@
+﻿@{
+    BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
+    BadGangMinton.DAL.TransactionDal txDal = new BadGangMinton.DAL.TransactionDal();
+    BadGangMinton.DAL.LookupDal lDal = new BadGangMinton.DAL.LookupDal();
+
+    var data = txDal.GetAttendanceByPersonId(sm.UserSession.Person.Id);
+}
+
+<div class="container">
+    <div class="panel panel-default" style="box-shadow: 0 4px 8px 0 rgb(139, 63, 15), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+        <div class="panel-heading">
+            <h1 style="color:darkred;font-weight: bold;text-align: center;text-shadow: 2px 2px darkred;">Be Social</h1>
+        </div>
+        <div class="panel-body">
+            <footer id="footer" style="background-color:white;">
+                <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <div class="container text-center">
+                        <div class="social-icons">
+                            <ul>
+                                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>  
+                                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+

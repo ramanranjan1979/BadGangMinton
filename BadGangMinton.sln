@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadGangMinton", "BadGangMinton\BadGangMinton.csproj", "{1C77A64C-CE76-4722-839D-046726D7DE04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DB\DB.csproj", "{FE93675D-8A67-49C3-9637-C105619BB738}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL\DAL.csproj", "{51012011-9039-41C9-99A8-0D6D3372A709}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BGO", "ObjectModel\ObjectModel\BGO.csproj", "{BFFCD10D-278E-48E4-8A4A-A53B4E3C170A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Console\Console.csproj", "{D49C5FF4-FEC1-4276-8AAC-72A5C3D2AC30}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C77A64C-CE76-4722-839D-046726D7DE04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C77A64C-CE76-4722-839D-046726D7DE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C77A64C-CE76-4722-839D-046726D7DE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C77A64C-CE76-4722-839D-046726D7DE04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE93675D-8A67-49C3-9637-C105619BB738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE93675D-8A67-49C3-9637-C105619BB738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE93675D-8A67-49C3-9637-C105619BB738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE93675D-8A67-49C3-9637-C105619BB738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51012011-9039-41C9-99A8-0D6D3372A709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51012011-9039-41C9-99A8-0D6D3372A709}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51012011-9039-41C9-99A8-0D6D3372A709}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51012011-9039-41C9-99A8-0D6D3372A709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFFCD10D-278E-48E4-8A4A-A53B4E3C170A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFFCD10D-278E-48E4-8A4A-A53B4E3C170A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFFCD10D-278E-48E4-8A4A-A53B4E3C170A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFFCD10D-278E-48E4-8A4A-A53B4E3C170A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49C5FF4-FEC1-4276-8AAC-72A5C3D2AC30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49C5FF4-FEC1-4276-8AAC-72A5C3D2AC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49C5FF4-FEC1-4276-8AAC-72A5C3D2AC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49C5FF4-FEC1-4276-8AAC-72A5C3D2AC30}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://modiinfolimited.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BadGangMinton\\BadGangMinton.csproj
+		SccProjectName1 = BadGangMinton
+		SccLocalPath1 = BadGangMinton
+		SccProjectUniqueName2 = DB\\DB.csproj
+		SccProjectName2 = DB
+		SccLocalPath2 = DB
+		SccProjectUniqueName3 = DAL\\DAL\\DAL.csproj
+		SccProjectName3 = DAL/DAL
+		SccLocalPath3 = DAL\\DAL
+		SccProjectUniqueName4 = ObjectModel\\ObjectModel\\BGO.csproj
+		SccProjectName4 = ObjectModel/ObjectModel
+		SccLocalPath4 = ObjectModel\\ObjectModel
+		SccProjectUniqueName5 = Console\\Console.csproj
+		SccProjectName5 = Console
+		SccLocalPath5 = Console
+	EndGlobalSection
+EndGlobal

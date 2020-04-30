@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "MyAccount";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+
+    BadGangMinton.DAL.ContactDal cDal = new BadGangMinton.DAL.ContactDal();
+    BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
+}
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12" style="box-shadow: inset -20px 17px 100px 0 rgb(247, 202, 24), 0 6px 20px 0 rgb(11, 148, 66);">
+            <div class="row">
+
+
+
+
+                <div class="col-sm-6">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+                            @Html.Partial("_memberdashboard4")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+                            @Html.Partial("_memberdashboard1", new BadGangMinton.View.Model.PhotoViewModel() { PersonId = sm.UserSession.Person.Id })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+                            @Html.Partial("_memberdashboard2")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+                            @Html.Partial("_memberdashboard3")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+                            @Html.Partial("_memberdashboardInbox")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+                            @Html.Partial("_memberdashboardSocial")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
