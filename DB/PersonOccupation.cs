@@ -26,8 +26,8 @@ namespace DB
         public System.DateTime CreatedOn { get; set; }
         public bool IsActive { get; set; }
     
-        public virtual Occupation Occupation { get; set; }
         public virtual JobTitle JobTitle { get; set; }
+        public virtual Occupation Occupation { get; set; }
         public virtual Person Person { get; set; }
     }
 }

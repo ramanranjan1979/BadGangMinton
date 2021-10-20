@@ -17,13 +17,13 @@ namespace DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Occupation()
         {
-            this.PersonOccupations = new HashSet<PersonOccupation>();
+            this.PersonOccupation = new HashSet<PersonOccupation>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PersonOccupation> PersonOccupations { get; set; }
+        public virtual ICollection<PersonOccupation> PersonOccupation { get; set; }
     }
 }

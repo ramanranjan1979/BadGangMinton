@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb325a8688f54805bc20798cae669c16" Name="Diagram1" >
+        <EntityTypeShape EntityType="bgDBNew.AddressType" Width="1.5" PointX="3" PointY="33" />
+        <EntityTypeShape EntityType="bgDBNew.Attendance" Width="1.5" PointX="5.25" PointY="65.5" />
+        <EntityTypeShape EntityType="bgDBNew.Country" Width="1.5" PointX="3" PointY="35.375" />
+        <EntityTypeShape EntityType="bgDBNew.EmailType" Width="1.5" PointX="3" PointY="30.375" />
+        <EntityTypeShape EntityType="bgDBNew.JobTitle" Width="1.5" PointX="9" PointY="34.625" />
+        <EntityTypeShape EntityType="bgDBNew.Log" Width="1.5" PointX="8.25" PointY="25" />
+        <EntityTypeShape EntityType="bgDBNew.Login" Width="1.5" PointX="5.25" PointY="61.625" />
+        <EntityTypeShape EntityType="bgDBNew.LogType" Width="1.5" PointX="6" PointY="36.375" />
+        <EntityTypeShape EntityType="bgDBNew.MailoutParameter" Width="1.5" PointX="6" PointY="9.25" />
+        <EntityTypeShape EntityType="bgDBNew.MailoutQueue" Width="1.5" PointX="8.25" PointY="16.5" />
+        <EntityTypeShape EntityType="bgDBNew.MailoutQueueParameterValue" Width="1.5" PointX="10.5" PointY="15.125" />
+        <EntityTypeShape EntityType="bgDBNew.MailoutTracker" Width="1.5" PointX="10.5" PointY="18.125" />
+        <EntityTypeShape EntityType="bgDBNew.MailoutType" Width="1.5" PointX="6" PointY="12.875" />
+        <EntityTypeShape EntityType="bgDBNew.MailoutTypeParameter" Width="1.5" PointX="8.25" PointY="9" />
+        <EntityTypeShape EntityType="bgDBNew.Member" Width="1.5" PointX="8.25" PointY="29" />
+        <EntityTypeShape EntityType="bgDBNew.Occupation" Width="1.5" PointX="9" PointY="32.25" />
+        <EntityTypeShape EntityType="bgDBNew.Person" Width="1.5" PointX="3" PointY="23.25" />
+        <EntityTypeShape EntityType="bgDBNew.PersonAddress" Width="1.5" PointX="5.25" PointY="28.375" />
+        <EntityTypeShape EntityType="bgDBNew.PersonEmail" Width="1.5" PointX="5.25" PointY="25" />
+        <EntityTypeShape EntityType="bgDBNew.PersonOccupation" Width="1.5" PointX="11.25" PointY="24.375" />
+        <EntityTypeShape EntityType="bgDBNew.PersonPhone" Width="1.5" PointX="11.25" PointY="21" />
+        <EntityTypeShape EntityType="bgDBNew.PersonRole" Width="1.5" PointX="8.25" PointY="40" />
+        <EntityTypeShape EntityType="bgDBNew.PersonSocialProfile" Width="1.5" PointX="5.25" PointY="21" />
+        <EntityTypeShape EntityType="bgDBNew.PersonType" Width="1.5" PointX="6" PointY="39.25" />
+        <EntityTypeShape EntityType="bgDBNew.PersonUpload" Width="1.5" PointX="11.25" PointY="29" />
+        <EntityTypeShape EntityType="bgDBNew.PhoneType" Width="1.5" PointX="9" PointY="12.375" />
+        <EntityTypeShape EntityType="bgDBNew.Role" Width="1.5" PointX="6" PointY="42.25" />
+        <EntityTypeShape EntityType="bgDBNew.Salutation" Width="1.5" PointX="0.75" PointY="25.375" />
+        <EntityTypeShape EntityType="bgDBNew.SecurityCode" Width="1.5" PointX="8.25" PointY="20.875" />
+        <EntityTypeShape EntityType="bgDBNew.SecurityType" Width="1.5" PointX="6" PointY="33.375" />
+        <EntityTypeShape EntityType="bgDBNew.SocialProfileType" Width="1.5" PointX="3" PointY="20.375" />
+        <EntityTypeShape EntityType="bgDBNew.Transaction" Width="1.5" PointX="5.25" PointY="16.875" />
+        <EntityTypeShape EntityType="bgDBNew.TransactionType" Width="1.5" PointX="3" PointY="17.25" />
+        <EntityTypeShape EntityType="bgDBNew.UploadType" Width="1.5" PointX="9" PointY="37.375" />
+        <AssociationConnector Association="bgDBNew.FK_AddressTypePersonAddress" />
+        <AssociationConnector Association="bgDBNew.FK_PersonAttendance" />
+        <AssociationConnector Association="bgDBNew.FK_CountryPersonAddress" />
+        <AssociationConnector Association="bgDBNew.FK_EmailTypePersonEmail" />
+        <AssociationConnector Association="bgDBNew.FK_JobTitlePersonOccupation" />
+        <AssociationConnector Association="bgDBNew.FK_LogTypeLog" />
+        <AssociationConnector Association="bgDBNew.FK_PersonLog" />
+        <AssociationConnector Association="bgDBNew.FK_PersonLogin" />
+        <AssociationConnector Association="bgDBNew.FK_MailoutParameterMailoutTypeParameter" />
+        <AssociationConnector Association="bgDBNew.FK_MailoutQueueMailoutQueueParameterValue" />
+        <AssociationConnector Association="bgDBNew.FK_MailoutQueueMailoutTracker" />
+        <AssociationConnector Association="bgDBNew.FK_MailoutTypeMailoutQueue" />
+        <AssociationConnector Association="bgDBNew.FK_PersonMailoutQueue" />
+        <AssociationConnector Association="bgDBNew.FK_MailoutTypeParameterMailoutQueueParameterValue" />
+        <AssociationConnector Association="bgDBNew.FK_MailoutTypeMailoutTypeParameter" />
+        <AssociationConnector Association="bgDBNew.FK_PersonPlayer" />
+        <AssociationConnector Association="bgDBNew.FK_PersonTypeMember" />
+        <AssociationConnector Association="bgDBNew.FK_OccupationPersonOccupation" />
+        <AssociationConnector Association="bgDBNew.FK_PersonPersonAddress" />
+        <AssociationConnector Association="bgDBNew.FK_PersonPersonEmail" />
+        <AssociationConnector Association="bgDBNew.FK_PersonPersonOccupation" />
+        <AssociationConnector Association="bgDBNew.FK_PersonPersonPhone" />
+        <AssociationConnector Association="bgDBNew.FK_PersonPersonSocialProfile" />
+        <AssociationConnector Association="bgDBNew.FK_PersonPersonUpload" />
+        <AssociationConnector Association="bgDBNew.FK_PersonSecurityCode" />
+        <AssociationConnector Association="bgDBNew.FK_PersonTransaction" />
+        <AssociationConnector Association="bgDBNew.FK_SalutationPerson" />
+        <AssociationConnector Association="bgDBNew.FK_PhoneTypePersonPhone" />
+        <AssociationConnector Association="bgDBNew.FK_PersonTypePersonRole" />
+        <AssociationConnector Association="bgDBNew.FK_RolePersonRole" />
+        <AssociationConnector Association="bgDBNew.FK_SocialProfileTypePersonSocialProfile" />
+        <AssociationConnector Association="bgDBNew.FK_UploadTypePersonUpload" />
+        <AssociationConnector Association="bgDBNew.FK_SecurityTypeSecurityCode" />
+        <AssociationConnector Association="bgDBNew.FK_TransactionTypeTransaction" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

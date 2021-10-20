@@ -18,7 +18,7 @@ namespace DB
         public PersonType()
         {
             this.Member = new HashSet<Member>();
-            this.PersonRole = new HashSet<PersonTypeRole>();
+            this.PersonRole = new HashSet<PersonRole>();
         }
     
         public int Id { get; set; }
@@ -27,6 +27,6 @@ namespace DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Member { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PersonTypeRole> PersonRole { get; set; }
+        public virtual ICollection<PersonRole> PersonRole { get; set; }
     }
 }

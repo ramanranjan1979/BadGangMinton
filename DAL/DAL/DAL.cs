@@ -13,7 +13,7 @@ using System.IO;
 
 namespace BadGangMinton.DAL
 {
-    public class LookupDal : bgDBContainer
+    public class LookupDal : bgDBNewContainer
     {
 
 
@@ -270,7 +270,7 @@ namespace BadGangMinton.DAL
 
     }
 
-    public class ContactDal : bgDBContainer
+    public class ContactDal : bgDBNewContainer
     {
         public BGO.Contact.Person GetPersonByPersonId(int personId)
         {
@@ -544,7 +544,7 @@ namespace BadGangMinton.DAL
         public Security LoggedInPerson { get; set; }
     }
 
-    public class SecurityDal : bgDBContainer
+    public class SecurityDal : bgDBNewContainer
     {
         public List<SecurityTypeCode> GetPeronSecurityCodeBySecurityType(int personId, string securityTypeName)
         {
@@ -900,7 +900,7 @@ namespace BadGangMinton.DAL
         }
     }
 
-    public class MemberDal : bgDBContainer
+    public class MemberDal : bgDBNewContainer
     {
         public void CreateMember(int personId, DateTime dOJ, int personTypeId, bool status = true)
         {
@@ -930,7 +930,7 @@ namespace BadGangMinton.DAL
                     PersonTypeId = p.PersonTypeId,
                     Person = new ContactDal().GetPersonByPersonId(p.PersonId),
                     AccountBalance = new TransactionDal().GetAccountBalance(p.PersonId),
-                    IsMembershipActive = p.Person.Logs.Where(x => x.Description == "Membership has been suspend").FirstOrDefault() == null ? true : false
+                    IsMembershipActive = p.Person.Log.Where(x => x.Description == "Membership has been suspend").FirstOrDefault() == null ? true : false
 
                 });
             }
@@ -973,7 +973,7 @@ namespace BadGangMinton.DAL
 
     }
 
-    public class TransactionDal : bgDBContainer
+    public class TransactionDal : bgDBNewContainer
     {
         public List<BGO.TX.Transaction> GetTransaction()
         {
@@ -1218,7 +1218,7 @@ namespace BadGangMinton.DAL
         }
     }
 
-    public class MxDal : bgDBContainer
+    public class MxDal : bgDBNewContainer
     {
 
 

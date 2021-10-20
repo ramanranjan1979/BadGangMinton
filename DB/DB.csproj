@@ -57,152 +57,187 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressType.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="Attendance.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="bgDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>bgDB.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="bgDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>bgDB.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="bgDB.Designer.cs">
+      <DependentUpon>bgDB.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="bgDBNew.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>bgDB.edmx</DependentUpon>
+      <DependentUpon>bgDBNew.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bgDBNew.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bgDBNew.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bgDBNew.edmx</DependentUpon>
     </Compile>
     <Compile Include="Country.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="EmailType.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="JobTitle.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="Log.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="LogType.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="MailoutParameter.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="MailoutQueue.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="MailoutQueueParameterValue.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="MailoutTracker.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="MailoutType.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="MailoutTypeParameter.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="Member.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="Occupation.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="Person.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="PersonAddress.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="PersonEmail.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="PersonOccupation.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="PersonPhone.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PersonRole.cs">
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="PersonSocialProfile.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="PersonType.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="PersonTypeRole.cs">
       <DependentUpon>bgDB.tt</DependentUpon>
     </Compile>
     <Compile Include="PersonUpload.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="PhoneType.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="Salutation.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="SecurityCode.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="SecurityType.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="SocialProfileType.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="Transaction.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="TransactionType.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
     <Compile Include="UploadType.cs">
-      <DependentUpon>bgDB.tt</DependentUpon>
+      <DependentUpon>bgDBNew.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="bgDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>bgDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
+    <EntityDeploy Include="bgDBNew.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>bgDBNew.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="bgDB.edmx.diagram">
       <DependentUpon>bgDB.edmx</DependentUpon>
+    </None>
+    <None Include="bgDBNew.edmx.diagram">
+      <DependentUpon>bgDBNew.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bgDB.Context.tt">
+      <DependentUpon>bgDB.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>bgDB.Context.cs</LastGenOutput>
-      <DependentUpon>bgDB.edmx</DependentUpon>
     </Content>
     <Content Include="bgDB.edmx.sql" />
     <Content Include="bgDB.tt">
+      <DependentUpon>bgDB.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>bgDB.cs</LastGenOutput>
-      <DependentUpon>bgDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="bgDBNew.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>bgDBNew.Context.cs</LastGenOutput>
+      <DependentUpon>bgDBNew.edmx</DependentUpon>
+    </Content>
+    <Content Include="bgDBNew.edmx.sql" />
+    <Content Include="bgDBNew.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>bgDBNew.cs</LastGenOutput>
+      <DependentUpon>bgDBNew.edmx</DependentUpon>
     </Content>
     <Content Include="Constraint.sql" />
     <Content Include="CreateUser.sql" />
     <Content Include="help.txt" />
+    <Content Include="How to alter schema of all objects in sql server.sql" />
     <Content Include="Lookup.sql" />
   </ItemGroup>
   <ItemGroup>

@@ -25,9 +25,9 @@ namespace DB
         public int MailoutTypeId { get; set; }
         public int MailoutParameterId { get; set; }
     
-        public virtual MailoutType MailoutType { get; set; }
         public virtual MailoutParameter MailoutParameter { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MailoutQueueParameterValue> MailoutQueueParameterValue { get; set; }
+        public virtual MailoutType MailoutType { get; set; }
     }
 }

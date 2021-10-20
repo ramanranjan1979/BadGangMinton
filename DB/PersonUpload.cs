@@ -20,7 +20,7 @@ namespace DB
         public int PersonId { get; set; }
         public System.DateTime CreatedOn { get; set; }
     
-        public virtual UploadType UploadType { get; set; }
         public virtual Person Person { get; set; }
+        public virtual UploadType UploadType { get; set; }
     }
 }

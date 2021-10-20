@@ -17,7 +17,7 @@ namespace DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Role()
         {
-            this.PersonRole = new HashSet<PersonTypeRole>();
+            this.PersonRole = new HashSet<PersonRole>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace DB
         public System.DateTime CreatedOn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PersonTypeRole> PersonRole { get; set; }
+        public virtual ICollection<PersonRole> PersonRole { get; set; }
     }
 }

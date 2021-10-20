@@ -17,13 +17,13 @@ namespace DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UploadType()
         {
-            this.PersonUploads = new HashSet<PersonUpload>();
+            this.PersonUpload = new HashSet<PersonUpload>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PersonUpload> PersonUploads { get; set; }
+        public virtual ICollection<PersonUpload> PersonUpload { get; set; }
     }
 }

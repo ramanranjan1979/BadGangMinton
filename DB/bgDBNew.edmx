@@ -1,0 +1,2290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bgDBNew.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="bgDBNewStoreContainer">
+    <EntitySet Name="AddressType" EntityType="bgDBNew.Store.AddressType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Attendance" EntityType="bgDBNew.Store.Attendance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Country" EntityType="bgDBNew.Store.Country" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmailType" EntityType="bgDBNew.Store.EmailType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="JobTitle" EntityType="bgDBNew.Store.JobTitle" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Log" EntityType="bgDBNew.Store.Log" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Login" EntityType="bgDBNew.Store.Login" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogType" EntityType="bgDBNew.Store.LogType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MailoutParameter" EntityType="bgDBNew.Store.MailoutParameter" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MailoutQueue" EntityType="bgDBNew.Store.MailoutQueue" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MailoutQueueParameterValue" EntityType="bgDBNew.Store.MailoutQueueParameterValue" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MailoutTracker" EntityType="bgDBNew.Store.MailoutTracker" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MailoutType" EntityType="bgDBNew.Store.MailoutType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MailoutTypeParameter" EntityType="bgDBNew.Store.MailoutTypeParameter" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Member" EntityType="bgDBNew.Store.Member" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Occupation" EntityType="bgDBNew.Store.Occupation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Person" EntityType="bgDBNew.Store.Person" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonAddress" EntityType="bgDBNew.Store.PersonAddress" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonEmail" EntityType="bgDBNew.Store.PersonEmail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonOccupation" EntityType="bgDBNew.Store.PersonOccupation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonPhone" EntityType="bgDBNew.Store.PersonPhone" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonRole" EntityType="bgDBNew.Store.PersonRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSocialProfile" EntityType="bgDBNew.Store.PersonSocialProfile" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonType" EntityType="bgDBNew.Store.PersonType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonUpload" EntityType="bgDBNew.Store.PersonUpload" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhoneType" EntityType="bgDBNew.Store.PhoneType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="bgDBNew.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Salutation" EntityType="bgDBNew.Store.Salutation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SecurityCode" EntityType="bgDBNew.Store.SecurityCode" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SecurityType" EntityType="bgDBNew.Store.SecurityType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SocialProfileType" EntityType="bgDBNew.Store.SocialProfileType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Transaction" EntityType="bgDBNew.Store.Transaction" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionType" EntityType="bgDBNew.Store.TransactionType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UploadType" EntityType="bgDBNew.Store.UploadType" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_AddressTypePersonAddress" Association="bgDBNew.Store.FK_AddressTypePersonAddress">
+      <End Role="AddressType" EntitySet="AddressType" />
+      <End Role="PersonAddress" EntitySet="PersonAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonAttendance" Association="bgDBNew.Store.FK_PersonAttendance">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CountryPersonAddress" Association="bgDBNew.Store.FK_CountryPersonAddress">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="PersonAddress" EntitySet="PersonAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailTypePersonEmail" Association="bgDBNew.Store.FK_EmailTypePersonEmail">
+      <End Role="EmailType" EntitySet="EmailType" />
+      <End Role="PersonEmail" EntitySet="PersonEmail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobTitlePersonOccupation" Association="bgDBNew.Store.FK_JobTitlePersonOccupation">
+      <End Role="JobTitle" EntitySet="JobTitle" />
+      <End Role="PersonOccupation" EntitySet="PersonOccupation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LogTypeLog" Association="bgDBNew.Store.FK_LogTypeLog">
+      <End Role="LogType" EntitySet="LogType" />
+      <End Role="Log" EntitySet="Log" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonLog" Association="bgDBNew.Store.FK_PersonLog">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Log" EntitySet="Log" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonLogin" Association="bgDBNew.Store.FK_PersonLogin">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Login" EntitySet="Login" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MailoutParameterMailoutTypeParameter" Association="bgDBNew.Store.FK_MailoutParameterMailoutTypeParameter">
+      <End Role="MailoutParameter" EntitySet="MailoutParameter" />
+      <End Role="MailoutTypeParameter" EntitySet="MailoutTypeParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MailoutQueueMailoutQueueParameterValue" Association="bgDBNew.Store.FK_MailoutQueueMailoutQueueParameterValue">
+      <End Role="MailoutQueue" EntitySet="MailoutQueue" />
+      <End Role="MailoutQueueParameterValue" EntitySet="MailoutQueueParameterValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MailoutQueueMailoutTracker" Association="bgDBNew.Store.FK_MailoutQueueMailoutTracker">
+      <End Role="MailoutQueue" EntitySet="MailoutQueue" />
+      <End Role="MailoutTracker" EntitySet="MailoutTracker" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MailoutTypeMailoutQueue" Association="bgDBNew.Store.FK_MailoutTypeMailoutQueue">
+      <End Role="MailoutType" EntitySet="MailoutType" />
+      <End Role="MailoutQueue" EntitySet="MailoutQueue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonMailoutQueue" Association="bgDBNew.Store.FK_PersonMailoutQueue">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="MailoutQueue" EntitySet="MailoutQueue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MailoutTypeParameterMailoutQueueParameterValue" Association="bgDBNew.Store.FK_MailoutTypeParameterMailoutQueueParameterValue">
+      <End Role="MailoutTypeParameter" EntitySet="MailoutTypeParameter" />
+      <End Role="MailoutQueueParameterValue" EntitySet="MailoutQueueParameterValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MailoutTypeMailoutTypeParameter" Association="bgDBNew.Store.FK_MailoutTypeMailoutTypeParameter">
+      <End Role="MailoutType" EntitySet="MailoutType" />
+      <End Role="MailoutTypeParameter" EntitySet="MailoutTypeParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonPlayer" Association="bgDBNew.Store.FK_PersonPlayer">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonTypeMember" Association="bgDBNew.Store.FK_PersonTypeMember">
+      <End Role="PersonType" EntitySet="PersonType" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OccupationPersonOccupation" Association="bgDBNew.Store.FK_OccupationPersonOccupation">
+      <End Role="Occupation" EntitySet="Occupation" />
+      <End Role="PersonOccupation" EntitySet="PersonOccupation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonPersonAddress" Association="bgDBNew.Store.FK_PersonPersonAddress">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="PersonAddress" EntitySet="PersonAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonPersonEmail" Association="bgDBNew.Store.FK_PersonPersonEmail">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="PersonEmail" EntitySet="PersonEmail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonPersonOccupation" Association="bgDBNew.Store.FK_PersonPersonOccupation">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="PersonOccupation" EntitySet="PersonOccupation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonPersonPhone" Association="bgDBNew.Store.FK_PersonPersonPhone">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="PersonPhone" EntitySet="PersonPhone" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonPersonSocialProfile" Association="bgDBNew.Store.FK_PersonPersonSocialProfile">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="PersonSocialProfile" EntitySet="PersonSocialProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonPersonUpload" Association="bgDBNew.Store.FK_PersonPersonUpload">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="PersonUpload" EntitySet="PersonUpload" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonSecurityCode" Association="bgDBNew.Store.FK_PersonSecurityCode">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="SecurityCode" EntitySet="SecurityCode" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonTransaction" Association="bgDBNew.Store.FK_PersonTransaction">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Transaction" EntitySet="Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalutationPerson" Association="bgDBNew.Store.FK_SalutationPerson">
+      <End Role="Salutation" EntitySet="Salutation" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhoneTypePersonPhone" Association="bgDBNew.Store.FK_PhoneTypePersonPhone">
+      <End Role="PhoneType" EntitySet="PhoneType" />
+      <End Role="PersonPhone" EntitySet="PersonPhone" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonTypePersonRole" Association="bgDBNew.Store.FK_PersonTypePersonRole">
+      <End Role="PersonType" EntitySet="PersonType" />
+      <End Role="PersonRole" EntitySet="PersonRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePersonRole" Association="bgDBNew.Store.FK_RolePersonRole">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="PersonRole" EntitySet="PersonRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SocialProfileTypePersonSocialProfile" Association="bgDBNew.Store.FK_SocialProfileTypePersonSocialProfile">
+      <End Role="SocialProfileType" EntitySet="SocialProfileType" />
+      <End Role="PersonSocialProfile" EntitySet="PersonSocialProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UploadTypePersonUpload" Association="bgDBNew.Store.FK_UploadTypePersonUpload">
+      <End Role="UploadType" EntitySet="UploadType" />
+      <End Role="PersonUpload" EntitySet="PersonUpload" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SecurityTypeSecurityCode" Association="bgDBNew.Store.FK_SecurityTypeSecurityCode">
+      <End Role="SecurityType" EntitySet="SecurityType" />
+      <End Role="SecurityCode" EntitySet="SecurityCode" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionTypeTransaction" Association="bgDBNew.Store.FK_TransactionTypeTransaction">
+      <End Role="TransactionType" EntitySet="TransactionType" />
+      <End Role="Transaction" EntitySet="Transaction" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AddressType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="AttendanceDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryCode" Type="nvarchar" Nullable="false" MaxLength="2" />
+    <Property Name="EnglishName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmailType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="JobTitle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LogTypeId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+    <Property Name="LockedOn" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsLock" Type="bit" Nullable="false" />
+    <Property Name="MustChangepassword" Type="bit" Nullable="false" />
+    <Property Name="Person_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MailoutParameter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="MailoutQueue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="smallint" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdateOn" Type="datetime" Nullable="true" />
+    <Property Name="EmailAddress" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="HtmlBody" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="MailoutTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MailoutQueueParameterValue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="MailoutQueueId" Type="int" Nullable="false" />
+    <Property Name="MailoutTypeParameterId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MailoutTracker">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IPAddress" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="OpenedOn" Type="datetime" Nullable="false" />
+    <Property Name="MailoutQueueId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MailoutType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="MailoutTypeParameter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="MailoutTypeId" Type="int" Nullable="false" />
+    <Property Name="MailoutParameterId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="JoiningDate" Type="datetime" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="PersonTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Occupation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Mname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Lname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="GenderId" Type="smallint" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SalutationId" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="IPAddress" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="GroupID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PersonAddress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressTypeId" Type="int" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="Line1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Line2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="State" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Landmark" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Postcode" Type="nvarchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="PersonEmail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="EmailTypeId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonOccupation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OccupationId" Type="int" Nullable="false" />
+    <Property Name="JobTitleId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="OrganizationName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="OrganizationAddress" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Fdate" Type="datetime" Nullable="true" />
+    <Property Name="Tdate" Type="datetime" Nullable="true" />
+    <Property Name="ReportingInformation" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonPhone">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhoneTypeId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="PersonRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="PersonTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSocialProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SocialProfileTypeId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="PersonUpload">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UploadTypeId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhoneType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Salutation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="SecurityCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="ExpiredOn" Type="datetime" Nullable="true" />
+    <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="SecurityTypeId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SecurityType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="SocialProfileType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TransactionTypeId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsActive" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TransactionType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="5" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Multiplier" Type="decimal" Nullable="false" Precision="18" Scale="4" />
+  </EntityType>
+  <EntityType Name="UploadType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_AddressTypePersonAddress">
+    <End Role="AddressType" Type="bgDBNew.Store.AddressType" Multiplicity="1" />
+    <End Role="PersonAddress" Type="bgDBNew.Store.PersonAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddressType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonAddress">
+        <PropertyRef Name="AddressTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonAttendance">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="Attendance" Type="bgDBNew.Store.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CountryPersonAddress">
+    <End Role="Country" Type="bgDBNew.Store.Country" Multiplicity="1" />
+    <End Role="PersonAddress" Type="bgDBNew.Store.PersonAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonAddress">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailTypePersonEmail">
+    <End Role="EmailType" Type="bgDBNew.Store.EmailType" Multiplicity="1" />
+    <End Role="PersonEmail" Type="bgDBNew.Store.PersonEmail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmailType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonEmail">
+        <PropertyRef Name="EmailTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobTitlePersonOccupation">
+    <End Role="JobTitle" Type="bgDBNew.Store.JobTitle" Multiplicity="1" />
+    <End Role="PersonOccupation" Type="bgDBNew.Store.PersonOccupation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobTitle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonOccupation">
+        <PropertyRef Name="JobTitleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LogTypeLog">
+    <End Role="LogType" Type="bgDBNew.Store.LogType" Multiplicity="1" />
+    <End Role="Log" Type="bgDBNew.Store.Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LogType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="LogTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonLog">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="0..1" />
+    <End Role="Log" Type="bgDBNew.Store.Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonLogin">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="Login" Type="bgDBNew.Store.Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="Person_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailoutParameterMailoutTypeParameter">
+    <End Role="MailoutParameter" Type="bgDBNew.Store.MailoutParameter" Multiplicity="1" />
+    <End Role="MailoutTypeParameter" Type="bgDBNew.Store.MailoutTypeParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailoutParameter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MailoutTypeParameter">
+        <PropertyRef Name="MailoutParameterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailoutQueueMailoutQueueParameterValue">
+    <End Role="MailoutQueue" Type="bgDBNew.Store.MailoutQueue" Multiplicity="1" />
+    <End Role="MailoutQueueParameterValue" Type="bgDBNew.Store.MailoutQueueParameterValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailoutQueue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MailoutQueueParameterValue">
+        <PropertyRef Name="MailoutQueueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailoutQueueMailoutTracker">
+    <End Role="MailoutQueue" Type="bgDBNew.Store.MailoutQueue" Multiplicity="1" />
+    <End Role="MailoutTracker" Type="bgDBNew.Store.MailoutTracker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailoutQueue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MailoutTracker">
+        <PropertyRef Name="MailoutQueueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailoutTypeMailoutQueue">
+    <End Role="MailoutType" Type="bgDBNew.Store.MailoutType" Multiplicity="1" />
+    <End Role="MailoutQueue" Type="bgDBNew.Store.MailoutQueue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailoutType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MailoutQueue">
+        <PropertyRef Name="MailoutTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonMailoutQueue">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="MailoutQueue" Type="bgDBNew.Store.MailoutQueue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MailoutQueue">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailoutTypeParameterMailoutQueueParameterValue">
+    <End Role="MailoutTypeParameter" Type="bgDBNew.Store.MailoutTypeParameter" Multiplicity="0..1" />
+    <End Role="MailoutQueueParameterValue" Type="bgDBNew.Store.MailoutQueueParameterValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailoutTypeParameter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MailoutQueueParameterValue">
+        <PropertyRef Name="MailoutTypeParameterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailoutTypeMailoutTypeParameter">
+    <End Role="MailoutType" Type="bgDBNew.Store.MailoutType" Multiplicity="1" />
+    <End Role="MailoutTypeParameter" Type="bgDBNew.Store.MailoutTypeParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailoutType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MailoutTypeParameter">
+        <PropertyRef Name="MailoutTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonPlayer">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="Member" Type="bgDBNew.Store.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonTypeMember">
+    <End Role="PersonType" Type="bgDBNew.Store.PersonType" Multiplicity="1" />
+    <End Role="Member" Type="bgDBNew.Store.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="PersonTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OccupationPersonOccupation">
+    <End Role="Occupation" Type="bgDBNew.Store.Occupation" Multiplicity="1" />
+    <End Role="PersonOccupation" Type="bgDBNew.Store.PersonOccupation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Occupation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonOccupation">
+        <PropertyRef Name="OccupationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonPersonAddress">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="PersonAddress" Type="bgDBNew.Store.PersonAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonAddress">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonPersonEmail">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="PersonEmail" Type="bgDBNew.Store.PersonEmail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonEmail">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonPersonOccupation">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="PersonOccupation" Type="bgDBNew.Store.PersonOccupation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonOccupation">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonPersonPhone">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="PersonPhone" Type="bgDBNew.Store.PersonPhone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonPhone">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonPersonSocialProfile">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="PersonSocialProfile" Type="bgDBNew.Store.PersonSocialProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonSocialProfile">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonPersonUpload">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="PersonUpload" Type="bgDBNew.Store.PersonUpload" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonUpload">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonSecurityCode">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="SecurityCode" Type="bgDBNew.Store.SecurityCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SecurityCode">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonTransaction">
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="1" />
+    <End Role="Transaction" Type="bgDBNew.Store.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalutationPerson">
+    <End Role="Salutation" Type="bgDBNew.Store.Salutation" Multiplicity="1" />
+    <End Role="Person" Type="bgDBNew.Store.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Salutation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="SalutationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhoneTypePersonPhone">
+    <End Role="PhoneType" Type="bgDBNew.Store.PhoneType" Multiplicity="1" />
+    <End Role="PersonPhone" Type="bgDBNew.Store.PersonPhone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhoneType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonPhone">
+        <PropertyRef Name="PhoneTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonTypePersonRole">
+    <End Role="PersonType" Type="bgDBNew.Store.PersonType" Multiplicity="1" />
+    <End Role="PersonRole" Type="bgDBNew.Store.PersonRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonRole">
+        <PropertyRef Name="PersonTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePersonRole">
+    <End Role="Role" Type="bgDBNew.Store.Role" Multiplicity="1" />
+    <End Role="PersonRole" Type="bgDBNew.Store.PersonRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SocialProfileTypePersonSocialProfile">
+    <End Role="SocialProfileType" Type="bgDBNew.Store.SocialProfileType" Multiplicity="1" />
+    <End Role="PersonSocialProfile" Type="bgDBNew.Store.PersonSocialProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SocialProfileType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonSocialProfile">
+        <PropertyRef Name="SocialProfileTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UploadTypePersonUpload">
+    <End Role="UploadType" Type="bgDBNew.Store.UploadType" Multiplicity="1" />
+    <End Role="PersonUpload" Type="bgDBNew.Store.PersonUpload" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UploadType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonUpload">
+        <PropertyRef Name="UploadTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SecurityTypeSecurityCode">
+    <End Role="SecurityType" Type="bgDBNew.Store.SecurityType" Multiplicity="1" />
+    <End Role="SecurityCode" Type="bgDBNew.Store.SecurityCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SecurityCode">
+        <PropertyRef Name="SecurityTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionTypeTransaction">
+    <End Role="TransactionType" Type="bgDBNew.Store.TransactionType" Multiplicity="1" />
+    <End Role="Transaction" Type="bgDBNew.Store.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="TransactionTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="bgDBNew" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="bgDBNewContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AddressType" EntityType="bgDBNew.AddressType" />
+          <EntitySet Name="Attendance" EntityType="bgDBNew.Attendance" />
+          <EntitySet Name="Country" EntityType="bgDBNew.Country" />
+          <EntitySet Name="EmailType" EntityType="bgDBNew.EmailType" />
+          <EntitySet Name="JobTitle" EntityType="bgDBNew.JobTitle" />
+          <EntitySet Name="Log" EntityType="bgDBNew.Log" />
+          <EntitySet Name="Login" EntityType="bgDBNew.Login" />
+          <EntitySet Name="LogType" EntityType="bgDBNew.LogType" />
+          <EntitySet Name="MailoutParameter" EntityType="bgDBNew.MailoutParameter" />
+          <EntitySet Name="MailoutQueue" EntityType="bgDBNew.MailoutQueue" />
+          <EntitySet Name="MailoutQueueParameterValue" EntityType="bgDBNew.MailoutQueueParameterValue" />
+          <EntitySet Name="MailoutTracker" EntityType="bgDBNew.MailoutTracker" />
+          <EntitySet Name="MailoutType" EntityType="bgDBNew.MailoutType" />
+          <EntitySet Name="MailoutTypeParameter" EntityType="bgDBNew.MailoutTypeParameter" />
+          <EntitySet Name="Member" EntityType="bgDBNew.Member" />
+          <EntitySet Name="Occupation" EntityType="bgDBNew.Occupation" />
+          <EntitySet Name="Person" EntityType="bgDBNew.Person" />
+          <EntitySet Name="PersonAddress" EntityType="bgDBNew.PersonAddress" />
+          <EntitySet Name="PersonEmail" EntityType="bgDBNew.PersonEmail" />
+          <EntitySet Name="PersonOccupation" EntityType="bgDBNew.PersonOccupation" />
+          <EntitySet Name="PersonPhone" EntityType="bgDBNew.PersonPhone" />
+          <EntitySet Name="PersonRole" EntityType="bgDBNew.PersonRole" />
+          <EntitySet Name="PersonSocialProfile" EntityType="bgDBNew.PersonSocialProfile" />
+          <EntitySet Name="PersonType" EntityType="bgDBNew.PersonType" />
+          <EntitySet Name="PersonUpload" EntityType="bgDBNew.PersonUpload" />
+          <EntitySet Name="PhoneType" EntityType="bgDBNew.PhoneType" />
+          <EntitySet Name="Role" EntityType="bgDBNew.Role" />
+          <EntitySet Name="Salutation" EntityType="bgDBNew.Salutation" />
+          <EntitySet Name="SecurityCode" EntityType="bgDBNew.SecurityCode" />
+          <EntitySet Name="SecurityType" EntityType="bgDBNew.SecurityType" />
+          <EntitySet Name="SocialProfileType" EntityType="bgDBNew.SocialProfileType" />
+          <EntitySet Name="Transaction" EntityType="bgDBNew.Transaction" />
+          <EntitySet Name="TransactionType" EntityType="bgDBNew.TransactionType" />
+          <EntitySet Name="UploadType" EntityType="bgDBNew.UploadType" />
+          <AssociationSet Name="FK_AddressTypePersonAddress" Association="bgDBNew.FK_AddressTypePersonAddress">
+            <End Role="AddressType" EntitySet="AddressType" />
+            <End Role="PersonAddress" EntitySet="PersonAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonAttendance" Association="bgDBNew.FK_PersonAttendance">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CountryPersonAddress" Association="bgDBNew.FK_CountryPersonAddress">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="PersonAddress" EntitySet="PersonAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailTypePersonEmail" Association="bgDBNew.FK_EmailTypePersonEmail">
+            <End Role="EmailType" EntitySet="EmailType" />
+            <End Role="PersonEmail" EntitySet="PersonEmail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobTitlePersonOccupation" Association="bgDBNew.FK_JobTitlePersonOccupation">
+            <End Role="JobTitle" EntitySet="JobTitle" />
+            <End Role="PersonOccupation" EntitySet="PersonOccupation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LogTypeLog" Association="bgDBNew.FK_LogTypeLog">
+            <End Role="LogType" EntitySet="LogType" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonLog" Association="bgDBNew.FK_PersonLog">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonLogin" Association="bgDBNew.FK_PersonLogin">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailoutParameterMailoutTypeParameter" Association="bgDBNew.FK_MailoutParameterMailoutTypeParameter">
+            <End Role="MailoutParameter" EntitySet="MailoutParameter" />
+            <End Role="MailoutTypeParameter" EntitySet="MailoutTypeParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailoutQueueMailoutQueueParameterValue" Association="bgDBNew.FK_MailoutQueueMailoutQueueParameterValue">
+            <End Role="MailoutQueue" EntitySet="MailoutQueue" />
+            <End Role="MailoutQueueParameterValue" EntitySet="MailoutQueueParameterValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailoutQueueMailoutTracker" Association="bgDBNew.FK_MailoutQueueMailoutTracker">
+            <End Role="MailoutQueue" EntitySet="MailoutQueue" />
+            <End Role="MailoutTracker" EntitySet="MailoutTracker" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailoutTypeMailoutQueue" Association="bgDBNew.FK_MailoutTypeMailoutQueue">
+            <End Role="MailoutType" EntitySet="MailoutType" />
+            <End Role="MailoutQueue" EntitySet="MailoutQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonMailoutQueue" Association="bgDBNew.FK_PersonMailoutQueue">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="MailoutQueue" EntitySet="MailoutQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailoutTypeParameterMailoutQueueParameterValue" Association="bgDBNew.FK_MailoutTypeParameterMailoutQueueParameterValue">
+            <End Role="MailoutTypeParameter" EntitySet="MailoutTypeParameter" />
+            <End Role="MailoutQueueParameterValue" EntitySet="MailoutQueueParameterValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailoutTypeMailoutTypeParameter" Association="bgDBNew.FK_MailoutTypeMailoutTypeParameter">
+            <End Role="MailoutType" EntitySet="MailoutType" />
+            <End Role="MailoutTypeParameter" EntitySet="MailoutTypeParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPlayer" Association="bgDBNew.FK_PersonPlayer">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonTypeMember" Association="bgDBNew.FK_PersonTypeMember">
+            <End Role="PersonType" EntitySet="PersonType" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OccupationPersonOccupation" Association="bgDBNew.FK_OccupationPersonOccupation">
+            <End Role="Occupation" EntitySet="Occupation" />
+            <End Role="PersonOccupation" EntitySet="PersonOccupation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPersonAddress" Association="bgDBNew.FK_PersonPersonAddress">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonAddress" EntitySet="PersonAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPersonEmail" Association="bgDBNew.FK_PersonPersonEmail">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonEmail" EntitySet="PersonEmail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPersonOccupation" Association="bgDBNew.FK_PersonPersonOccupation">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonOccupation" EntitySet="PersonOccupation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPersonPhone" Association="bgDBNew.FK_PersonPersonPhone">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonPhone" EntitySet="PersonPhone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPersonSocialProfile" Association="bgDBNew.FK_PersonPersonSocialProfile">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonSocialProfile" EntitySet="PersonSocialProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPersonUpload" Association="bgDBNew.FK_PersonPersonUpload">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonUpload" EntitySet="PersonUpload" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonSecurityCode" Association="bgDBNew.FK_PersonSecurityCode">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="SecurityCode" EntitySet="SecurityCode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonTransaction" Association="bgDBNew.FK_PersonTransaction">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalutationPerson" Association="bgDBNew.FK_SalutationPerson">
+            <End Role="Salutation" EntitySet="Salutation" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhoneTypePersonPhone" Association="bgDBNew.FK_PhoneTypePersonPhone">
+            <End Role="PhoneType" EntitySet="PhoneType" />
+            <End Role="PersonPhone" EntitySet="PersonPhone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonTypePersonRole" Association="bgDBNew.FK_PersonTypePersonRole">
+            <End Role="PersonType" EntitySet="PersonType" />
+            <End Role="PersonRole" EntitySet="PersonRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePersonRole" Association="bgDBNew.FK_RolePersonRole">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="PersonRole" EntitySet="PersonRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SocialProfileTypePersonSocialProfile" Association="bgDBNew.FK_SocialProfileTypePersonSocialProfile">
+            <End Role="SocialProfileType" EntitySet="SocialProfileType" />
+            <End Role="PersonSocialProfile" EntitySet="PersonSocialProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UploadTypePersonUpload" Association="bgDBNew.FK_UploadTypePersonUpload">
+            <End Role="UploadType" EntitySet="UploadType" />
+            <End Role="PersonUpload" EntitySet="PersonUpload" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecurityTypeSecurityCode" Association="bgDBNew.FK_SecurityTypeSecurityCode">
+            <End Role="SecurityType" EntitySet="SecurityType" />
+            <End Role="SecurityCode" EntitySet="SecurityCode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionTypeTransaction" Association="bgDBNew.FK_TransactionTypeTransaction">
+            <End Role="TransactionType" EntitySet="TransactionType" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AddressType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PersonAddress" Relationship="bgDBNew.FK_AddressTypePersonAddress" FromRole="AddressType" ToRole="PersonAddress" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="AttendanceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonAttendance" FromRole="Attendance" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryCode" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="EnglishName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PersonAddress" Relationship="bgDBNew.FK_CountryPersonAddress" FromRole="Country" ToRole="PersonAddress" />
+        </EntityType>
+        <EntityType Name="EmailType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PersonEmail" Relationship="bgDBNew.FK_EmailTypePersonEmail" FromRole="EmailType" ToRole="PersonEmail" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PersonOccupation" Relationship="bgDBNew.FK_JobTitlePersonOccupation" FromRole="JobTitle" ToRole="PersonOccupation" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="LogType" Relationship="bgDBNew.FK_LogTypeLog" FromRole="Log" ToRole="LogType" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonLog" FromRole="Log" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="LockedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsLock" Type="Boolean" Nullable="false" />
+          <Property Name="MustChangepassword" Type="Boolean" Nullable="false" />
+          <Property Name="Person_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonLogin" FromRole="Login" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="LogType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Log" Relationship="bgDBNew.FK_LogTypeLog" FromRole="LogType" ToRole="Log" />
+        </EntityType>
+        <EntityType Name="MailoutParameter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MailoutTypeParameter" Relationship="bgDBNew.FK_MailoutParameterMailoutTypeParameter" FromRole="MailoutParameter" ToRole="MailoutTypeParameter" />
+        </EntityType>
+        <EntityType Name="MailoutQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="HtmlBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="MailoutTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MailoutQueueParameterValue" Relationship="bgDBNew.FK_MailoutQueueMailoutQueueParameterValue" FromRole="MailoutQueue" ToRole="MailoutQueueParameterValue" />
+          <NavigationProperty Name="MailoutTracker" Relationship="bgDBNew.FK_MailoutQueueMailoutTracker" FromRole="MailoutQueue" ToRole="MailoutTracker" />
+          <NavigationProperty Name="MailoutType" Relationship="bgDBNew.FK_MailoutTypeMailoutQueue" FromRole="MailoutQueue" ToRole="MailoutType" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonMailoutQueue" FromRole="MailoutQueue" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="MailoutQueueParameterValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MailoutQueueId" Type="Int32" Nullable="false" />
+          <Property Name="MailoutTypeParameterId" Type="Int32" />
+          <NavigationProperty Name="MailoutQueue" Relationship="bgDBNew.FK_MailoutQueueMailoutQueueParameterValue" FromRole="MailoutQueueParameterValue" ToRole="MailoutQueue" />
+          <NavigationProperty Name="MailoutTypeParameter" Relationship="bgDBNew.FK_MailoutTypeParameterMailoutQueueParameterValue" FromRole="MailoutQueueParameterValue" ToRole="MailoutTypeParameter" />
+        </EntityType>
+        <EntityType Name="MailoutTracker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IPAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpenedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MailoutQueueId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MailoutQueue" Relationship="bgDBNew.FK_MailoutQueueMailoutTracker" FromRole="MailoutTracker" ToRole="MailoutQueue" />
+        </EntityType>
+        <EntityType Name="MailoutType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MailoutQueue" Relationship="bgDBNew.FK_MailoutTypeMailoutQueue" FromRole="MailoutType" ToRole="MailoutQueue" />
+          <NavigationProperty Name="MailoutTypeParameter" Relationship="bgDBNew.FK_MailoutTypeMailoutTypeParameter" FromRole="MailoutType" ToRole="MailoutTypeParameter" />
+        </EntityType>
+        <EntityType Name="MailoutTypeParameter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="MailoutTypeId" Type="Int32" Nullable="false" />
+          <Property Name="MailoutParameterId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MailoutParameter" Relationship="bgDBNew.FK_MailoutParameterMailoutTypeParameter" FromRole="MailoutTypeParameter" ToRole="MailoutParameter" />
+          <NavigationProperty Name="MailoutQueueParameterValue" Relationship="bgDBNew.FK_MailoutTypeParameterMailoutQueueParameterValue" FromRole="MailoutTypeParameter" ToRole="MailoutQueueParameterValue" />
+          <NavigationProperty Name="MailoutType" Relationship="bgDBNew.FK_MailoutTypeMailoutTypeParameter" FromRole="MailoutTypeParameter" ToRole="MailoutType" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="JoiningDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="PersonTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonPlayer" FromRole="Member" ToRole="Person" />
+          <NavigationProperty Name="PersonType" Relationship="bgDBNew.FK_PersonTypeMember" FromRole="Member" ToRole="PersonType" />
+        </EntityType>
+        <EntityType Name="Occupation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PersonOccupation" Relationship="bgDBNew.FK_OccupationPersonOccupation" FromRole="Occupation" ToRole="PersonOccupation" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GenderId" Type="Int16" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="SalutationId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GroupID" Type="Int32" />
+          <NavigationProperty Name="Attendance" Relationship="bgDBNew.FK_PersonAttendance" FromRole="Person" ToRole="Attendance" />
+          <NavigationProperty Name="Log" Relationship="bgDBNew.FK_PersonLog" FromRole="Person" ToRole="Log" />
+          <NavigationProperty Name="Login" Relationship="bgDBNew.FK_PersonLogin" FromRole="Person" ToRole="Login" />
+          <NavigationProperty Name="MailoutQueue" Relationship="bgDBNew.FK_PersonMailoutQueue" FromRole="Person" ToRole="MailoutQueue" />
+          <NavigationProperty Name="Member" Relationship="bgDBNew.FK_PersonPlayer" FromRole="Person" ToRole="Member" />
+          <NavigationProperty Name="PersonAddress" Relationship="bgDBNew.FK_PersonPersonAddress" FromRole="Person" ToRole="PersonAddress" />
+          <NavigationProperty Name="PersonEmail" Relationship="bgDBNew.FK_PersonPersonEmail" FromRole="Person" ToRole="PersonEmail" />
+          <NavigationProperty Name="PersonOccupation" Relationship="bgDBNew.FK_PersonPersonOccupation" FromRole="Person" ToRole="PersonOccupation" />
+          <NavigationProperty Name="PersonPhone" Relationship="bgDBNew.FK_PersonPersonPhone" FromRole="Person" ToRole="PersonPhone" />
+          <NavigationProperty Name="PersonSocialProfile" Relationship="bgDBNew.FK_PersonPersonSocialProfile" FromRole="Person" ToRole="PersonSocialProfile" />
+          <NavigationProperty Name="PersonUpload" Relationship="bgDBNew.FK_PersonPersonUpload" FromRole="Person" ToRole="PersonUpload" />
+          <NavigationProperty Name="SecurityCode" Relationship="bgDBNew.FK_PersonSecurityCode" FromRole="Person" ToRole="SecurityCode" />
+          <NavigationProperty Name="Transaction" Relationship="bgDBNew.FK_PersonTransaction" FromRole="Person" ToRole="Transaction" />
+          <NavigationProperty Name="Salutation" Relationship="bgDBNew.FK_SalutationPerson" FromRole="Person" ToRole="Salutation" />
+        </EntityType>
+        <EntityType Name="PersonAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddressTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Line1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Line2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Landmark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AddressType" Relationship="bgDBNew.FK_AddressTypePersonAddress" FromRole="PersonAddress" ToRole="AddressType" />
+          <NavigationProperty Name="Country" Relationship="bgDBNew.FK_CountryPersonAddress" FromRole="PersonAddress" ToRole="Country" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonPersonAddress" FromRole="PersonAddress" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="PersonEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="EmailType" Relationship="bgDBNew.FK_EmailTypePersonEmail" FromRole="PersonEmail" ToRole="EmailType" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonPersonEmail" FromRole="PersonEmail" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="PersonOccupation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OccupationId" Type="Int32" Nullable="false" />
+          <Property Name="JobTitleId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrganizationAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fdate" Type="DateTime" Precision="3" />
+          <Property Name="Tdate" Type="DateTime" Precision="3" />
+          <Property Name="ReportingInformation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="JobTitle" Relationship="bgDBNew.FK_JobTitlePersonOccupation" FromRole="PersonOccupation" ToRole="JobTitle" />
+          <NavigationProperty Name="Occupation" Relationship="bgDBNew.FK_OccupationPersonOccupation" FromRole="PersonOccupation" ToRole="Occupation" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonPersonOccupation" FromRole="PersonOccupation" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="PersonPhone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonPersonPhone" FromRole="PersonPhone" ToRole="Person" />
+          <NavigationProperty Name="PhoneType" Relationship="bgDBNew.FK_PhoneTypePersonPhone" FromRole="PersonPhone" ToRole="PhoneType" />
+        </EntityType>
+        <EntityType Name="PersonRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="PersonTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PersonType" Relationship="bgDBNew.FK_PersonTypePersonRole" FromRole="PersonRole" ToRole="PersonType" />
+          <NavigationProperty Name="Role" Relationship="bgDBNew.FK_RolePersonRole" FromRole="PersonRole" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="PersonSocialProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SocialProfileTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonPersonSocialProfile" FromRole="PersonSocialProfile" ToRole="Person" />
+          <NavigationProperty Name="SocialProfileType" Relationship="bgDBNew.FK_SocialProfileTypePersonSocialProfile" FromRole="PersonSocialProfile" ToRole="SocialProfileType" />
+        </EntityType>
+        <EntityType Name="PersonType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="bgDBNew.FK_PersonTypeMember" FromRole="PersonType" ToRole="Member" />
+          <NavigationProperty Name="PersonRole" Relationship="bgDBNew.FK_PersonTypePersonRole" FromRole="PersonType" ToRole="PersonRole" />
+        </EntityType>
+        <EntityType Name="PersonUpload">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UploadTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonPersonUpload" FromRole="PersonUpload" ToRole="Person" />
+          <NavigationProperty Name="UploadType" Relationship="bgDBNew.FK_UploadTypePersonUpload" FromRole="PersonUpload" ToRole="UploadType" />
+        </EntityType>
+        <EntityType Name="PhoneType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PersonPhone" Relationship="bgDBNew.FK_PhoneTypePersonPhone" FromRole="PhoneType" ToRole="PersonPhone" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PersonRole" Relationship="bgDBNew.FK_RolePersonRole" FromRole="Role" ToRole="PersonRole" />
+        </EntityType>
+        <EntityType Name="Salutation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_SalutationPerson" FromRole="Salutation" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="SecurityCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpiredOn" Type="DateTime" Precision="3" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonSecurityCode" FromRole="SecurityCode" ToRole="Person" />
+          <NavigationProperty Name="SecurityType" Relationship="bgDBNew.FK_SecurityTypeSecurityCode" FromRole="SecurityCode" ToRole="SecurityType" />
+        </EntityType>
+        <EntityType Name="SecurityType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SecurityCode" Relationship="bgDBNew.FK_SecurityTypeSecurityCode" FromRole="SecurityType" ToRole="SecurityCode" />
+        </EntityType>
+        <EntityType Name="SocialProfileType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PersonSocialProfile" Relationship="bgDBNew.FK_SocialProfileTypePersonSocialProfile" FromRole="SocialProfileType" ToRole="PersonSocialProfile" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Person" Relationship="bgDBNew.FK_PersonTransaction" FromRole="Transaction" ToRole="Person" />
+          <NavigationProperty Name="TransactionType" Relationship="bgDBNew.FK_TransactionTypeTransaction" FromRole="Transaction" ToRole="TransactionType" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Multiplier" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <NavigationProperty Name="Transaction" Relationship="bgDBNew.FK_TransactionTypeTransaction" FromRole="TransactionType" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="UploadType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PersonUpload" Relationship="bgDBNew.FK_UploadTypePersonUpload" FromRole="UploadType" ToRole="PersonUpload" />
+        </EntityType>
+        <Association Name="FK_AddressTypePersonAddress">
+          <End Type="bgDBNew.AddressType" Role="AddressType" Multiplicity="1" />
+          <End Type="bgDBNew.PersonAddress" Role="PersonAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonAddress">
+              <PropertyRef Name="AddressTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonAttendance">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.Attendance" Role="Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CountryPersonAddress">
+          <End Type="bgDBNew.Country" Role="Country" Multiplicity="1" />
+          <End Type="bgDBNew.PersonAddress" Role="PersonAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonAddress">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailTypePersonEmail">
+          <End Type="bgDBNew.EmailType" Role="EmailType" Multiplicity="1" />
+          <End Type="bgDBNew.PersonEmail" Role="PersonEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmailType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonEmail">
+              <PropertyRef Name="EmailTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobTitlePersonOccupation">
+          <End Type="bgDBNew.JobTitle" Role="JobTitle" Multiplicity="1" />
+          <End Type="bgDBNew.PersonOccupation" Role="PersonOccupation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitle">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonOccupation">
+              <PropertyRef Name="JobTitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LogTypeLog">
+          <End Type="bgDBNew.LogType" Role="LogType" Multiplicity="1" />
+          <End Type="bgDBNew.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LogType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="LogTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonLog">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="bgDBNew.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonLogin">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="Person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailoutParameterMailoutTypeParameter">
+          <End Type="bgDBNew.MailoutParameter" Role="MailoutParameter" Multiplicity="1" />
+          <End Type="bgDBNew.MailoutTypeParameter" Role="MailoutTypeParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MailoutParameter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MailoutTypeParameter">
+              <PropertyRef Name="MailoutParameterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailoutQueueMailoutQueueParameterValue">
+          <End Type="bgDBNew.MailoutQueue" Role="MailoutQueue" Multiplicity="1" />
+          <End Type="bgDBNew.MailoutQueueParameterValue" Role="MailoutQueueParameterValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MailoutQueue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MailoutQueueParameterValue">
+              <PropertyRef Name="MailoutQueueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailoutQueueMailoutTracker">
+          <End Type="bgDBNew.MailoutQueue" Role="MailoutQueue" Multiplicity="1" />
+          <End Type="bgDBNew.MailoutTracker" Role="MailoutTracker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MailoutQueue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MailoutTracker">
+              <PropertyRef Name="MailoutQueueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailoutTypeMailoutQueue">
+          <End Type="bgDBNew.MailoutType" Role="MailoutType" Multiplicity="1" />
+          <End Type="bgDBNew.MailoutQueue" Role="MailoutQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MailoutType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MailoutQueue">
+              <PropertyRef Name="MailoutTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonMailoutQueue">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.MailoutQueue" Role="MailoutQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MailoutQueue">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailoutTypeParameterMailoutQueueParameterValue">
+          <End Type="bgDBNew.MailoutTypeParameter" Role="MailoutTypeParameter" Multiplicity="0..1" />
+          <End Type="bgDBNew.MailoutQueueParameterValue" Role="MailoutQueueParameterValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MailoutTypeParameter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MailoutQueueParameterValue">
+              <PropertyRef Name="MailoutTypeParameterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailoutTypeMailoutTypeParameter">
+          <End Type="bgDBNew.MailoutType" Role="MailoutType" Multiplicity="1" />
+          <End Type="bgDBNew.MailoutTypeParameter" Role="MailoutTypeParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MailoutType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MailoutTypeParameter">
+              <PropertyRef Name="MailoutTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPlayer">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonTypeMember">
+          <End Type="bgDBNew.PersonType" Role="PersonType" Multiplicity="1" />
+          <End Type="bgDBNew.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="PersonTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OccupationPersonOccupation">
+          <End Type="bgDBNew.Occupation" Role="Occupation" Multiplicity="1" />
+          <End Type="bgDBNew.PersonOccupation" Role="PersonOccupation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Occupation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonOccupation">
+              <PropertyRef Name="OccupationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPersonAddress">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.PersonAddress" Role="PersonAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonAddress">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPersonEmail">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.PersonEmail" Role="PersonEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonEmail">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPersonOccupation">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.PersonOccupation" Role="PersonOccupation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonOccupation">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPersonPhone">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.PersonPhone" Role="PersonPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonPhone">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPersonSocialProfile">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.PersonSocialProfile" Role="PersonSocialProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonSocialProfile">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPersonUpload">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.PersonUpload" Role="PersonUpload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonUpload">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonSecurityCode">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.SecurityCode" Role="SecurityCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SecurityCode">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonTransaction">
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="1" />
+          <End Type="bgDBNew.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalutationPerson">
+          <End Type="bgDBNew.Salutation" Role="Salutation" Multiplicity="1" />
+          <End Type="bgDBNew.Person" Role="Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salutation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="SalutationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhoneTypePersonPhone">
+          <End Type="bgDBNew.PhoneType" Role="PhoneType" Multiplicity="1" />
+          <End Type="bgDBNew.PersonPhone" Role="PersonPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonPhone">
+              <PropertyRef Name="PhoneTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonTypePersonRole">
+          <End Type="bgDBNew.PersonType" Role="PersonType" Multiplicity="1" />
+          <End Type="bgDBNew.PersonRole" Role="PersonRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonRole">
+              <PropertyRef Name="PersonTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePersonRole">
+          <End Type="bgDBNew.Role" Role="Role" Multiplicity="1" />
+          <End Type="bgDBNew.PersonRole" Role="PersonRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SocialProfileTypePersonSocialProfile">
+          <End Type="bgDBNew.SocialProfileType" Role="SocialProfileType" Multiplicity="1" />
+          <End Type="bgDBNew.PersonSocialProfile" Role="PersonSocialProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SocialProfileType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonSocialProfile">
+              <PropertyRef Name="SocialProfileTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UploadTypePersonUpload">
+          <End Type="bgDBNew.UploadType" Role="UploadType" Multiplicity="1" />
+          <End Type="bgDBNew.PersonUpload" Role="PersonUpload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UploadType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonUpload">
+              <PropertyRef Name="UploadTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecurityTypeSecurityCode">
+          <End Type="bgDBNew.SecurityType" Role="SecurityType" Multiplicity="1" />
+          <End Type="bgDBNew.SecurityCode" Role="SecurityCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SecurityCode">
+              <PropertyRef Name="SecurityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionTypeTransaction">
+          <End Type="bgDBNew.TransactionType" Role="TransactionType" Multiplicity="1" />
+          <End Type="bgDBNew.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="TransactionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bgDBNewStoreContainer" CdmEntityContainer="bgDBNewContainer">
+    <EntitySetMapping Name="AddressType">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.AddressType)">
+        <MappingFragment StoreEntitySet="AddressType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attendance">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.Attendance)">
+        <MappingFragment StoreEntitySet="Attendance">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Country">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.Country)">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="EnglishName" ColumnName="EnglishName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailType">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.EmailType)">
+        <MappingFragment StoreEntitySet="EmailType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobTitle">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.JobTitle)">
+        <MappingFragment StoreEntitySet="JobTitle">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Log">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.Log)">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LogTypeId" ColumnName="LogTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Login">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.Login)">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="LockedOn" ColumnName="LockedOn" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+          <ScalarProperty Name="MustChangepassword" ColumnName="MustChangepassword" />
+          <ScalarProperty Name="Person_Id" ColumnName="Person_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogType">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.LogType)">
+        <MappingFragment StoreEntitySet="LogType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailoutParameter">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.MailoutParameter)">
+        <MappingFragment StoreEntitySet="MailoutParameter">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailoutQueue">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.MailoutQueue)">
+        <MappingFragment StoreEntitySet="MailoutQueue">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="HtmlBody" ColumnName="HtmlBody" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="MailoutTypeId" ColumnName="MailoutTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailoutQueueParameterValue">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.MailoutQueueParameterValue)">
+        <MappingFragment StoreEntitySet="MailoutQueueParameterValue">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="MailoutQueueId" ColumnName="MailoutQueueId" />
+          <ScalarProperty Name="MailoutTypeParameterId" ColumnName="MailoutTypeParameterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailoutTracker">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.MailoutTracker)">
+        <MappingFragment StoreEntitySet="MailoutTracker">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="OpenedOn" ColumnName="OpenedOn" />
+          <ScalarProperty Name="MailoutQueueId" ColumnName="MailoutQueueId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailoutType">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.MailoutType)">
+        <MappingFragment StoreEntitySet="MailoutType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailoutTypeParameter">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.MailoutTypeParameter)">
+        <MappingFragment StoreEntitySet="MailoutTypeParameter">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MailoutTypeId" ColumnName="MailoutTypeId" />
+          <ScalarProperty Name="MailoutParameterId" ColumnName="MailoutParameterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Member">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.Member)">
+        <MappingFragment StoreEntitySet="Member">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PersonTypeId" ColumnName="PersonTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Occupation">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.Occupation)">
+        <MappingFragment StoreEntitySet="Occupation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Person">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.Person)">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Mname" ColumnName="Mname" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SalutationId" ColumnName="SalutationId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonAddress">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.PersonAddress)">
+        <MappingFragment StoreEntitySet="PersonAddress">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddressTypeId" ColumnName="AddressTypeId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="Line1" ColumnName="Line1" />
+          <ScalarProperty Name="Line2" ColumnName="Line2" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Landmark" ColumnName="Landmark" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonEmail">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.PersonEmail)">
+        <MappingFragment StoreEntitySet="PersonEmail">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="EmailTypeId" ColumnName="EmailTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonOccupation">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.PersonOccupation)">
+        <MappingFragment StoreEntitySet="PersonOccupation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
+          <ScalarProperty Name="JobTitleId" ColumnName="JobTitleId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+          <ScalarProperty Name="OrganizationAddress" ColumnName="OrganizationAddress" />
+          <ScalarProperty Name="Fdate" ColumnName="Fdate" />
+          <ScalarProperty Name="Tdate" ColumnName="Tdate" />
+          <ScalarProperty Name="ReportingInformation" ColumnName="ReportingInformation" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonPhone">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.PersonPhone)">
+        <MappingFragment StoreEntitySet="PersonPhone">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PhoneTypeId" ColumnName="PhoneTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonRole">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.PersonRole)">
+        <MappingFragment StoreEntitySet="PersonRole">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="PersonTypeId" ColumnName="PersonTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonSocialProfile">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.PersonSocialProfile)">
+        <MappingFragment StoreEntitySet="PersonSocialProfile">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SocialProfileTypeId" ColumnName="SocialProfileTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonType">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.PersonType)">
+        <MappingFragment StoreEntitySet="PersonType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonUpload">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.PersonUpload)">
+        <MappingFragment StoreEntitySet="PersonUpload">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="UploadTypeId" ColumnName="UploadTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhoneType">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.PhoneType)">
+        <MappingFragment StoreEntitySet="PhoneType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.Role)">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salutation">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.Salutation)">
+        <MappingFragment StoreEntitySet="Salutation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityCode">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.SecurityCode)">
+        <MappingFragment StoreEntitySet="SecurityCode">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExpiredOn" ColumnName="ExpiredOn" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="SecurityTypeId" ColumnName="SecurityTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityType">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.SecurityType)">
+        <MappingFragment StoreEntitySet="SecurityType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SocialProfileType">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.SocialProfileType)">
+        <MappingFragment StoreEntitySet="SocialProfileType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transaction">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.Transaction)">
+        <MappingFragment StoreEntitySet="Transaction">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionType">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.TransactionType)">
+        <MappingFragment StoreEntitySet="TransactionType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Multiplier" ColumnName="Multiplier" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UploadType">
+      <EntityTypeMapping TypeName="IsTypeOf(bgDBNew.UploadType)">
+        <MappingFragment StoreEntitySet="UploadType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

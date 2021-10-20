@@ -20,7 +20,7 @@ namespace DB
         public System.DateTime CreatedOn { get; set; }
         public string Value { get; set; }
     
-        public virtual SocialProfileType SocialProfileType { get; set; }
         public virtual Person Person { get; set; }
+        public virtual SocialProfileType SocialProfileType { get; set; }
     }
 }

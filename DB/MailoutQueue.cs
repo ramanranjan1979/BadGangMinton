@@ -30,11 +30,11 @@ namespace DB
         public int PersonId { get; set; }
         public int MailoutTypeId { get; set; }
     
-        public virtual Person Person { get; set; }
-        public virtual MailoutType MailoutType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MailoutQueueParameterValue> MailoutQueueParameterValue { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MailoutTracker> MailoutTracker { get; set; }
+        public virtual MailoutType MailoutType { get; set; }
+        public virtual Person Person { get; set; }
     }
 }

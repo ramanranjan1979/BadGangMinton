@@ -21,7 +21,7 @@ namespace DB
         public int SecurityTypeId { get; set; }
         public int PersonId { get; set; }
     
-        public virtual SecurityType SecurityType { get; set; }
         public virtual Person Person { get; set; }
+        public virtual SecurityType SecurityType { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace DB
         public string Remarks { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
-        public virtual TransactionType TransactionType { get; set; }
         public virtual Person Person { get; set; }
+        public virtual TransactionType TransactionType { get; set; }
     }
 }

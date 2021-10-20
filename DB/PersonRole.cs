@@ -12,19 +12,15 @@ namespace DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Login
+    public partial class PersonRole
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public Nullable<System.DateTime> ModifiedOn { get; set; }
-        public Nullable<System.DateTime> LockedOn { get; set; }
         public bool IsActive { get; set; }
-        public bool IsLock { get; set; }
-        public bool MustChangepassword { get; set; }
-        public int Person_Id { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public int RoleId { get; set; }
+        public int PersonTypeId { get; set; }
     
-        public virtual Person Person { get; set; }
+        public virtual PersonType PersonType { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

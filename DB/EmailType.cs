@@ -17,13 +17,13 @@ namespace DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EmailType()
         {
-            this.PersonEmails = new HashSet<PersonEmail>();
+            this.PersonEmail = new HashSet<PersonEmail>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PersonEmail> PersonEmails { get; set; }
+        public virtual ICollection<PersonEmail> PersonEmail { get; set; }
     }
 }
