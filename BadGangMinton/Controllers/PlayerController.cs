@@ -139,6 +139,16 @@ namespace BadGangMinton.Controllers
                             qty = 2.0M;
                             unitWording = "02 hours";
                             break;
+
+                        case "twoandhalfunit":
+                            qty = 2.5M;
+                            unitWording = "02 hours 30 minutes";
+                            break;
+
+                        case "threeunit":
+                            qty = 3.0M;
+                            unitWording = "03 hours";
+                            break;
                     }
 
                     if (p.GroupId.HasValue)

@@ -206,7 +206,7 @@ namespace BadGangMinton.Controllers
                 mid = sDal.ApplySecurityCode(model.PersonId, model.SecurityCode, model.Password);
             }
 
-            sDal.ClearPasswordVerificationtRequest(mid);
+            sDal.ExpireSecurityCode(mid,2);
 
             sDal.LogMe("TRACKING", "PASSWORD HAS BEEN CHANGED", model.PersonId);
 
@@ -226,6 +226,8 @@ namespace BadGangMinton.Controllers
                 sDal.LogMe("TRACKING", "LOGGED IN SYSTEM", sm.UserSession.Person.Id);
                 if (sm.UserSession.RoleNameList.Contains("sysadmin"))
                 {
+                    sDal.ExpireSecurityCode(sm.UserSession.Person.Id, 2);
+
                     return RedirectToAction("Index", "Admin");
                 }
                 else

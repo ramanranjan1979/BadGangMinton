@@ -849,9 +849,9 @@ namespace BadGangMinton.DAL
             return lUpdated.Id;
         }
 
-        public void ClearPasswordVerificationtRequest(int personId)
+        public void ExpireSecurityCode(int personId , int SecurityTypeId)
         {
-            var verifications = (from v in SecurityCode where v.Person.Id == personId && v.SecurityTypeId == 1 && v.ExpiredOn == null select v).ToList();
+            var verifications = (from v in SecurityCode where v.Person.Id == personId && v.SecurityTypeId == SecurityTypeId && v.ExpiredOn == null select v).ToList();
             if (verifications != null)
             {
                 foreach (var verify in verifications)
@@ -1232,6 +1232,39 @@ namespace BadGangMinton.DAL
             {
                 var data = (from x in MailoutQueue.Where(x => x.PersonId == personId.Value) select x).ToList();
              
+
+                foreach (var d in data)
+                {
+                    var mxtype = (from y in MailoutType where y.Id == d.MailoutTypeId select y).FirstOrDefault();
+                    MxType t = new MxType()
+                    {
+                        Description = mxtype.Description,
+                        Id = mxtype.Id,
+                        Name = mxtype.Name,
+                        Subject = mxtype.Subject
+                    };
+
+                    BGO.Mailout.MailoutQueue x = new BGO.Mailout.MailoutQueue()
+                    {
+                        CreatedOn = d.CreatedOn,
+                        Email = d.EmailAddress,
+                        HTML = d.HtmlBody,
+                        Id = d.Id,
+                        MailoutTypeId = d.MailoutTypeId,
+                        Status = d.Status,
+                        UpdatedOn = d.UpdateOn,
+                        Person = new ContactDal().GetPersonByPersonId(d.PersonId),
+                        Type = t,
+                        Subject = t.Subject
+                    };
+
+                    q.Add(x);
+                }
+            }
+            else
+            {
+                var data = (from x in MailoutQueue select x).ToList();
+
 
                 foreach (var d in data)
                 {

@@ -54,13 +54,13 @@ namespace BadGangMinton.Helpers
             m.Subject = subject;
             m.Body = body;
             sc.Host = ConfigurationManager.AppSettings["SMTP_HOST"];
-            string str1 = "gmail.com";
-            if (fromAddress.ToLower().Contains(str1))
-            {
+            //string str1 = "gmail.com";
+            //if (fromAddress.ToLower().Contains(str1))
+            //{
                 try
                 {
-                    sc.Port = 587;
-                    sc.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SMTP_FROM"], ConfigurationManager.AppSettings["SMTP_Password"]);
+                    sc.Port = 25;
+                    sc.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SMTP_UserName"], ConfigurationManager.AppSettings["SMTP_Password"]);
                     sc.EnableSsl = true;
                     m.IsBodyHtml = true;
 
@@ -70,27 +70,27 @@ namespace BadGangMinton.Helpers
                 catch (Exception ex)
                 {
                     res.HasError = true;
-                    res.ErrorMessage = ex.InnerException.Message;
+                    res.ErrorMessage = ex.Message;
                 }
-            }
-            else
-            {
-                try
-                {
-                    sc.Port = 25;
-                    sc.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SMTP_FROM"], ConfigurationManager.AppSettings["SMTP_Password"]);
-                    sc.EnableSsl = false;
-                    m.IsBodyHtml = true;
-                    if (!_testMode)
-                        sc.Send(m);
+            //}
+            //else
+            //{
+            //    try
+            //    {
+            //        sc.Port = 25;
+            //        sc.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SMTP_UserName"], ConfigurationManager.AppSettings["SMTP_Password"]);
+            //        sc.EnableSsl = false;
+            //        m.IsBodyHtml = true;
+            //        if (!_testMode)
+            //            sc.Send(m);
 
-                }
-                catch (Exception ex)
-                {
-                    res.HasError = true;
-                    res.ErrorMessage = ex.InnerException.Message;
-                }
-            }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        res.HasError = true;
+            //        res.ErrorMessage = ex.Message;
+            //    }
+            //}
 
             return res;
         }

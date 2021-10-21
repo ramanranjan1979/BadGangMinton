@@ -469,9 +469,9 @@
 
                                     <div class="form-group">
 
-                                        <label for="DOB" class="col-sm-2 control-label">Date Of Birth</label>
+                                        <label for="DOB" class="col-sm-2 control-label">Date Of Birth (dd/mm/yyyy)</label>
                                         <div class="col-sm-4" style="margin-bottom: 30px;">
-                                            @Html.TextBoxFor(model => model.DateOfBirth, new { @readonly = "readonly", @class = "form-control", @style = "opacity: 0.35;color: gold;background-color: black;" })
+                                            @Html.TextBoxFor(model => model.DateOfBirth, new {  @class = "form-control", @style = "opacity: 0.35;color: gold;background-color: black;" })
                                             @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger", @Style = "color:gold;" })
                                         </div>
 

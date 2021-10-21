@@ -18,7 +18,14 @@ namespace BadGangMinton.Controllers
 
             foreach (var mx in mxTypes)
             {
-                mx.HtmlBody = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["mxTemplatePath"] + $"{mx.Name}.html");
+                try
+                {
+                    mx.HtmlBody = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["mxTemplatePath"] + $"{mx.Name}.html");
+                }
+                catch (Exception ex)
+                {
+                    mx.HtmlBody = "Template not found";
+                }
             }
             return View(mxTypes);
         }
@@ -26,7 +33,7 @@ namespace BadGangMinton.Controllers
         [HttpPost]
         public JsonResult GetMxTemplateByMailoutTypeId(int mailoutTypeId)
         {
-            List<BGO.Common.MailoutType> mxTypes = lookupDal.GetAllMailoutType();
+            List<BGO.Common.MailoutType> mxTypes = lookupDal.GetAllMailoutType().Where(x => x.Id == mailoutTypeId).ToList();
             foreach (var mx in mxTypes)
             {
                 mx.HtmlBody = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["mxTemplatePath"] + $"{mx.Name}.html");
