@@ -213,7 +213,7 @@ namespace BadGangMinton.DAL
         public List<BGO.Common.Log> GetSystemLog()
         {
             List<BGO.Common.Log> lookupData = new List<BGO.Common.Log>();
-            var types = (from x in Log select x).ToList();
+            var types = (from x in Log.Include("Person") select x).ToList();
             foreach (var type in types)
             {
                 lookupData.Add(new BGO.Common.Log()
@@ -221,7 +221,7 @@ namespace BadGangMinton.DAL
                     CreatedOn = type.CreatedOn,
                     Description = type.Description,
                     Id = type.Id,
-                    Person = type.PersonId.HasValue ? new ContactDal().GetPersonByPersonId(type.PersonId.Value) : null,
+                    Person = type.PersonId.HasValue ? new ContactDal().PopulatePersonBO(type.Person) : null,
                     LogType = GetAllLogType().Where(x => x.Id == type.LogTypeId).FirstOrDefault()
                 });
             }
@@ -362,7 +362,7 @@ namespace BadGangMinton.DAL
         public List<BGO.Contact.Person> GetPeople(bool status = true)
         {
             List<BGO.Contact.Person> lookupData = new List<BGO.Contact.Person>();
-            var People = (from x in Person where x.IsActive == status select x).ToList();
+            var People = (from x in Person.Include("PersonEmail") where x.IsActive == status select x).ToList();
             foreach (var p in People)
             {
                 lookupData.Add(new BGO.Contact.Person()
@@ -376,14 +376,120 @@ namespace BadGangMinton.DAL
                     GenderId = p.GenderId,
                     IsActive = p.IsActive,
                     SalutationId = p.SalutationId,
-                    PersonEmail = GetPersonEmailByPersonId(p.Id),
-                    PersonPhone = GetPersonPhoneByPersonId(p.Id),
+                    // PersonEmail = GetPersonEmailByPersonId(p.Id),
+                    PersonEmail = PopulatePersonEmailBO(p.PersonEmail),
+                    //PersonPhone = GetPersonPhoneByPersonId(p.Id),
+                    PersonPhone = PopulatePersonPhoneBO(p.PersonPhone),
                     GroupId = p.GroupID
                 });
+
+
             }
 
             return lookupData;
         }
+
+        public List<BGO.Contact.PersonEmail> PopulatePersonEmailBO(ICollection<DB.PersonEmail> personEmail)
+        {
+            List<BGO.Contact.PersonEmail> emailList = new List<BGO.Contact.PersonEmail>();
+            if (personEmail.Count > 0)
+            {
+                foreach (var item in personEmail.ToList())
+                {
+                    emailList.Add(new BGO.Contact.PersonEmail
+                    {
+                        Id = item.Id,
+                        CreatedOn = item.CreatedOn,
+                        Type = new BGO.Contact.EmailType() { Id = item.EmailType.Id, Name = item.EmailType.Name },
+                        Value = item.Value
+                    });
+                }
+
+            }
+
+            return emailList;
+        }
+
+        public BGO.Contact.Person PopulatePersonBO(DB.Person personEntity)
+        {
+            BGO.Contact.Person p = new BGO.Contact.Person();
+            if (personEntity != null)
+            {
+                p = new BGO.Contact.Person()
+                {
+                    Id = personEntity.Id,
+                    Fname = personEntity.Fname,
+                    Lname = personEntity.Lname,
+                    Mname = personEntity.Mname,
+                    SalutationId = personEntity.SalutationId,
+                    IPaddress = personEntity.IPAddress,
+                    CreatedOn = personEntity.CreatedOn,
+                    DOB = personEntity.DOB,
+                    GenderId = personEntity.GenderId,
+                    IsActive = personEntity.IsActive,
+                    PersonEmail = new ContactDal().PopulatePersonEmailBO(personEntity.PersonEmail),
+                    PersonPhone = new ContactDal().PopulatePersonPhoneBO(personEntity.PersonPhone),
+                    PersonAddress = new ContactDal().PopulatePersonAddressBO(personEntity.PersonAddress)
+                };
+
+            }
+
+            return p;
+        }
+
+        public List<BGO.Contact.PersonPhone> PopulatePersonPhoneBO(ICollection<DB.PersonPhone> personPhone)
+        {
+            List<BGO.Contact.PersonPhone> list = new List<BGO.Contact.PersonPhone>();
+            if (personPhone.Count > 0)
+            {
+                foreach (var ph in personPhone.ToList())
+                {
+                    list.Add(new BGO.Contact.PersonPhone
+                    {
+                        Id = ph.Id,
+                        CreatedOn = ph.CreatedOn,
+                        Value = ph.Value,
+                        Type = new BGO.Contact.PhoneType() { Id = ph.PhoneType.Id, Name = ph.PhoneType.Name }
+
+                    });
+                }
+
+            }
+
+            return list;
+        }
+
+        public List<BGO.Contact.PersonAddress> PopulatePersonAddressBO(ICollection<DB.PersonAddress> personAddress)
+        {
+            List<BGO.Contact.PersonAddress> list = new List<BGO.Contact.PersonAddress>();
+            if (personAddress.Count > 0)
+            {
+                foreach (var ph in personAddress.ToList())
+                {
+                    list.Add(new BGO.Contact.PersonAddress
+                    {
+                        Id = ph.Id,
+                        CreatedOn = ph.CreatedOn,
+                        AddressType = new BGO.Contact.AddressType()
+                        {
+                            Id = ph.AddressTypeId,
+                            Name = ph.AddressType.Name
+                        },
+                        City = ph.City,
+                        CountryId = ph.CountryId,
+                        Landmark = ph.Landmark,
+                        Line1 = ph.Line1,
+                        Line2 = ph.Line2,
+                        Postcode = ph.Postcode,
+                        State = ph.State
+                    });
+                }
+
+            }
+
+            return list;
+        }
+
 
         public void UpdatePerson(string fname, string mname, string lname, int personId, Int16 genderId, DateTime dob, int salutationId)
         {
@@ -849,7 +955,7 @@ namespace BadGangMinton.DAL
             return lUpdated.Id;
         }
 
-        public void ExpireSecurityCode(int personId , int SecurityTypeId)
+        public void ExpireSecurityCode(int personId, int SecurityTypeId)
         {
             var verifications = (from v in SecurityCode where v.Person.Id == personId && v.SecurityTypeId == SecurityTypeId && v.ExpiredOn == null select v).ToList();
             if (verifications != null)
@@ -918,7 +1024,7 @@ namespace BadGangMinton.DAL
         public List<BGO.Member.Member> GetMember(int personTypeId)
         {
             List<BGO.Member.Member> lookupData = new List<BGO.Member.Member>();
-            var members = (from x in Member where x.PersonTypeId == personTypeId select x).ToList();
+            var members = (from x in Member.Include("Person") where x.PersonTypeId == personTypeId select x).ToList();
             foreach (var p in members)
             {
                 lookupData.Add(new BGO.Member.Member()
@@ -928,7 +1034,24 @@ namespace BadGangMinton.DAL
                     JoiningDate = p.JoiningDate.Value,
                     IsActive = p.IsActive,
                     PersonTypeId = p.PersonTypeId,
-                    Person = new ContactDal().GetPersonByPersonId(p.PersonId),
+                    Person = new BGO.Contact.Person()
+                    {
+                        Id = p.PersonId,
+                        Fname = p.Person.Fname,
+                        Lname = p.Person.Lname,
+                        Mname = p.Person.Mname,
+                        SalutationId = p.Person.SalutationId,
+                        IPaddress = p.Person.IPAddress,
+                        CreatedOn = p.Person.CreatedOn,
+                        DOB = p.Person.DOB,
+                        GenderId = p.Person.GenderId,
+                        IsActive = p.Person.IsActive,
+                        PersonEmail = new ContactDal().PopulatePersonEmailBO(p.Person.PersonEmail),
+                        PersonPhone = new ContactDal().PopulatePersonPhoneBO(p.Person.PersonPhone),
+                        PersonAddress = new ContactDal().PopulatePersonAddressBO(p.Person.PersonAddress)
+
+                    },
+                    //Person = new ContactDal().GetPersonByPersonId(p.PersonId),
                     AccountBalance = new TransactionDal().GetAccountBalance(p.PersonId),
                     IsMembershipActive = p.Person.Log.Where(x => x.Description == "Membership has been suspend").FirstOrDefault() == null ? true : false
 
@@ -975,15 +1098,33 @@ namespace BadGangMinton.DAL
 
     public class TransactionDal : bgDBNewContainer
     {
-        public List<BGO.TX.Transaction> GetTransaction()
+        public List<BGO.TX.Transaction> GetTransactionList(int txTypeId)
         {
+
             List<BGO.TX.Transaction> lookupData = new List<BGO.TX.Transaction>();
-            var tx = (from x in Transaction select x).ToList();
+            var tx = (from x in Transaction.Where(t => t.TransactionTypeId == txTypeId).Include("Person") select x).ToList();
             foreach (var t in tx)
             {
                 lookupData.Add(new BGO.TX.Transaction()
                 {
-                    Person = new ContactDal().GetPersonByPersonId(t.PersonId),
+                    Person = new BGO.Contact.Person()
+                    {
+                        Id = t.PersonId,
+                        Fname = t.Person.Fname,
+                        Lname = t.Person.Lname,
+                        Mname = t.Person.Mname,
+                        SalutationId = t.Person.SalutationId,
+                        IPaddress = t.Person.IPAddress,
+                        CreatedOn = t.Person.CreatedOn,
+                        DOB = t.Person.DOB,
+                        GenderId = t.Person.GenderId,
+                        IsActive = t.Person.IsActive,
+                        PersonEmail = new ContactDal().PopulatePersonEmailBO(t.Person.PersonEmail),
+                        PersonPhone = new ContactDal().PopulatePersonPhoneBO(t.Person.PersonPhone),
+                        PersonAddress = new ContactDal().PopulatePersonAddressBO(t.Person.PersonAddress)
+
+                    },
+
                     Amount = t.Amount,
                     TransactionDate = t.CreatedOn,
                     TransactionTypeId = t.TransactionTypeId,
@@ -1231,7 +1372,7 @@ namespace BadGangMinton.DAL
             if (personId.HasValue)
             {
                 var data = (from x in MailoutQueue.Where(x => x.PersonId == personId.Value) select x).ToList();
-             
+
 
                 foreach (var d in data)
                 {

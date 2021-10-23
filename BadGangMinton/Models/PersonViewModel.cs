@@ -33,7 +33,7 @@ namespace BadGangMinton.View.Model
 
         [Display(Name = "Date of birth")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Date of birth is mandatory")]
-        public Nullable<DateTime> DOB { get; set; }
+        public DateTime? DOB { get; set; }
 
 
         public DateTime DateCreated { get; set; } = DateTime.Now;
@@ -153,7 +153,7 @@ namespace BadGangMinton.View.Model
 
         [Display(Name = "Date of joining")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Date of joining is mandatory")]
-        public Nullable<DateTime> DOJ { get; set; }
+        public DateTime? DOJ { get; set; }
 
         public List<BGO.Contact.Person> PotentialMember { get; set; }
     }

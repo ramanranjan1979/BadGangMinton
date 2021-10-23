@@ -63,7 +63,7 @@ namespace BadGangMinton.View.Model
                       
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Date of birth is mandatory")]        
-        public Nullable<DateTime> DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
 
         [Display(Name = "Contact Number")]

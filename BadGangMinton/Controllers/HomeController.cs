@@ -5,20 +5,22 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BadGangMinton.Controllers
 {
     public class HomeController : BaseController
     {
+
+        [OutputCache(Duration = 3600, VaryByParam = "none")]
         public ActionResult Index()
         {
             var model = new RegistrationViewModel();
-            List<GenderType> genderTypes = new List<GenderType>();
-            genderTypes.Add(new GenderType() { Id = 1, Name = "Male" });
-            genderTypes.Add(new GenderType() { Id = 2, Name = "Female" });
+            List<GenderType> genderTypes = new List<GenderType>
+            {
+                new GenderType() { Id = 1, Name = "Male" },
+                new GenderType() { Id = 2, Name = "Female" }
+            };
 
             model.SalutationSelectList = new SelectList(lookupDal.GetAllSalutation(), "Id", "Name");
             model.GenderSelectList = new SelectList(genderTypes, "Id", "Name");
@@ -249,7 +251,7 @@ namespace BadGangMinton.Controllers
         {
             if (ModelState.IsValid)
             {
-                BGO.Contact.Person p = new BGO.Contact.Person()
+                Person p = new Person()
                 {
                     CreatedOn = DateTime.Now,
                     DOB = pVM.DateOfBirth.Value,
@@ -262,15 +264,15 @@ namespace BadGangMinton.Controllers
                     IPaddress = GetUserIp()
                 };
 
-                BGO.Contact.PersonEmail pe = new BGO.Contact.PersonEmail()
+                PersonEmail pe = new PersonEmail()
                 {
-                    Type = new BGO.Contact.EmailType() { Id = 1, Name = "PERSONAL" },
+                    Type = new EmailType() { Id = 1, Name = "PERSONAL" },
                     Value = pVM.PrimaryEmail
                 };
 
-                BGO.Contact.PersonPhone ph = new BGO.Contact.PersonPhone()
+                PersonPhone ph = new PersonPhone()
                 {
-                    Type = new BGO.Contact.PhoneType() { Id = 1, Name = "MOBILE" },
+                    Type = new PhoneType() { Id = 1, Name = "MOBILE" },
                     Value = pVM.PhoneNumber
                 };
 

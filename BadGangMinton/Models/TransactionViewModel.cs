@@ -34,7 +34,7 @@ namespace BadGangMinton.View.Model
 
         [Display(Name = "Date")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Transaction date is mandatory")]
-        public Nullable<DateTime> TransactionDate { get; set; } = DateTime.Now;
+        public DateTime? TransactionDate { get; set; } = DateTime.Now;
 
         [Display(Name = "Amount")]        
         [Required(AllowEmptyStrings = false, ErrorMessage = "Enter the transaction amount")]

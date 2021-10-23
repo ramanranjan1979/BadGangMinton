@@ -181,8 +181,8 @@ namespace BadGangMinton.View.Model
         public string UserName { get; set; }
         public string Password { get; set; }
         public DateTime CreatedOn { get; set; }
-        public Nullable<DateTime> ModifiedOn { get; set; }
-        public Nullable<DateTime> LockedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
+        public DateTime? LockedOn { get; set; }
         public bool IsActive { get; set; }
         public bool IsLock { get; set; }
         public BGO.Contact.Person Person { get; set; }

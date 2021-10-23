@@ -238,6 +238,7 @@
     <Content Include="CreateUser.sql" />
     <Content Include="help.txt" />
     <Content Include="How to alter schema of all objects in sql server.sql" />
+    <Content Include="Index.sql" />
     <Content Include="Lookup.sql" />
   </ItemGroup>
   <ItemGroup>

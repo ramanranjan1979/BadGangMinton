@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="content-box-large box-with-header">
-                                @Html.Partial("_newPayment", tDal.GetTransaction().Where(t => t.TransactionTypeId == 1).OrderByDescending(o=>o.TransactionDate).Take(10))
+                                @Html.Partial("_newPayment", tDal.GetTransactionList(1).Where(t => t.TransactionTypeId == 1).OrderByDescending(o=>o.TransactionDate).Take(10))
                             </div>
                         </div>
                     </div>

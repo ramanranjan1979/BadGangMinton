@@ -101,7 +101,7 @@ namespace BadGangMinton.Controllers
 
         public ActionResult TransactionList(int txTypeId, int? personId)
         {
-            var tx = txDAL.GetTransaction().Where(x => x.TransactionTypeId == txTypeId && (personId.HasValue ? x.Person.Id == personId.Value : 1 == 1));
+            var tx = txDAL.GetTransactionList(txTypeId).Where(x => x.TransactionTypeId == txTypeId && (personId.HasValue ? x.Person.Id == personId.Value : 1 == 1));
 
             if (personId.HasValue)
             {
