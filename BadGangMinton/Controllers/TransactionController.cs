@@ -99,14 +99,14 @@ namespace BadGangMinton.Controllers
             return View(txVM);
         }
 
-        public ActionResult TransactionList(int txTypeId, int? personId)
+        public ActionResult TransactionList(int txTypeId, int personId)
         {
-            var tx = txDAL.GetTransactionList(txTypeId).Where(x => x.TransactionTypeId == txTypeId && (personId.HasValue ? x.Person.Id == personId.Value : 1 == 1));
+            var tx = txDAL.GetTransactionList(txTypeId,personId);
 
-            if (personId.HasValue)
-            {
-                tx = txDAL.GetTransaction(personId.Value).Where(x => x.TransactionTypeId == txTypeId);
-            }
+            //if (personId.HasValue)
+            //{
+            //    tx = txDAL.GetTransaction(personId.Value).Where(x => x.TransactionTypeId == txTypeId);
+            //}
 
             List<TransactionListViewModel> txVM = new List<TransactionListViewModel>();
             foreach (var t in tx)
@@ -138,7 +138,7 @@ namespace BadGangMinton.Controllers
             List<Member> players = new List<Member>();
             List<TransactionType> txTypes = new List<TransactionType>();
 
-            players = mDal.GetMember(2);
+            players = mDal.GetMember(2).OrderBy(o=>o.Person.Fname).ToList();
             txTypes = lookupDal.GetAllTransactionType();
 
             vm.Players = new SelectList(players, "Person.Id", "Person.Name");

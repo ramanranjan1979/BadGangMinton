@@ -1,4 +1,6 @@
 ﻿using BadGangMinton.View.Model;
+using BGO.Common;
+using BGO.Contact;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -129,7 +131,21 @@ namespace BadGangMinton.Controllers
             return Json("DONE");
         }
 
+        public ActionResult MailoutFilter()
+        {
+            MxFilterViewModel vm = new MxFilterViewModel();
+            List<MailoutType> txTypes = lookupDal.GetAllMailoutType();
+            List<BGO.Member.Member> memberList = mDal.GetAllMember().OrderBy(o => o.Person.Fname).ToList();
+            vm.People = new SelectList(memberList, "Person.Id", "Person.Name");
+            vm.MxTypes = new SelectList(txTypes, "Id", "Name");
+            return PartialView("_MailoutFilter", vm);
+        }
 
+        public ActionResult MailoutList(int mxTypeId, int personId)
+        {
+            var data = new DAL.MxDal().GetMailoutsByPersonIdAndTemplateId(mxTypeId,personId);
+            return View(data);
+        }
 
     }
 }

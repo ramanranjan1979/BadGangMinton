@@ -1061,6 +1061,46 @@ namespace BadGangMinton.DAL
             return lookupData;
         }
 
+        public List<BGO.Member.Member> GetAllMember()
+        {
+            List<BGO.Member.Member> lookupData = new List<BGO.Member.Member>();
+            var members = (from x in Member.Include("Person") select x).ToList();
+            foreach (var p in members)
+            {
+                lookupData.Add(new BGO.Member.Member()
+                {
+                    Id = p.Id,
+                    PersonId = p.PersonId,
+                    JoiningDate = p.JoiningDate.Value,
+                    IsActive = p.IsActive,
+                    PersonTypeId = p.PersonTypeId,
+                    Person = new BGO.Contact.Person()
+                    {
+                        Id = p.PersonId,
+                        Fname = p.Person.Fname,
+                        Lname = p.Person.Lname,
+                        Mname = p.Person.Mname,
+                        SalutationId = p.Person.SalutationId,
+                        IPaddress = p.Person.IPAddress,
+                        CreatedOn = p.Person.CreatedOn,
+                        DOB = p.Person.DOB,
+                        GenderId = p.Person.GenderId,
+                        IsActive = p.Person.IsActive,
+                        PersonEmail = new ContactDal().PopulatePersonEmailBO(p.Person.PersonEmail),
+                        PersonPhone = new ContactDal().PopulatePersonPhoneBO(p.Person.PersonPhone),
+                        PersonAddress = new ContactDal().PopulatePersonAddressBO(p.Person.PersonAddress)
+
+                    },
+                    //Person = new ContactDal().GetPersonByPersonId(p.PersonId),
+                    AccountBalance = new TransactionDal().GetAccountBalance(p.PersonId),
+                    IsMembershipActive = p.Person.Log.Where(x => x.Description == "Membership has been suspend").FirstOrDefault() == null ? true : false
+
+                });
+            }
+
+            return lookupData;
+        }
+
         public List<BGO.Contact.Person> GetPotentialMember(int personTypeId)
         {
             List<BGO.Contact.Person> lookupData = new List<BGO.Contact.Person>();
@@ -1103,6 +1143,46 @@ namespace BadGangMinton.DAL
 
             List<BGO.TX.Transaction> lookupData = new List<BGO.TX.Transaction>();
             var tx = (from x in Transaction.Where(t => t.TransactionTypeId == txTypeId).Include("Person") select x).ToList();
+            foreach (var t in tx)
+            {
+                lookupData.Add(new BGO.TX.Transaction()
+                {
+                    Person = new BGO.Contact.Person()
+                    {
+                        Id = t.PersonId,
+                        Fname = t.Person.Fname,
+                        Lname = t.Person.Lname,
+                        Mname = t.Person.Mname,
+                        SalutationId = t.Person.SalutationId,
+                        IPaddress = t.Person.IPAddress,
+                        CreatedOn = t.Person.CreatedOn,
+                        DOB = t.Person.DOB,
+                        GenderId = t.Person.GenderId,
+                        IsActive = t.Person.IsActive,
+                        PersonEmail = new ContactDal().PopulatePersonEmailBO(t.Person.PersonEmail),
+                        PersonPhone = new ContactDal().PopulatePersonPhoneBO(t.Person.PersonPhone),
+                        PersonAddress = new ContactDal().PopulatePersonAddressBO(t.Person.PersonAddress)
+
+                    },
+
+                    Amount = t.Amount,
+                    TransactionDate = t.CreatedOn,
+                    TransactionTypeId = t.TransactionTypeId,
+                    TransactionType = new LookupDal().GetAllTransactionType().Where(x => x.Id == t.TransactionTypeId).FirstOrDefault(),
+                    Remarks = t.Remarks,
+                    Id = t.Id
+
+                });
+            }
+
+            return lookupData;
+        }
+
+        public List<BGO.TX.Transaction> GetTransactionList(int txTypeId, int personId)
+        {
+
+            List<BGO.TX.Transaction> lookupData = new List<BGO.TX.Transaction>();
+            var tx = (from x in Transaction.Where(t => t.TransactionTypeId == txTypeId && t.PersonId == personId).Include("Person") select x).ToList();
             foreach (var t in tx)
             {
                 lookupData.Add(new BGO.TX.Transaction()
@@ -1435,6 +1515,43 @@ namespace BadGangMinton.DAL
                     q.Add(x);
                 }
             }
+            return q;
+        }
+
+        public List<BGO.Mailout.MailoutQueue> GetMailoutsByPersonIdAndTemplateId(int mxTypeId, int personId)
+        {
+            List<BGO.Mailout.MailoutQueue> q = new List<BGO.Mailout.MailoutQueue>();
+            {
+                var data = (from x in MailoutQueue.Where(xt => xt.PersonId == personId && xt.MailoutTypeId==mxTypeId) select x).ToList();
+                foreach (var d in data)
+                {
+                    var mxtype = (from y in MailoutType where y.Id == d.MailoutTypeId select y).FirstOrDefault();
+                    MxType t = new MxType()
+                    {
+                        Description = mxtype.Description,
+                        Id = mxtype.Id,
+                        Name = mxtype.Name,
+                        Subject = mxtype.Subject
+                    };
+
+                    BGO.Mailout.MailoutQueue x = new BGO.Mailout.MailoutQueue()
+                    {
+                        CreatedOn = d.CreatedOn,
+                        Email = d.EmailAddress,
+                        HTML = d.HtmlBody,
+                        Id = d.Id,
+                        MailoutTypeId = d.MailoutTypeId,
+                        Status = d.Status,
+                        UpdatedOn = d.UpdateOn,
+                        Person = new ContactDal().GetPersonByPersonId(d.PersonId),
+                        Type = t,
+                        Subject = t.Subject
+                    };
+
+                    q.Add(x);
+                }
+            }
+
             return q;
         }
 

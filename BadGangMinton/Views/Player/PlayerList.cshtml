@@ -44,7 +44,7 @@
                     </th>
                 </tr>
 
-                @foreach (var item in Model.OrderByDescending(o => o.JoiningDate))
+                @foreach (var item in Model.OrderBy(o => o.Person.Fname))
                 {
                     <tr>
                         <td>

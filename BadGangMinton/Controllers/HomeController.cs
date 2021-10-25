@@ -64,7 +64,7 @@ namespace BadGangMinton.Controllers
         }
 
 
-        
+
         public ActionResult ThankYouForVerification(string name, string emailAddress)
         {
             ViewBag.Message = "Thank You For Joining";
@@ -208,7 +208,7 @@ namespace BadGangMinton.Controllers
                 mid = sDal.ApplySecurityCode(model.PersonId, model.SecurityCode, model.Password);
             }
 
-            sDal.ExpireSecurityCode(mid,2);
+            sDal.ExpireSecurityCode(mid, 2);
 
             sDal.LogMe("TRACKING", "PASSWORD HAS BEEN CHANGED", model.PersonId);
 
@@ -321,7 +321,7 @@ namespace BadGangMinton.Controllers
                 return RedirectToAction("Index");
             }
 
-            
+
         }
 
         [HttpGet]
@@ -358,10 +358,10 @@ namespace BadGangMinton.Controllers
 
         public ActionResult GetPersonList()
         {
-            AttachPersonViewModel apVM = new AttachPersonViewModel();           
-            List<Person> people = new List<Person>(); 
-            people= cDal.GetPeople().Where(c=>c.GroupId.HasValue==false).ToList();
-            apVM.People = new SelectList(people, "Id", "Name");                    
+            AttachPersonViewModel apVM = new AttachPersonViewModel();
+            List<Person> people = new List<Person>();
+            people = cDal.GetPeople().Where(c => c.GroupId.HasValue == false).ToList();
+            apVM.People = new SelectList(people, "Id", "Name");
             return PartialView("_PersonList", apVM);
         }
 
@@ -388,7 +388,7 @@ namespace BadGangMinton.Controllers
         {
             if (ModelState.IsValid)
             {
-                sDal.ApplyPersonSecurityCode(pVM.PersonId, pVM.VerificationCode);              
+                sDal.ApplyPersonSecurityCode(pVM.PersonId, pVM.VerificationCode);
 
                 sDal.SaveUserLogin(pVM.UserName, Helpers.BGHelper.ComputeHash(pVM.Password), pVM.PersonId);
 
@@ -405,7 +405,7 @@ namespace BadGangMinton.Controllers
                     Dictionary<string, string> param = new Dictionary<string, string>();
                     param.Add("NAME", $"{pVM.FirstName} {pVM.LastName}");
                     param.Add("Username", pVM.UserName);
-                    param.Add("Password", pVM.Password);
+                    param.Add("Password", Mask(pVM.Password));
                     string html = bgService.GetHtml(AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["mxTemplatePath"] + "tmpCredential.html", param);
 
                     var mxType = lookupDal.GetAllMailoutType().Where(x => x.Id == 2).FirstOrDefault();
@@ -433,6 +433,13 @@ namespace BadGangMinton.Controllers
             ViewBag.Name = pVM.FirstName;
 
             return RedirectToAction("ThankYouForVerification", new { Name = pVM.FirstName, EmailAddress = pVM.PrimaryEmail });
+        }
+
+        private string Mask(string password)
+        {
+            int pwdLen = password.Length;
+            string masking = $"{password.Substring(0, 2)}*********{password.Substring(password.Length - 1, 1)}";
+            return masking;
         }
 
         public ActionResult RaiseSupportQuery(SupportViewModel model)

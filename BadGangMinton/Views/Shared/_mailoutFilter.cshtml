@@ -1,0 +1,39 @@
+﻿@model BadGangMinton.View.Model.MxFilterViewModel
+
+<div class="col-sm-4">
+    @Html.DropDownListFor(e => Model.PersonId, Model.People, "- Select A Member -", new { @class = "form-control", @style = "border-color: darkred;background-color:white;margin-left:auto;margin-right:auto; " })
+</div>
+
+<div class="col-sm-4">
+    @Html.DropDownListFor(e => Model.MxTypeId, Model.MxTypes, "- Select A Email Type -", new { @class = "form-control", @style = "border-color: darkred;background-color:white;margin-left:auto;margin-right:auto; " })
+</div>
+
+<div class="col-sm-4">
+    <span class="glyphicon glyphicon-search" style="cursor:pointer;color:darkred;" onclick="SearchMailout();"></span>
+</div>
+
+<script>
+
+    function SearchMailout() {
+
+
+        var ddlPersonId = $('#PersonId');
+        var ddlMxTypeId = $('#MxTypeId');
+
+
+
+        var pid = ddlPersonId.val();
+        var mxTypeId = ddlMxTypeId.val();
+
+        if (pid == '' || mxTypeId == '') {
+
+            ddlPersonId.css("border-color", "red");
+            ddlMxTypeId.css("border-color", "red");
+        }
+        else {
+            var url = '/Mailout/MailoutList?mxTypeId=' + mxTypeId + '&personId=' + pid;
+            window.location.href = url;
+        }
+    }
+
+</script>

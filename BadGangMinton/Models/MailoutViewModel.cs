@@ -78,4 +78,13 @@ namespace BadGangMinton.View.Model
         [DataType(DataType.MultilineText)]
         public string Body { get; set; }
     }
+
+    public class MxFilterViewModel
+    {
+        public string PersonId { get; set; }
+        public SelectList People { get; set; }
+
+        public string MxTypeId { get; set; }
+        public SelectList MxTypes { get; set; }
+    }
 }

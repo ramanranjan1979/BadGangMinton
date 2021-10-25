@@ -103,7 +103,7 @@ namespace BadGangMinton.Controllers
             return Json("OK");
         }
 
-        public JsonResult SaveAttendanceNew(string[] Playervalue, DateTime attendanceDate, string unit)
+        public JsonResult SaveAttendanceNew(string[] Playervalue, DateTime attendanceDate, string unit, bool notificationRequired)
         {
             if (Playervalue != null)
             {
@@ -162,33 +162,50 @@ namespace BadGangMinton.Controllers
                         txDAL.saveTransaction(int.Parse(item), tx.Id, qty * 2.5M * tx.Multiplier, attendanceDate, $"Well done buddy! You played well today on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {qty * 2.5M} for today's game. Keep it up!");
                     }
 
-                    try
+                    if (notificationRequired)
                     {
-                        Dictionary<string, string> param = new Dictionary<string, string>();
-                        param.Add("NAME", p.Name);
-                        param.Add("AMOUNT", "£" + (-1 * qty * 2.5M * tx.Multiplier).ToString("0.00"));
-                        param.Add("UNITS", unitWording);
-
-                        string html = bgService.GetHtml(AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["mxTemplatePath"] + "tmpAttendance.html", param);
-
-                        var mxType = lookupDal.GetAllMailoutType().Where(x => x.Id == 8).FirstOrDefault();
-
-                        string toEmail = cDal.GetPersonEmailByPersonId(p.Id).Where(x => x.Type.Id == 1).FirstOrDefault().Value;
-
-                        var q = mxDAL.PushNotification(p, param, mxType.Id, toEmail, html);
-
-                        var res = emailService.EmailBySMTP(toEmail, ConfigurationManager.AppSettings["SMTP_FROM"], html, mxType.Subject);
-
-                        if (res.HasError)
+                        try
                         {
-                            sDal.LogMe("EMAILEXCEPTION", $"EMAIL EXCEPTION: {res.ErrorMessage}", p.Id);
 
-                            mxDAL.UpdateNotification(q.Id);
+                            Dictionary<string, string> param = new Dictionary<string, string>();
+
+                            param.Add("AMOUNT", "£" + (-1 * qty * 2.5M * tx.Multiplier).ToString("0.00"));
+                            param.Add("UNITS", unitWording);
+
+
+                            if (p.GroupId.HasValue)
+                            {
+                                var sponsor = cDal.GetPersonByPersonId(p.GroupId.Value);
+                                param.Add("NAME", sponsor.Name);
+                                param.Add("ATTENDANCEDESCRIPTION", $"Thanks to your buddy {p.Name} for showing presence on {attendanceDate.Date.ToShortDateString()}, {attendanceDate.DayOfWeek} for the game.");
+                            }
+                            else
+                            {
+                                param.Add("NAME", p.Name);
+                                param.Add("ATTENDANCEDESCRIPTION", $"Thanks for showing presence on {attendanceDate.Date.ToShortDateString()}, {attendanceDate.DayOfWeek} for the game.");
+                            }
+
+                            string html = bgService.GetHtml(AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["mxTemplatePath"] + "tmpAttendance.html", param);
+
+                            var mxType = lookupDal.GetAllMailoutType().Where(x => x.Id == 8).FirstOrDefault();
+
+                            string toEmail = p.GroupId.HasValue ? cDal.GetPersonEmailByPersonId(p.GroupId.Value).Where(x => x.Type.Id == 1).FirstOrDefault().Value : cDal.GetPersonEmailByPersonId(p.Id).Where(x => x.Type.Id == 1).FirstOrDefault().Value;
+
+                            var q = p.GroupId.HasValue ? mxDAL.PushNotification(cDal.GetPersonByPersonId(p.GroupId.Value), param, mxType.Id, toEmail, html) : mxDAL.PushNotification(p, param, mxType.Id, toEmail, html);
+
+                            var res = emailService.EmailBySMTP(toEmail, ConfigurationManager.AppSettings["SMTP_FROM"], html, mxType.Subject);
+
+                            if (res.HasError)
+                            {
+                                sDal.LogMe("EMAILEXCEPTION", $"EMAIL EXCEPTION: {res.ErrorMessage}", p.Id);
+
+                                mxDAL.UpdateNotification(q.Id);
+                            }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        sDal.LogMe("EMAILEXCEPTION", $"EMAIL EXCEPTION: {ex.Message}", p.Id);
+                        catch (Exception ex)
+                        {
+                            sDal.LogMe("EMAILEXCEPTION", $"EMAIL EXCEPTION: {ex.Message}", p.Id);
+                        }
                     }
                 }
 
@@ -250,6 +267,45 @@ namespace BadGangMinton.Controllers
         {
             sDal.DeleteLog(2, "Membership has been suspend", id.Value);
             return RedirectToAction("PlayerList");
+        }
+
+        public JsonResult NotifyAccountBalance(string[] Playervalue)
+        {
+            try
+            {
+                if (Playervalue != null)
+                {
+                    foreach (var item in Playervalue)
+                    {
+                        var player = cDal.GetPersonByPersonId(int.Parse(item));
+                        Dictionary<string, string> param = new Dictionary<string, string>();
+                        param.Add("NAME", player.Name);
+                        param.Add("Balance", txDAL.GetAccountBalance(player.Id).ToString());
+
+                        string html = bgService.GetHtml(AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["mxTemplatePath"] + "tmpInvoice.html", param);
+
+                        var mxType = lookupDal.GetAllMailoutType().Where(x => x.Id == 7).FirstOrDefault();
+
+                        string toEmail = cDal.GetPersonEmailByPersonId(player.Id).Where(x => x.Type.Id == 1).FirstOrDefault().Value;
+
+                        var q = mxDAL.PushNotification(player, param, mxType.Id, toEmail, html);
+
+                        var res = emailService.EmailBySMTP(toEmail, ConfigurationManager.AppSettings["SMTP_FROM"], html, mxType.Subject);
+
+                        if (res.HasError)
+                        {
+                            sDal.LogMe("EMAILEXCEPTION", $"EMAIL EXCEPTION: {res.ErrorMessage}", player.Id);
+
+                            mxDAL.UpdateNotification(q.Id);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                sDal.LogMe("EMAILEXCEPTION", $"EMAIL EXCEPTION: {ex.Message}", sm.UserSession.Person.Id);
+            }
+            return Json("OK");
         }
     }
 }

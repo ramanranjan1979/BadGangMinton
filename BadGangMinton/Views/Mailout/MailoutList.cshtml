@@ -1,84 +1,99 @@
-﻿@using BadGangMinton.Helpers
+﻿@model IEnumerable<BGO.Mailout.MailoutQueue>
+@using BadGangMinton.Helpers
+
+@using BadGangMinton.Helpers
 @{
     ViewBag.Title = "Mailout History";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-@{
-    BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
-    BadGangMinton.DAL.MxDal txDal = new BadGangMinton.DAL.MxDal();
+@*@{
+        BadGangMinton.Session.SessionManager sm = new BadGangMinton.Session.SessionManager();
+        BadGangMinton.DAL.MxDal txDal = new BadGangMinton.DAL.MxDal();
 
 
-    var data = txDal.GetAllMailouts(null);
-}
+        var data = txDal.GetAllMailouts(0);
+    }*@
 
 
 <div class="conten-box-large">
     <div class="panel-body">
-        <div class="table-responsive" style="background-color:#f7ca18;color:darkred;">
-            <table class="table">
 
-                <tr>
-
-                    <th>
-                        @Html.Label("Name")
-                    </th>
-                    <th>
-                        <span class="glyphicon glyphicon-calendar" style="font-size: 20px;"></span>
-                    </th>
-                    <th>
-                        @Html.Label("Subject")
-                    </th>
-
-                    <th>
-                        @Html.Label("IsSent")
-                    </th>
-
-
-                    <th colspan="2">
-                        <div class="pull-right">
-                            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span>", "Compose", "ComposeEmail", "Mailout", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
-                        </div>
-                    </th>
-                </tr>
-
-                @foreach (var item in data.OrderByDescending(o => o.CreatedOn))
-                {
-                    <tr>
-                        <td style="cursor:pointer;" onclick="ShowPersonDetailModal('@item.Person.Id');">
-                            @Html.DisplayFor(modelItem => item.Person.Name)
-                            @if (item.Person.GroupId.HasValue)
-                            {
-                                <span style="cursor:pointer;background-color:lawngreen;" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="Group Member">
-                                    <span class="glyphicon glyphicon-asterisk" style="margin-top:8px;"></span>
-                                </span>
-                            }
-                        </td>
-
-                        <td>
-                            @Html.Raw(item.CreatedOn.ToShortDateString()) ,
-                            @item.CreatedOn.DayOfWeek
-                        </td>
-
-                        <td>
-                            @item.Subject
-                        </td>
-
-                        <td>
-                            @item.Status
-                        </td>
-
-                        <td>
-                            <span style="cursor:pointer;" class="glyphicon glyphicon-envelope" onclick="ShowTxMessageDetailModal('@item.HTML.Replace(System.Environment.NewLine, "\\" + System.Environment.NewLine).Replace("'", "\"")');"></span>
-                        </td>
-
-                        <td>
-                            <span style="cursor:pointer;" class="glyphicon glyphicon-inbox" onclick="Resend_Mailout_Popup('@item.Id');"></span>
-                        </td>
-                    </tr>
-                }
-            </table>
+        <div class="form-group" style="margin-bottom:60px;">
+            @Html.Action("MailoutFilter", "Mailout")
         </div>
+
+        @{
+            if (Model != null)
+            {
+                <div class="table-responsive" style="background-color:#f7ca18;color:darkred;">
+                    <table class="table">
+
+                        <tr>
+
+                            <th>
+                                @Html.Label("Name")
+                            </th>
+                            <th>
+                                <span class="glyphicon glyphicon-calendar" style="font-size: 20px;"></span>
+                            </th>
+                            <th>
+                                @Html.Label("Subject")
+                            </th>
+
+                            <th>
+                                @Html.Label("IsSent")
+                            </th>
+
+
+                            <th colspan="2">
+                                <div class="pull-right">
+                                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span>", "Compose", "ComposeEmail", "Mailout", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
+                                </div>
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model.ToList().OrderByDescending(o => o.CreatedOn))
+                        {
+                            <tr>
+                                <td style="cursor:pointer;" onclick="ShowPersonDetailModal('@item.Person.Id');">
+                                    @Html.DisplayFor(modelItem => item.Person.Name)
+                                    @if (item.Person.GroupId.HasValue)
+                                    {
+                                        <span style="cursor:pointer;background-color:lawngreen;" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="Group Member">
+                                            <span class="glyphicon glyphicon-asterisk" style="margin-top:8px;"></span>
+                                        </span>
+                                    }
+                                </td>
+
+                                <td>
+                                    @Html.Raw(item.CreatedOn.ToShortDateString()) ,
+                                    @item.CreatedOn.DayOfWeek
+                                </td>
+
+                                <td>
+                                    @item.Subject
+                                </td>
+
+                                <td>
+                                    @item.Status
+                                </td>
+
+                                <td>
+                                    <span style="cursor:pointer;" class="glyphicon glyphicon-envelope" onclick="ShowTxMessageDetailModal('@item.HTML.Replace(System.Environment.NewLine, "\\" + System.Environment.NewLine).Replace("'", "\"")');"></span>
+                                </td>
+
+                                <td>
+                                    <span style="cursor:pointer;" class="glyphicon glyphicon-inbox" onclick="Resend_Mailout_Popup('@item.Id');"></span>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }
+        }
+
+
     </div>
 </div>
 
@@ -194,7 +209,7 @@
         $('#Person_Detail_Popup').modal('show');
     }
 
-    var id_to_Resend=0;
+    var id_to_Resend = 0;
 
     function Resend_Mailout_Popup(id) {
         id_to_Resend = id;
@@ -204,7 +219,7 @@
     }
 
     function Resend() {
-        if ($("#Resend_Textbox").val() == "RESEND") {            
+        if ($("#Resend_Textbox").val() == "RESEND") {
             var data = { "mailoutQueueId": id_to_Resend };
             $.ajax({
                 url: "/Mailout/Resend",

@@ -18,11 +18,18 @@ namespace BadGangMinton.Controllers
 
         public ActionResult Health(int? logTypeId, int? personId)
         {
-            var data = lookupDal.GetSystemLog();
+            var data = new List<BGO.Common.Log>();
 
             if (logTypeId.HasValue && personId.HasValue)
             {
-                data = data.Where(x => x.LogType.Id == logTypeId.Value && x.Person.Id == personId.Value).ToList();
+                if (personId.Value == -1)
+                {
+                    data = lookupDal.GetSystemLog().Where(x => x.LogType.Id == logTypeId.Value && x.Person == null).ToList();
+                }
+                else
+                {
+                    data = lookupDal.GetSystemLog().Where(x => x.LogType.Id == logTypeId.Value && x.Person.Id == personId.Value).ToList();
+                }
             }
             return View(data);
         }
@@ -78,8 +85,11 @@ namespace BadGangMinton.Controllers
             List<Person> people = new List<Person>();
             List<BGO.Common.LogType> logTypes = new List<BGO.Common.LogType>();
 
-            people = cDal.GetPeople();
+            people = cDal.GetPeople().OrderBy(x => x.Name).ToList();
+
+            people.Add(new Person() { Id = -1, Fname = "NULL", Lname = "NULL" });
             logTypes = lookupDal.GetAllLogType();
+
 
             vm.People = new SelectList(people, "Id", "Name");
             vm.LogTypes = new SelectList(logTypes, "Id", "Name");

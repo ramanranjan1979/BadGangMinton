@@ -118,7 +118,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("AddTransaction","Transaction")">New Transaction</a></li>
-                                <li><a href="@Url.Action("TransactionList","Transaction",new {@txTypeId=2 })">List</a></li>
+                                <li><a href="@Url.Action("TransactionList","Transaction",new {@txTypeId=2,personId = 0 })">List</a></li>
                             </ul>
                         </li>
 
@@ -199,6 +199,7 @@
         </div>
     </footer>
 
+    @Html.Partial("_ConfirmationModalPopup")
 
 
     @Scripts.Render("~/bundles/bootstrap")
