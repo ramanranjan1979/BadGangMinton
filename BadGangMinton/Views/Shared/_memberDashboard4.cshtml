@@ -15,7 +15,7 @@
 
         <div class="panel-body">
             <ul style="list-style:none;text-align:center;line-height:35px;">
-                
+
 
                 <li>
                     Your Joining Date: <strong>@sm.UserSession.Person.CreatedOn.ToShortDateString()</strong>
@@ -37,6 +37,9 @@
                     }
                 }
 
+                <li>
+                    <button class="btn btn-success" onclick="OpenHowToPay();">How to pay?</button>
+                </li>
 
                 <li>
                     Your Last Login : @d.Where(x => x.Description == "LOGGED IN SYSTEM").OrderByDescending(o => o.CreatedOn).FirstOrDefault().CreatedOn.ToShortDateString()
@@ -45,3 +48,36 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="HowToPay_Popup" tabindex="-1" role="dialog" aria-labelledby="howtopayModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" id="howtopayModalLabel">How to pay!</h3>
+
+            </div>
+            <div class="modal-body">
+                <h4 id="howtopayModalHeading"> Please use below informations to top-up your account</h4>
+
+                <h5>
+                    Account Name : Raman P Ranjan | Sort Code : 110001 | Account Number: 08807457
+                    <br />
+                    OR
+                    <br />
+                    Paypal ID : ramansuni08@gmail.com
+                </h5>
+            </div>
+            
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    function OpenHowToPay() {
+        $("#HowToPay_Popup").modal('show');
+    }
+</script>

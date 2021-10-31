@@ -400,5 +400,12 @@ namespace BadGangMinton.Controllers
             return Json(rtn);
         }
 
+        public ActionResult MyInbox()
+        {
+            ViewBag.Message = "My Inbox";
+            ViewBag.Title = "My Inbox";
+            return View();
+        }
+
     }
 }

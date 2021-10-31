@@ -21,7 +21,7 @@
                 <h1 style="color:red;font-weight: bold;text-align:center;text-shadow: 2px 2px darkred;">My Balance(@Model.Sum(z => z.Amount).ToString("##.##"))</h1>
             }
         }
-        
+
     </div>
 
     <div class="panel-body">
@@ -34,8 +34,8 @@
                 <table class="table">
                     <tr>
                         @*<th>
-                            @Html.Label("#")
-                        </th>*@
+                                @Html.Label("#")
+                            </th>*@
 
                         <th>
                             <span class="glyphicon glyphicon-user"></span>
@@ -59,8 +59,8 @@
                     {
                         <tr>
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>*@
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>*@
 
                             <td>
                                 @(sm.UserSession.Person.Fname == item.Person.Fname ? string.Empty : item.Person.Fname)
@@ -75,7 +75,7 @@
                             </td>
 
                             <td>
-                                <span style="cursor:pointer;"  data-toggle="tooltip" data-placement="bottom" title="@item.Remarks">@Html.DisplayFor(modelItem => item.Amount)</span>
+                                <span style="cursor:pointer;" data-toggle="tooltip" data-placement="bottom" title="@item.Remarks">@Html.DisplayFor(modelItem => item.Amount)</span>
                             </td>
 
                         </tr>
