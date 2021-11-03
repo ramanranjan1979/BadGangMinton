@@ -94,7 +94,7 @@ namespace BadGangMinton.Controllers
                     #endregion
                 }
 
-                return RedirectToAction("TransactionList", new { txTypeId = 2 });
+                return RedirectToAction("TransactionList", new { txTypeId = 2 , personId = 0 });
             }
             return View(txVM);
         }
@@ -128,7 +128,7 @@ namespace BadGangMinton.Controllers
         public ActionResult DeleteTx(int? id)
         {
             txDAL.DeleteTransaction(id.Value);
-            return RedirectToAction("TransactionList", "Transaction", new { txTypeId = 2 });
+            return RedirectToAction("TransactionList", "Transaction", new { txTypeId = 2, personId = 0 });
         }
 
         public ActionResult TransactionFilter()

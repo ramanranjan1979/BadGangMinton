@@ -57,7 +57,7 @@ namespace BadGangMinton.Controllers
                 From = sm.UserSession.Person.PersonEmail.Where(x => x.Type.Id == 1).FirstOrDefault().Value
             };
 
-            vModel.People = new SelectList(cDal.GetPeople(), "Id", "Name");
+            vModel.People = new SelectList(cDal.GetPeople().Where(g => g.GroupId == null).OrderBy(x => x.Fname).ToList(), "Id", "Name");
             return View(vModel);
         }
 
@@ -82,7 +82,7 @@ namespace BadGangMinton.Controllers
 
                     var q = mxDAL.PushNotification(cDal.GetPersonByPersonId(int.Parse(item)), param, mxType.Id, toEmail, html);
 
-                    var res = emailService.EmailBySMTP(toEmail, ConfigurationManager.AppSettings["SMTP_FROM"], html, mxType.Subject);
+                    var res = emailService.EmailBySMTP(toEmail, ConfigurationManager.AppSettings["SMTP_FROM"], html, notification.Subject != null ? notification.Subject : mxType.Subject);
 
                     if (res.HasError)
                     {
@@ -143,7 +143,7 @@ namespace BadGangMinton.Controllers
 
         public ActionResult MailoutList(int mxTypeId, int personId)
         {
-            var data = new DAL.MxDal().GetMailoutsByPersonIdAndTemplateId(mxTypeId,personId);
+            var data = new DAL.MxDal().GetMailoutsByPersonIdAndTemplateId(mxTypeId, personId);
             return View(data);
         }
 

@@ -1604,6 +1604,8 @@ namespace BadGangMinton.DAL
             MailoutQueue.Add(mq);
             SaveChanges();
 
+            q.Id = mq.Id;
+
             return q;
 
         }

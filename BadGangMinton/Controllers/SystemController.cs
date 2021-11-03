@@ -28,7 +28,7 @@ namespace BadGangMinton.Controllers
                 }
                 else
                 {
-                    data = lookupDal.GetSystemLog().Where(x => x.LogType.Id == logTypeId.Value && x.Person.Id == personId.Value).ToList();
+                    data = lookupDal.GetSystemLog().Where(x => x.LogType.Id == logTypeId.Value && x.Person != null && x.Person.Id == personId.Value).ToList();
                 }
             }
             return View(data);
