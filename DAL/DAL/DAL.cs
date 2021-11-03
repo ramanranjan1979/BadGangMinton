@@ -229,6 +229,29 @@ namespace BadGangMinton.DAL
             return lookupData;
         }
 
+        public List<BGO.Common.Log> GetRecentSystemLog()
+        {
+            List<BGO.Common.Log> lookupData = new List<BGO.Common.Log>();
+            var types = (from x in Log.OrderByDescending(o => o.CreatedOn) select x).Take(10).ToList();
+            foreach (var type in types)
+            {
+                lookupData.Add(new BGO.Common.Log()
+                {
+                    CreatedOn = type.CreatedOn,
+                    Description = type.Description,
+                    Id = type.Id,
+                    Person = type.PersonId.HasValue ? new ContactDal().PopulatePersonBO(type.Person) : null,
+                    LogType = new BGO.Common.LogType()
+                    {
+                        Id = type.LogTypeId,
+                        Name = type.LogType.Name
+                    }
+                });
+            }
+
+            return lookupData;
+        }
+
         public List<BGO.Common.Log> GetPersonLog(int personId)
         {
             List<BGO.Common.Log> lookupData = new List<BGO.Common.Log>();
@@ -1178,6 +1201,45 @@ namespace BadGangMinton.DAL
             return lookupData;
         }
 
+        public List<BGO.TX.Transaction> GetRecentTransactionList(int txTypeId)
+        {
+
+            List<BGO.TX.Transaction> lookupData = new List<BGO.TX.Transaction>();
+            var tx = (from x in Transaction.Where(t => t.TransactionTypeId == txTypeId).Include("Person") select x).OrderByDescending(x => x.CreatedOn).Take(10).ToList();
+            foreach (var t in tx)
+            {
+                lookupData.Add(new BGO.TX.Transaction()
+                {
+                    Person = new BGO.Contact.Person()
+                    {
+                        Id = t.PersonId,
+                        Fname = t.Person.Fname,
+                        Lname = t.Person.Lname,
+                        Mname = t.Person.Mname,
+                        SalutationId = t.Person.SalutationId,
+                        IPaddress = t.Person.IPAddress,
+                        CreatedOn = t.Person.CreatedOn,
+                        DOB = t.Person.DOB,
+                        GenderId = t.Person.GenderId,
+                        IsActive = t.Person.IsActive,
+                        PersonEmail = new ContactDal().PopulatePersonEmailBO(t.Person.PersonEmail),
+                        PersonPhone = new ContactDal().PopulatePersonPhoneBO(t.Person.PersonPhone),
+                        PersonAddress = new ContactDal().PopulatePersonAddressBO(t.Person.PersonAddress)
+
+                    },
+
+                    Amount = t.Amount,
+                    TransactionDate = t.CreatedOn,
+                    TransactionTypeId = t.TransactionTypeId,
+                    TransactionType = new LookupDal().GetAllTransactionType().Where(x => x.Id == t.TransactionTypeId).FirstOrDefault(),
+                    Remarks = t.Remarks,
+                    Id = t.Id
+
+                });
+            }
+
+            return lookupData;
+        }
         public List<BGO.TX.Transaction> GetTransactionList(int txTypeId, int personId)
         {
 
@@ -1522,7 +1584,7 @@ namespace BadGangMinton.DAL
         {
             List<BGO.Mailout.MailoutQueue> q = new List<BGO.Mailout.MailoutQueue>();
             {
-                var data = (from x in MailoutQueue.Where(xt => xt.PersonId == personId && xt.MailoutTypeId==mxTypeId) select x).ToList();
+                var data = (from x in MailoutQueue.Where(xt => xt.PersonId == personId && xt.MailoutTypeId == mxTypeId) select x).ToList();
                 foreach (var d in data)
                 {
                     var mxtype = (from y in MailoutType where y.Id == d.MailoutTypeId select y).FirstOrDefault();

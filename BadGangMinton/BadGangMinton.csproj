@@ -428,6 +428,8 @@
     <Content Include="Views\Shared\_mailoutFilter.cshtml" />
     <Content Include="Views\Shared\_ConfirmationModalPopup.cshtml" />
     <Content Include="Views\Account\MyInbox.cshtml" />
+    <Content Include="Views\Contact\Edit.cshtml" />
+    <Content Include="Views\Contact\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

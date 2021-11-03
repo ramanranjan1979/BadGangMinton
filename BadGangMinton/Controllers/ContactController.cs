@@ -40,7 +40,7 @@ namespace BadGangMinton.Controllers
             return View(model);
         }
 
-       
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -99,6 +99,112 @@ namespace BadGangMinton.Controllers
             contact.PersonAddress = cDal.GetPersonAddressesByPersonId(personId);
             contact.Group = contact.GroupId.HasValue ? cDal.GetPersonByPersonId(contact.GroupId.Value) : null;
             return Content(Newtonsoft.Json.JsonConvert.SerializeObject(contact), "application/json");
+        }
+
+        public ActionResult Edit(int personId)
+        {
+            var person = cDal.GetPersonByPersonId(personId);
+
+            ViewBag.Message = $"{person.Fname} Profile";
+            ViewBag.Title = $"{person.Fname} Profile";
+
+            PersonViewModel personProfile = new PersonViewModel()
+            {
+                Id = personId,
+                FirstName = person.Fname,
+                MiddleName = person.Mname,
+                LastName = person.Lname,
+                DOB = person.DOB.Date,
+                DateCreated = person.CreatedOn,
+                GenderTypeId = person.GenderId.ToString(),
+                SalutationTypeId = person.SalutationId.ToString(),
+                GroupId = person.GroupId
+            };
+
+            List<BGO.Common.GenderType> genderTypes = new List<BGO.Common.GenderType>();
+            List<Salutation> salutationTypes = new List<Salutation>();
+
+            genderTypes.Add(new BGO.Common.GenderType() { Id = 1, Name = "Male" });
+            genderTypes.Add(new BGO.Common.GenderType { Id = 2, Name = "Female" });
+
+            salutationTypes = lookupDal.GetAllSalutation();
+            personProfile.Gender = new SelectList(genderTypes, "Id", "Name");
+            personProfile.Salutations = new SelectList(salutationTypes, "Id", "Name");
+
+            personProfile.PersonAddress = new List<Address>();
+            personProfile.PersonContactNumber = new List<Contact>();
+            personProfile.PersonEmail = new List<EmailAddress>();
+
+            var addresses = cDal.GetPersonAddressesByPersonId(personId);
+            var phones = cDal.GetPersonPhoneByPersonId(personId);
+            var emails = cDal.GetPersonEmailByPersonId(personId);
+
+            if (cDal.GetPersonEmailByPersonId(personId).Where(x => x.Type.Id == 1).Count() > 0)
+                personProfile.PrimaryEmail = cDal.GetPersonEmailByPersonId(personId).Where(x => x.Type.Id == 1).FirstOrDefault().Value;
+
+            if (cDal.GetPersonPhoneByPersonId(personId).Where(x => x.Type.Id == 1).Count() > 0)
+                personProfile.PrimaryContactNumber = cDal.GetPersonPhoneByPersonId(personId).FirstOrDefault().Value;
+
+
+            foreach (var a in addresses)
+            {
+                personProfile.PersonAddress.Add(new Address
+                {
+                    City = a.City,
+                    CountryId = a.CountryId,
+                    CreatedOn = a.CreatedOn,
+                    Id = a.Id,
+                    Landmark = a.Landmark,
+                    Line1 = a.Line1,
+                    Line2 = a.Line2,
+                    PostCode = a.Postcode,
+                    State = a.State,
+                    Type = new AddressType() { Id = a.AddressType.Id, Name = a.AddressType.Name }
+                });
+            }
+
+            foreach (var a in phones)
+            {
+                personProfile.PersonContactNumber.Add(new Contact()
+                {
+                    Id = a.Id,
+                    CreatedOn = a.CreatedOn,
+                    Type = new ContactNumberType() { Id = a.Type.Id, Name = a.Type.Name },
+                    Value = a.Value
+                });
+            }
+
+            foreach (var a in emails)
+            {
+                personProfile.PersonEmail.Add(new EmailAddress()
+                {
+                    Id = a.Id,
+                    DateCreated = a.CreatedOn,
+                    Type = new EmailType() { Id = a.Type.Id, Name = a.Type.Name },
+                    Value = a.Value
+                });
+            }
+
+            personProfile.PrimaryContactNumber = personProfile.PrimaryContactNumber == null ? "000000000000" : personProfile.PrimaryContactNumber;
+
+            return View(personProfile);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateProfile(PersonViewModel pVM)
+        {
+            if (ModelState.IsValid)
+            {
+                cDal.UpdatePerson(pVM.FirstName, string.IsNullOrEmpty(pVM.MiddleName) ? string.Empty : pVM.MiddleName, pVM.LastName, pVM.Id, Int16.Parse(pVM.GenderTypeId), pVM.DOB.Value, Int16.Parse(pVM.SalutationTypeId));
+                sDal.LogMe("TRACKING", $"{pVM.FirstName} {pVM.LastName} : {pVM.Id}PROFILE HAS BEEN UPDATED", sm.UserSession.Person.Id);
+            }
+            return RedirectToAction("Edit", new { personId = pVM.Id });
+        }
+        public ActionResult Details(int personId)
+        {
+            return View();
         }
 
     }

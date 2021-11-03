@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="content-box-large box-with-header">
-                                @Html.Partial("_newPayment", tDal.GetTransactionList(1).Where(t => t.TransactionTypeId == 1).OrderByDescending(o=>o.TransactionDate).Take(10))
+                                @Html.Partial("_newPayment", tDal.GetRecentTransactionList(1))
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                             <div class="content-box-large box-with-header">
-                                @Html.Partial("_sysHealth", lookupDal.GetSystemLog().OrderByDescending(o=>o.CreatedOn).Take(10))
+                                @Html.Partial("_sysHealth", lookupDal.GetRecentSystemLog())
                             </div>
                         </div>
                     </div>

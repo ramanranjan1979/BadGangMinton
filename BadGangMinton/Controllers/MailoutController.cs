@@ -16,7 +16,7 @@ namespace BadGangMinton.Controllers
 
         public ActionResult Templates()
         {
-            List<BGO.Common.MailoutType> mxTypes = lookupDal.GetAllMailoutType();
+            List<MailoutType> mxTypes = lookupDal.GetAllMailoutType();
 
             foreach (var mx in mxTypes)
             {
@@ -35,7 +35,7 @@ namespace BadGangMinton.Controllers
         [HttpPost]
         public JsonResult GetMxTemplateByMailoutTypeId(int mailoutTypeId)
         {
-            List<BGO.Common.MailoutType> mxTypes = lookupDal.GetAllMailoutType().Where(x => x.Id == mailoutTypeId).ToList();
+            List<MailoutType> mxTypes = lookupDal.GetAllMailoutType().Where(x => x.Id == mailoutTypeId).ToList();
             foreach (var mx in mxTypes)
             {
                 mx.HtmlBody = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["mxTemplatePath"] + $"{mx.Name}.html");
