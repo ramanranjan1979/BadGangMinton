@@ -412,6 +412,36 @@ namespace BadGangMinton.DAL
             return lookupData;
         }
 
+        public List<BGO.Contact.Person> GetRecentPeople(bool status = true)
+        {
+            List<BGO.Contact.Person> lookupData = new List<BGO.Contact.Person>();
+            var People = Person.Where(x => x.IsActive == status).OrderByDescending(t => t.Id).Include("PersonEmail").Take(10).ToList();
+            foreach (var p in People)
+            {
+                lookupData.Add(new BGO.Contact.Person()
+                {
+                    Fname = p.Fname,
+                    Mname = p.Mname,
+                    Lname = p.Lname,
+                    Id = p.Id,
+                    CreatedOn = p.CreatedOn,
+                    DOB = p.DOB,
+                    GenderId = p.GenderId,
+                    IsActive = p.IsActive,
+                    SalutationId = p.SalutationId,
+                    // PersonEmail = GetPersonEmailByPersonId(p.Id),
+                    PersonEmail = PopulatePersonEmailBO(p.PersonEmail),
+                    //PersonPhone = GetPersonPhoneByPersonId(p.Id),
+                    PersonPhone = PopulatePersonPhoneBO(p.PersonPhone),
+                    GroupId = p.GroupID
+                });
+
+
+            }
+
+            return lookupData;
+        }
+
         public List<BGO.Contact.PersonEmail> PopulatePersonEmailBO(ICollection<DB.PersonEmail> personEmail)
         {
             List<BGO.Contact.PersonEmail> emailList = new List<BGO.Contact.PersonEmail>();
@@ -1084,6 +1114,45 @@ namespace BadGangMinton.DAL
             return lookupData;
         }
 
+        public List<BGO.Member.Member> GetRecentMember(int personTypeId)
+        {
+            List<BGO.Member.Member> lookupData = new List<BGO.Member.Member>();
+            var members = Member.Where(t => t.PersonTypeId == personTypeId).Include("Person").OrderByDescending(x => x.Id).Take(10).ToList();
+            foreach (var p in members)
+            {
+                lookupData.Add(new BGO.Member.Member()
+                {
+                    Id = p.Id,
+                    PersonId = p.PersonId,
+                    JoiningDate = p.JoiningDate.Value,
+                    IsActive = p.IsActive,
+                    PersonTypeId = p.PersonTypeId,
+                    Person = new BGO.Contact.Person()
+                    {
+                        Id = p.PersonId,
+                        Fname = p.Person.Fname,
+                        Lname = p.Person.Lname,
+                        Mname = p.Person.Mname,
+                        SalutationId = p.Person.SalutationId,
+                        IPaddress = p.Person.IPAddress,
+                        CreatedOn = p.Person.CreatedOn,
+                        DOB = p.Person.DOB,
+                        GenderId = p.Person.GenderId,
+                        IsActive = p.Person.IsActive,
+                        PersonEmail = new ContactDal().PopulatePersonEmailBO(p.Person.PersonEmail),
+                        PersonPhone = new ContactDal().PopulatePersonPhoneBO(p.Person.PersonPhone),
+                        PersonAddress = new ContactDal().PopulatePersonAddressBO(p.Person.PersonAddress)
+
+                    },
+                    //Person = new ContactDal().GetPersonByPersonId(p.PersonId),
+                    AccountBalance = new TransactionDal().GetAccountBalance(p.PersonId),
+                    IsMembershipActive = p.Person.Log.Where(x => x.Description == "Membership has been suspend").FirstOrDefault() == null ? true : false
+
+                });
+            }
+
+            return lookupData;
+        }
         public List<BGO.Member.Member> GetAllMember()
         {
             List<BGO.Member.Member> lookupData = new List<BGO.Member.Member>();

@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                             <div class="content-box-large box-with-header">
-                                @Html.Partial("_newMember", cDal.GetPeople().OrderByDescending(o=>o.CreatedOn).Take(10))
+                                @Html.Partial("_newMember", cDal.GetRecentPeople())
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="content-box-large box-with-header">
-                                @Html.Partial("_newPlayer", mDal.GetMember(2).OrderByDescending(o => o.JoiningDate).Take(10))
+                                @Html.Partial("_newPlayer", mDal.GetRecentMember(2))
                             </div>
                         </div>
                     </div>
