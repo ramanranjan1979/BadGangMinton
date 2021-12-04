@@ -48,7 +48,8 @@ namespace BadGangMinton.Controllers
             var data = mDal.GetMember(2).Where(x => x.Person.IsActive).Where(m => m.IsActive && m.IsMembershipActive);
             foreach (var item in data)
             {
-                Member.Add(cDal.GetPersonByPersonId(item.PersonId));
+                //Member.Add(cDal.GetPersonByPersonId(item.PersonId));
+                Member.Add(item.Person);
             }
             attVM.Members = new SelectList(Member.OrderBy(o => o.Name), "Id", "Name");
 
