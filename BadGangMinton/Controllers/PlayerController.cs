@@ -67,6 +67,7 @@ namespace BadGangMinton.Controllers
         {
             if (Playervalue != null)
             {
+                decimal unitPrice = new Helpers.BGService().GetUnitPrice();
                 List<int> CurrentAttendant = new List<int>();
                 foreach (var item in Playervalue)
                 {
@@ -79,12 +80,12 @@ namespace BadGangMinton.Controllers
                     if (p.GroupId.HasValue)
                     {
                         //txDAL.saveTransaction(p.Group.Id, tx.Id, 2.5M * tx.Multiplier, attendanceDate, $"Bravo! Your buddy { p.Name} has played well on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {2.5M} for today's game. Keep it up!", true);
-                        txDAL.saveTransaction(p.Id, tx.Id, 2.5M * tx.Multiplier, attendanceDate, $"Bravo! Your buddy { p.Name} has played well on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {2.5M} for today's game. Keep it up!", true);
+                        txDAL.saveTransaction(p.Id, tx.Id, unitPrice * tx.Multiplier, attendanceDate, $"Bravo! Your buddy { p.Name} has played well on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {unitPrice} for today's game. Keep it up!", true);
                     }
                     else
                     {
 
-                        txDAL.saveTransaction(int.Parse(item), tx.Id, 2.5M * tx.Multiplier, attendanceDate, $"Well done buddy! You played well today on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {2.5M} for today's game. Keep it up!");
+                        txDAL.saveTransaction(int.Parse(item), tx.Id, unitPrice * tx.Multiplier, attendanceDate, $"Well done buddy! You played well today on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {unitPrice} for today's game. Keep it up!");
                     }
 
                     CurrentAttendant.Add(int.Parse(item));
@@ -108,6 +109,7 @@ namespace BadGangMinton.Controllers
         {
             if (Playervalue != null)
             {
+                decimal unitPrice = new Helpers.BGService().GetUnitPrice();
                 List<int> CurrentAttendant = new List<int>();
                 decimal qty = 1M;
                 string unitWording = string.Empty;
@@ -155,12 +157,12 @@ namespace BadGangMinton.Controllers
                     if (p.GroupId.HasValue)
                     {
                         //txDAL.saveTransaction(p.Group.Id, tx.Id, 2.5M * tx.Multiplier, attendanceDate, $"Bravo! Your buddy { p.Name} has played well on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {2.5M} for today's game. Keep it up!", true);
-                        txDAL.saveTransaction(p.Id, tx.Id, qty * 2.5M * tx.Multiplier, attendanceDate, $"Bravo! Your buddy { p.Name} has played well on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {qty * 2.5M} for today's game. Keep it up!", true);
+                        txDAL.saveTransaction(p.Id, tx.Id, qty * unitPrice * tx.Multiplier, attendanceDate, $"Bravo! Your buddy { p.Name} has played well on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {qty * unitPrice} for today's game. Keep it up!", true);
                     }
                     else
                     {
 
-                        txDAL.saveTransaction(int.Parse(item), tx.Id, qty * 2.5M * tx.Multiplier, attendanceDate, $"Well done buddy! You played well today on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {qty * 2.5M} for today's game. Keep it up!");
+                        txDAL.saveTransaction(int.Parse(item), tx.Id, qty * unitPrice * tx.Multiplier, attendanceDate, $"Well done buddy! You played well today on {attendanceDate.Date.ToShortDateString()} and you have been charged £ {qty * unitPrice} for today's game. Keep it up!");
                     }
 
                     if (notificationRequired)
@@ -170,7 +172,7 @@ namespace BadGangMinton.Controllers
 
                             Dictionary<string, string> param = new Dictionary<string, string>();
 
-                            param.Add("AMOUNT", "£" + (-1 * qty * 2.5M * tx.Multiplier).ToString("0.00"));
+                            param.Add("AMOUNT", "£" + (-1 * qty * unitPrice * tx.Multiplier).ToString("0.00"));
                             param.Add("UNITS", unitWording);
 
 

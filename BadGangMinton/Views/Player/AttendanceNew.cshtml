@@ -344,11 +344,15 @@
             success: function (data) {
                 var list = $("#modalBody").append('<ol></ol>').find('ol');
                 jQuery.each(data, function (i, val) {
+
+                    //console.log(val.Amount.toFixed(2));
+
+
                     if (val.TransactionType.Id == 1) {
-                        list.append('<li style="border:solid 1px;text-align:center;background-color:green;color:gold;">' + '<span class="glyphicon glyphicon-gbp"/>' + val.Amount + ' Date: ' + new Date(val.TransactionDate).toLocaleDateString() + ' Tx Type:  ' + val.TransactionType.Name + ' Tx Desc:  ' + val.TransactionType.Desc + '</li>');
+                        list.append('<li style="border:solid 1px;text-align:center;background-color:green;color:gold;">' + '<span class="glyphicon glyphicon-gbp"/>' + val.Amount.toFixed(2) + ' Date: ' + new Date(val.TransactionDate).toLocaleDateString() + ' Tx Type:  ' + val.TransactionType.Name + ' Tx Desc:  ' + val.TransactionType.Desc + '</li>');
                     }
                     else {
-                        list.append('<li style="border:solid 1px;text-align:center;background-color:red;color:gold;">' + '<span class="glyphicon glyphicon-gbp"/>' + val.Amount + ' Date: ' + new Date(val.TransactionDate).toLocaleDateString() + ' Tx Type:  ' + val.TransactionType.Name + ' Tx Desc:  ' + val.TransactionType.Desc + '</li>');
+                        list.append('<li style="border:solid 1px;text-align:center;background-color:red;color:gold;">' + '<span class="glyphicon glyphicon-gbp"/>' + val.Amount.toFixed(2) + ' Date: ' + new Date(val.TransactionDate).toLocaleDateString() + ' Tx Type:  ' + val.TransactionType.Name + ' Tx Desc:  ' + val.TransactionType.Desc + '</li>');
                     }
                 });
             },
