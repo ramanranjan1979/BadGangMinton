@@ -40,6 +40,7 @@ namespace BadGangMinton.Controllers
         {
             if (ModelState.IsValid)
             {
+                decimal unitPrice = new Helpers.BGService().GetUnitPrice();
                 var txTypeId = lookupDal.GetAllTransactionType().Where(x => x.Id == int.Parse(txVM.TransactionTypeId)).FirstOrDefault();
                 string remarks = string.Empty;
                 decimal amt = txVM.Amount;
@@ -50,7 +51,7 @@ namespace BadGangMinton.Controllers
                         break;
 
                     case "2":
-                        remarks = $"Well done buddy! You played well today on {txVM.TransactionDate.Value.ToShortDateString()} and you have been charged {2.5M} for today's game. Keep it up!";
+                        remarks = $"Well done buddy! You played well today on {txVM.TransactionDate.Value.ToShortDateString()} and you have been charged {unitPrice} for today's game. Keep it up!";
                         break;
 
                     case "3":

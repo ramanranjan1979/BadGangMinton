@@ -10,7 +10,7 @@ namespace BadGangMinton.Helpers
 {
     public class BGService
     {
-        public  string GetHtml(string templatePath, Dictionary<string, string> Parameters)
+        public string GetHtml(string templatePath, Dictionary<string, string> Parameters)
         {
             var rawString = System.IO.File.ReadAllText(templatePath);
             foreach (var parameter in Parameters)
@@ -22,6 +22,11 @@ namespace BadGangMinton.Helpers
             }
 
             return rawString;
+        }
+
+        public decimal GetUnitPrice()
+        {
+            return ConfigurationManager.AppSettings["UnitPricePerSession"] == null ? 0M : Convert.ToDecimal(ConfigurationManager.AppSettings["UnitPricePerSession"]);
         }
     }
 
@@ -57,21 +62,21 @@ namespace BadGangMinton.Helpers
             //string str1 = "gmail.com";
             //if (fromAddress.ToLower().Contains(str1))
             //{
-                try
-                {
-                    sc.Port = 25;
-                    sc.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SMTP_UserName"], ConfigurationManager.AppSettings["SMTP_Password"]);
-                    sc.EnableSsl = true;
-                    m.IsBodyHtml = true;
+            try
+            {
+                sc.Port = 25;
+                sc.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SMTP_UserName"], ConfigurationManager.AppSettings["SMTP_Password"]);
+                sc.EnableSsl = true;
+                m.IsBodyHtml = true;
 
-                    if (!_testMode)
-                        sc.Send(m);
-                }
-                catch (Exception ex)
-                {
-                    res.HasError = true;
-                    res.ErrorMessage = ex.Message;
-                }
+                if (!_testMode)
+                    sc.Send(m);
+            }
+            catch (Exception ex)
+            {
+                res.HasError = true;
+                res.ErrorMessage = ex.Message;
+            }
             //}
             //else
             //{
@@ -95,6 +100,6 @@ namespace BadGangMinton.Helpers
             return res;
         }
 
-      
+
     }
 }
